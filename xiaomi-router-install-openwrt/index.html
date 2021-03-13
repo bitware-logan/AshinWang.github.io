@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="LEDE&#x2F;Openwrt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小米路由器3刷Openwrt">
+<meta property="og:url" content="https://www.ashin.wang/xiaomi-router-install-openwrt/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="LEDE&#x2F;Openwrt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0082zybpgy1gc9uaeoeu4j30ew09zt9d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0082zybpgy1gca71xq9oej30v30ixgnk.jpg">
+<meta property="article:published_time" content="2020-02-26T07:24:08.000Z">
+<meta property="article:modified_time" content="2020-09-21T05:42:01.000Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="OpenWrt">
+<meta property="article:tag" content="LEDE">
+<meta property="article:tag" content="路由器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0082zybpgy1gc9uaeoeu4j30ew09zt9d.jpg">
+
+<link rel="canonical" href="https://www.ashin.wang/xiaomi-router-install-openwrt/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>小米路由器3刷Openwrt | Ashin Wang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">From Here To Somewhere</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/xiaomi-router-install-openwrt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小米路由器3刷Openwrt
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-26 15:24:08" itemprop="dateCreated datePublished" datetime="2020-02-26T15:24:08+08:00">2020-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-21 13:42:01" itemprop="dateModified" datetime="2020-09-21T13:42:01+08:00">2020-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">路由器</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">LEDE/Openwrt</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>小米路由器 3 的后台开始又慢又卡，中继 WiFi 时常 Bug !</p>
+<p>开始刷机~</p>
+<span id="more"></span>
+
+<h1 id="一、获取权限"><a href="#一、获取权限" class="headerlink" title="一、获取权限"></a>一、获取权限</h1><h2 id="1-下载开发版"><a href="#1-下载开发版" class="headerlink" title="1 下载开发版"></a>1 下载开发版</h2><p><a target="_blank" rel="noopener" href="http://bigota.miwifi.com/xiaoqiang/rom/r3/miwifi_r3_all_55ac7_2.11.20.bin">http://bigota.miwifi.com/xiaoqiang/rom/r3/miwifi_r3_all_55ac7_2.11.20.bin</a> 下载开发版本 2.11</p>
+<h2 id="2-安装开发版"><a href="#2-安装开发版" class="headerlink" title="2 安装开发版"></a>2 安装开发版</h2><p>进入后台–选择手动升级–导入开发版–升级</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc9uaeoeu4j30ew09zt9d.jpg" alt="截屏2020-02-26下午3.22.11"></p>
+<h2 id="3-开启-SSH"><a href="#3-开启-SSH" class="headerlink" title="3 开启 SSH"></a>3 开启 SSH</h2><p><del>官网教程不成功</del> <a target="_blank" rel="noopener" href="https://d.miwifi.com/rom/ssh?userId=35420579">https://d.miwifi.com/rom/ssh?userId=35420579</a></p>
+<blockquote>
+<p>工具包使用方法：小米路由器需升级到开发版0.5.28及以上，小米路由器mini需升级到开发版0.3.84及以上，小米路由器3即将支持。注意：稳定版不支持。</p>
+<ol>
+<li>请将下载的工具包bin文件复制到U盘（FAT/FAT32格式）的根目录下，保证文件名为miwifi_ssh.bin；</li>
+<li>断开小米路由器的电源，将U盘插入USB接口；</li>
+<li>按住reset按钮之后重新接入电源，指示灯变为黄色闪烁状态即可松开reset键；</li>
+<li>等待3-5秒后安装完成之后，小米路由器会自动重启，之后您就可以尽情折腾啦 ：）</li>
+</ol>
+</blockquote>
+<h3 id="此处完全参考-openwrt-org-toh-xiaomi-mir3"><a href="#此处完全参考-openwrt-org-toh-xiaomi-mir3" class="headerlink" title="此处完全参考 openwrt.org/toh/xiaomi/mir3"></a>此处完全参考 <a target="_blank" rel="noopener" href="https://openwrt.org/toh/xiaomi/mir3https://blog.csdn.net/u011054333/article/details/88564078">openwrt.org/toh/xiaomi/mir3</a></h3><p>登录路由器后台，进行一系列初始设置，获取 stok 值，例如  <code>stok=8afbe612c65e43251e8a4dbff3cf67d1</code></p>
+<p>在浏览器中输入下面链接操作，注意替换 stok 值，密码设置为 12345678，执行一定等到返回结果，出现 502 多试几次。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">## Step1 IN</span><br><span class="line">http:&#x2F;&#x2F;192.168.31.1&#x2F;cgi-bin&#x2F;luci&#x2F;;stok&#x3D;eecd2646b61b9e5b724182f4c037785a&#x2F;api&#x2F;xqnetwork&#x2F;set_wifi_ap?ssid&#x3D;Xiaomi&amp;encryption&#x3D;NONE&amp;enctype&#x3D;NONE&amp;channel&#x3D;1%3Bnvram%20set%20ssh%5Fen%3D1%3B%20nvram%20commit</span><br><span class="line">## Step1 OUT</span><br><span class="line">&#123;&quot;msg&quot;:&quot;未能连接到指定WiFi(Connecting)&quot;,&quot;code&quot;:1616&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Step2 IN</span><br><span class="line">http:&#x2F;&#x2F;192.168.31.1&#x2F;cgi-bin&#x2F;luci&#x2F;;stok&#x3D;eecd2646b61b9e5b724182f4c037785a&#x2F;api&#x2F;xqnetwork&#x2F;set_wifi_ap?ssid&#x3D;Xiaomi&amp;encryption&#x3D;NONE&amp;enctype&#x3D;NONE&amp;channel&#x3D;1%3Bsed%20%2Di%20%22%3Ax%3AN%3As%2Fif%20%5C%5B%2E%2A%5C%3B%20then%5Cn%2E%2Areturn%200%5Cn%2E%2Afi%2F%23tb%2F%3Bb%20x%22%20%2Fetc%2Finit.d%2Fdropbear</span><br><span class="line">## Step2 OUT</span><br><span class="line">&#123;&quot;msg&quot;:&quot;未能连接到指定WiFi(Probe timeout)&quot;,&quot;code&quot;:1616&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Step3 IN</span><br><span class="line">http:&#x2F;&#x2F;192.168.31.1&#x2F;cgi-bin&#x2F;luci&#x2F;;stok&#x3D;eecd2646b61b9e5b724182f4c037785a&#x2F;api&#x2F;xqnetwork&#x2F;set_wifi_ap?ssid&#x3D;Xiaomi&amp;encryption&#x3D;NONE&amp;enctype&#x3D;NONE&amp;channel&#x3D;1%3B%2Fetc%2Finit.d%2Fdropbear%20start</span><br><span class="line">## Step3 OUT</span><br><span class="line">&#123;&quot;msg&quot;:&quot;未能连接到指定WiFi(Probe timeout)&quot;,&quot;code&quot;:1616&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Step4 IN </span><br><span class="line">http:&#x2F;&#x2F;192.168.31.1&#x2F;cgi-bin&#x2F;luci&#x2F;;stok&#x3D;eecd2646b61b9e5b724182f4c037785a&#x2F;api&#x2F;xqsystem&#x2F;set_name_password?oldPwd&#x3D;12345678&amp;newPwd&#x3D;12345678</span><br><span class="line">## Step4 OUT</span><br><span class="line">&#123;&quot;code&quot;:0&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行-SSH"><a href="#执行-SSH" class="headerlink" title="执行 SSH"></a>执行 SSH</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host 192.168.31.1 port 22: Connection refused</span><br><span class="line">ashin@MacBook ~ % ssh root@192.168.31.1</span><br><span class="line">The authenticity of host &#39;192.168.31.1 (192.168.31.1)&#39; can&#39;t be established.</span><br><span class="line">RSA key fingerprint is SHA256:WI3DaBP7KYPu+1Zjvpe4x8aRrV60TFw8UiENG4X+Wbw.</span><br><span class="line">Are you sure you want to continue connecting (yes&#x2F;no)? yes</span><br><span class="line">Warning: Permanently added &#39;192.168.31.1&#39; (RSA) to the list of known hosts.</span><br><span class="line">root@192.168.31.1&#39;s password:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">BusyBox v1.19.4 (2016-04-15 17:38:14 CST) built-in shell (ash)</span><br><span class="line">Enter &#39;help&#39; for a list of built-in commands.</span><br><span class="line"></span><br><span class="line"> -----------------------------------------------------</span><br><span class="line">	Welcome to XiaoQiang!</span><br><span class="line"> -----------------------------------------------------</span><br><span class="line">root@XiaoQiang:~#</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-激活串口"><a href="#4-激活串口" class="headerlink" title="4 激活串口"></a>4 激活串口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ nvram set flag_last_success&#x3D;1</span><br><span class="line"></span><br><span class="line">$ nvram set boot_wait&#x3D;on</span><br><span class="line"></span><br><span class="line">$ nvram set uart_en&#x3D;1</span><br><span class="line"></span><br><span class="line">$ nvram commit</span><br><span class="line"></span><br><span class="line">$ reboot</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="二、上传刷机文件"><a href="#二、上传刷机文件" class="headerlink" title="二、上传刷机文件"></a>二、上传刷机文件</h1><h2 id="1-下载刷机文件"><a href="#1-下载刷机文件" class="headerlink" title="1 下载刷机文件"></a>1 下载刷机文件</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://openwrt.org/toh/xiaomi/mir3">https://openwrt.org/toh/xiaomi/mir3</a></p>
+<p>openwrt 提供 Pandora 和 X-Wrt 两个教程和下载地址</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://dl.x-wrt.com:4443/rom/">https://dl.x-wrt.com:4443/rom/</a></p>
+</li>
+</ul>
+<h2 id="2-上传刷机文件"><a href="#2-上传刷机文件" class="headerlink" title="2 上传刷机文件"></a>2 上传刷机文件</h2><p>使用 scp 命令（也可以使用 FTP 工具 ），上传至 <code>/tmp</code></p>
+<p><code>$ scp -r ./Desktop/Router_Xiaomi/LEDE/rom  root@192.168.31.1:/tmp/</code></p>
+<ul>
+<li>也可以挂 U 盘。</li>
+</ul>
+<h1 id="三、刷入包"><a href="#三、刷入包" class="headerlink" title="三、刷入包"></a>三、刷入包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 进入</span><br><span class="line">$ cd &#x2F;tmp&#x2F;rom&#x2F;</span><br><span class="line"></span><br><span class="line">$ mtd write kernel1.bin kernel1</span><br><span class="line"></span><br><span class="line">$ mtd write rootfs0.bin rootfs0</span><br><span class="line"></span><br><span class="line">$ reboot</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="四、重启"><a href="#四、重启" class="headerlink" title="四、重启"></a>四、重启</h1><p><code>$ reboot</code></p>
+<p>等待 2 分钟</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Address: 192.168.15.1</span><br><span class="line">login: root</span><br><span class="line">password: admin</span><br></pre></td></tr></table></figure>
+
+<p>Enjoy~</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gca71xq9oej30v30ixgnk.jpg"></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/xiaomi-router-install-openwrt/" title="小米路由器3刷Openwrt">https://www.ashin.wang/xiaomi-router-install-openwrt/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OpenWrt/" rel="tag"># OpenWrt</a>
+              <a href="/tags/LEDE/" rel="tag"># LEDE</a>
+              <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag"># 路由器</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/coding-creat-static-website/" rel="prev" title="Coding静态网站部署更新">
+      <i class="fa fa-chevron-left"></i> Coding静态网站部署更新
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/code-pic-online/" rel="next" title="代码在线生成图片">
+      代码在线生成图片 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%8E%B7%E5%8F%96%E6%9D%83%E9%99%90"><span class="nav-number">1.</span> <span class="nav-text">一、获取权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%BC%80%E5%8F%91%E7%89%88"><span class="nav-number">1.1.</span> <span class="nav-text">1 下载开发版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%BC%80%E5%8F%91%E7%89%88"><span class="nav-number">1.2.</span> <span class="nav-text">2 安装开发版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%BC%80%E5%90%AF-SSH"><span class="nav-number">1.3.</span> <span class="nav-text">3 开启 SSH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A4%E5%A4%84%E5%AE%8C%E5%85%A8%E5%8F%82%E8%80%83-openwrt-org-toh-xiaomi-mir3"><span class="nav-number">1.3.1.</span> <span class="nav-text">此处完全参考 openwrt.org&#x2F;toh&#x2F;xiaomi&#x2F;mir3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C-SSH"><span class="nav-number">1.3.2.</span> <span class="nav-text">执行 SSH</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%BF%80%E6%B4%BB%E4%B8%B2%E5%8F%A3"><span class="nav-number">1.4.</span> <span class="nav-text">4 激活串口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%8A%E4%BC%A0%E5%88%B7%E6%9C%BA%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">二、上传刷机文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%88%B7%E6%9C%BA%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">1 下载刷机文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%8A%E4%BC%A0%E5%88%B7%E6%9C%BA%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2 上传刷机文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%88%B7%E5%85%A5%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">三、刷入包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%87%8D%E5%90%AF"><span class="nav-number">4.</span> <span class="nav-text">四、重启</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

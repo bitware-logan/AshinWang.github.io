@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="0 队伍简介队伍名称： 猛狗哭泣 终榜排名： 21&#x2F;1470 公榜排名： 31&#x2F;1470 Code Repo: https:&#x2F;&#x2F;github.com&#x2F;AshinWang&#x2F;tianchi-competition-5-manipulation-detection&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安全AI挑战者计划第五期：伪造图像的篡改检测 Rank21分享">
+<meta property="og:url" content="https://www.ashin.wang/tianchi-competition-5-manipulation-detection/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="0 队伍简介队伍名称： 猛狗哭泣 终榜排名： 21&#x2F;1470 公榜排名： 31&#x2F;1470 Code Repo: https:&#x2F;&#x2F;github.com&#x2F;AshinWang&#x2F;tianchi-competition-5-manipulation-detection&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1gm9pw56fodj30iu08374w.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1gm9pwc20mlj30hb0gu0tj.jpg">
+<meta property="article:published_time" content="2020-12-18T06:54:18.000Z">
+<meta property="article:modified_time" content="2021-01-07T10:26:33.000Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="AI竞赛">
+<meta property="article:tag" content="天池">
+<meta property="article:tag" content="图像分割">
+<meta property="article:tag" content="篡改检测">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1gm9pw56fodj30iu08374w.jpg">
+
+<link rel="canonical" href="https://www.ashin.wang/tianchi-competition-5-manipulation-detection/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>安全AI挑战者计划第五期：伪造图像的篡改检测 Rank21分享 | Ashin Wang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">From Here To Somewhere</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/tianchi-competition-5-manipulation-detection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          安全AI挑战者计划第五期：伪造图像的篡改检测 Rank21分享
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-18 14:54:18" itemprop="dateCreated datePublished" datetime="2020-12-18T14:54:18+08:00">2020-12-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-07 18:26:33" itemprop="dateModified" datetime="2021-01-07T18:26:33+08:00">2021-01-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">AI竞赛</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="0-队伍简介"><a href="#0-队伍简介" class="headerlink" title="0 队伍简介"></a>0 队伍简介</h1><p>队伍名称： 猛狗哭泣</p>
+<p>终榜排名： 21/1470</p>
+<p>公榜排名： 31/1470</p>
+<p>Code Repo: <a target="_blank" rel="noopener" href="https://github.com/AshinWang/tianchi-competition-5-manipulation-detection/">https://github.com/AshinWang/tianchi-competition-5-manipulation-detection/</a></p>
+<span id="more"></span>
+
+<h1 id="1-比赛简介"><a href="#1-比赛简介" class="headerlink" title="1 比赛简介"></a>1 比赛简介</h1><p>比赛本质上就是图像分割。</p>
+<blockquote>
+<p>大赛名称：安全AI挑战者计划第五期：伪造图像的篡改检测-赛道2</p>
+<p>官方简介： <a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/competition/entrance/531812/introduction">https://tianchi.aliyun.com/competition/entrance/531812/introduction</a>  赛道2（10月12日10:00AM (UTC+8)开启，赛道1报名选手无需重复报名）伪造图像的对抗攻击比赛的赛道1——攻击比赛已经接近尾声，很多高质量的P图不但骗过人眼，还成功骗过我们提供的4个经典检测模型，那是否就真的是“魔高一丈”（反取证技术）呢？我们的对抗攻击比赛开始进入赛道2——检测比赛将在10月12日10:00AM (UTC+8)拉开帷幕！设计出“火眼金睛”（检测算法），把别人的“挖坑”（篡改区域）一一识别出来。区别于以往的图像取证比赛专注于自然内容图像，我们比赛采用的数据为大量伪造的证书文档类图像。任务是通过提供的训练集学习出有效的检测算法，对测试集的伪造图像进行篡改定位。为了更好的评价选手的检测定位效果，我们设计了全面的得分计算准则。</p>
+</blockquote>
+<h2 id="A-数据形式"><a href="#A-数据形式" class="headerlink" title="A 数据形式"></a>A 数据形式</h2><ul>
+<li>数据包括训练集和测试集，训练集有1500张JPEG图像及对应mask（分辨率与原图保持一致，像素值0表示该像素标识为未篡改，像素值1表示该像素标识为篡改），JPEG图像的EXIF信息均被擦除，除部分无后处理外，其它可能经过裁边、平滑、下采样、社交工具传输（没有使用组合方式）；测试集有1500张JPEG图像，处理过程与训练集一致；允许使用集外数据进行训练学习。</li>
+<li>参赛者提交数据时，利用我们提供的python程序生成mask，对1500张mask图像打包上传。</li>
+<li>篡改图像可能包括如splicing、copy-move、object removal等任意操作，部分进行后处理（JPEG压缩、重采样、裁剪边缘等）。</li>
+<li>不需要考虑图像的元数据（已经被擦除）。</li>
+</ul>
+<ul>
+<li>示例<br><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gm9pw56fodj30iu08374w.jpg"></li>
+</ul>
+<h2 id="B-评估标准"><a href="#B-评估标准" class="headerlink" title="B 评估标准"></a>B 评估标准</h2><p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gm9pwc20mlj30hb0gu0tj.jpg"></p>
+<h1 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3 解决方案"></a>3 解决方案</h1><h2 id="A-运行环境"><a href="#A-运行环境" class="headerlink" title="A 运行环境"></a>A 运行环境</h2><p>整个实验在 <code>Google Colab</code> 下完成，应主办方提交要求改写了 <code>.py</code> 方式，并通过了本地测试。</p>
+<h3 id="主要依赖库"><a href="#主要依赖库" class="headerlink" title="主要依赖库"></a>主要依赖库</h3><ul>
+<li>tensorflow ==2.1.0</li>
+<li>keras == 2.3.0</li>
+<li>segmentation-models==1.0.1</li>
+</ul>
+<h3 id="NoteBook"><a href="#NoteBook" class="headerlink" title="NoteBook"></a>NoteBook</h3><ul>
+<li>Colab Pro<ul>
+<li><p>GPU   Tesla v100 16G</p>
+</li>
+<li><p>RAM   25G</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="py"><a href="#py" class="headerlink" title=".py"></a>.py</h3><ol>
+<li><p>安装依赖库</p>
+<p><code>pip3 install -r requirements.txt </code></p>
+</li>
+<li><p>训练</p>
+<p><code>$ cd code</code><br><code>$ ./trian.sh</code></p>
+</li>
+<li><p>测试</p>
+<p><code>$ cd code</code><br><code>$ ./run.sh</code></p>
+</li>
+</ol>
+<h2 id="B-数据处理"><a href="#B-数据处理" class="headerlink" title="B 数据处理"></a>B 数据处理</h2><ul>
+<li>将图像数据准换为 np 形式的正方形矩阵，其中<ul>
+<li><p><strong>trian</strong>             resize(512, 512, 3)</p>
+</li>
+<li><p><strong>train_mask</strong> resize(512, 512, 1)</p>
+</li>
+<li><p><strong>test</strong>               resize(512, 512, 3)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>图像的平均长宽在 1200 左右，一开始 resize 到 <code>1024*1024*3</code>，直接爆内存（25 GiB）， <code>512*512*3</code> 的尺寸在 Colab 上基本上达到了训练极限，尽管 <code>256*256</code> 占用小了很多，但是训练模型的效果不好，最终还是将训练集 resize 为 <code>512*512*3</code>。</p>
+<h2 id="C-图像增强"><a href="#C-图像增强" class="headerlink" title="C 图像增强"></a>C 图像增强</h2><ul>
+<li>horizontal_flip</li>
+<li>vertical_flip</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Data Generator and augmentation</span></span><br><span class="line">data_gen_args = <span class="built_in">dict</span>(horizontal_flip=<span class="literal">True</span>,vertical_flip=<span class="literal">True</span>)</span><br><span class="line">image_datagen = ImageDataGenerator(**data_gen_args)</span><br><span class="line">mask_datagen = ImageDataGenerator(**data_gen_args)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="D-Metric"><a href="#D-Metric" class="headerlink" title="D Metric"></a>D Metric</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Dice_Coeff or F1 score</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">metric</span>(<span class="params">y_true, y_pred</span>):</span></span><br><span class="line">    y_true_f = K.flatten(y_true)</span><br><span class="line">    y_pred_f = K.flatten(y_pred)</span><br><span class="line">    intersection = K.<span class="built_in">sum</span>(y_true_f * y_pred_f)</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">2.</span> * intersection + <span class="number">1</span>) / (K.<span class="built_in">sum</span>(y_true_f) + K.<span class="built_in">sum</span>(y_pred_f) + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="E-模型训练"><a href="#E-模型训练" class="headerlink" title="E 模型训练"></a>E 模型训练</h2><p>使用公开的分割模型 Repo: <a target="_blank" rel="noopener" href="https://github.com/qubvel/segmentation_models">https://github.com/qubvel/segmentation_models</a></p>
+<p>Segmentation model = UNet</p>
+<p>Backbone = efficientnetb3</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Names</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VGG</td>
+<td>‘vgg16’ ‘vgg19’</td>
+</tr>
+<tr>
+<td>ResNet</td>
+<td>‘resnet18’ ‘resnet34’ ‘resnet50’ ‘resnet101’ ‘resnet152’</td>
+</tr>
+<tr>
+<td>SE-ResNet</td>
+<td>‘seresnet18’ ‘seresnet34’ ‘seresnet50’ ‘seresnet101’ ‘seresnet152’</td>
+</tr>
+<tr>
+<td>ResNeXt</td>
+<td>‘resnext50’ ‘resnext101’</td>
+</tr>
+<tr>
+<td>SE-ResNeXt</td>
+<td>‘seresnext50’ ‘seresnext101’</td>
+</tr>
+<tr>
+<td>SENet154</td>
+<td>‘senet154’</td>
+</tr>
+<tr>
+<td>DenseNet</td>
+<td>‘densenet121’ ‘densenet169’ ‘densenet201’</td>
+</tr>
+<tr>
+<td>Inception</td>
+<td>‘inceptionv3’ ‘inceptionresnetv2’</td>
+</tr>
+<tr>
+<td>MobileNet</td>
+<td>‘mobilenet’ ‘mobilenetv2’</td>
+</tr>
+<tr>
+<td>EfficientNet</td>
+<td>‘efficientnetb0’ ‘efficientnetb1’ ‘efficientnetb2’ ‘efficientnetb3’ ‘efficientnetb4’ ‘efficientnetb5’ efficientnetb6’ efficientnetb7’</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>All backbones have weights trained on 2012 ILSVRC ImageNet dataset (<code>encoder_weights=&#39;imagenet&#39;</code>).</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Unet + efficientnetb3</span></span><br><span class="line">model_name = <span class="string">&#x27;Unet&#x27;</span></span><br><span class="line">backbone_name = <span class="string">&#x27;efficientnetb3&#x27;</span></span><br><span class="line">model = Unet(backbone_name, classes=<span class="number">1</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>)</span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=Adam(), loss=<span class="string">&quot;binary_crossentropy&quot;</span>, metrics=metric)</span><br><span class="line"></span><br><span class="line">seed = <span class="number">42</span></span><br><span class="line">bs = <span class="number">32</span> <span class="comment"># BacthSize</span></span><br><span class="line">nb_epochs = <span class="number">100</span> <span class="comment"># epoch</span></span><br><span class="line"></span><br><span class="line">image_generator = image_datagen.flow(X_train, seed=seed, batch_size=bs, shuffle=<span class="literal">True</span>)</span><br><span class="line">mask_generator = mask_datagen.flow(y_train, seed=seed, batch_size=bs, shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Just zip the two generators to get a generator that provides augmented images and masks at the same time</span></span><br><span class="line">train_generator = <span class="built_in">zip</span>(image_generator, mask_generator)</span><br><span class="line"></span><br><span class="line">results = model.fit_generator(train_generator, steps_per_epoch=(spe), epochs=nb_epochs,validation_data=(X_valid, y_valid),callbacks=[save,lr_schedule,reduce_lr])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="F-模型预测"><a href="#F-模型预测" class="headerlink" title="F 模型预测"></a>F 模型预测</h2><p>预测测试集的图像时，将 test 转化为 <code>512*512*3</code> 的图像，再经过模型篡改区域预测后得到 <code>512*512*1</code>的 test_mask，再将 mask resize 到图像本身的长宽。这样 resize 来回应该会影响预测效果吧！！！但不 resize 会报错。<del>_</del></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">TEST_MASK_PATH = <span class="string">&#x27;../prediction_result/images/&#x27;</span></span><br><span class="line">predicted_test = model.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Save test mask</span></span><br><span class="line">print(<span class="string">&#x27;Get img name and path&#x27;</span>)</span><br><span class="line">each_test_name = []</span><br><span class="line">each_test_path = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(<span class="built_in">list</span>(&#123;i.split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> os.listdir(TEST_PATH)&#125;)):</span><br><span class="line">    i = i.split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">    each_test_path.append(TEST_PATH + <span class="string">&#x27;&#123;&#125;.jpg&#x27;</span>.<span class="built_in">format</span>(i))</span><br><span class="line">    each_test_name.append(i) </span><br><span class="line"></span><br><span class="line">each_test_path.remove(each_test_path[<span class="number">0</span>])</span><br><span class="line">each_test_name.remove(each_test_name[<span class="number">0</span>])</span><br><span class="line">print(each_test_path[<span class="number">0</span>])</span><br><span class="line">print(each_test_name[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Resize mask</span></span><br><span class="line">print(<span class="string">&#x27;Get img height and width&#x27;</span>)</span><br><span class="line">h = []</span><br><span class="line">w = []</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> tqdm(each_test_path):</span><br><span class="line">    temp = Image.<span class="built_in">open</span>(filename)</span><br><span class="line">    h.append(temp.height)</span><br><span class="line">    w.append(temp.width)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;Resize and save img&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="number">0</span>,<span class="number">1500</span>)):</span><br><span class="line">    pred = np.squeeze(predicted_test[index])</span><br><span class="line">    plt.imsave(<span class="string">&#x27;pred_mask.png&#x27;</span>,pred)</span><br><span class="line">    im_gray = cv2.imread(<span class="string">&#x27;pred_mask.png&#x27;</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">    (thresh, im_bw) = cv2.threshold(im_gray, <span class="number">220</span>, <span class="number">255</span>, cv2.THRESH_BINARY | cv2.THRESH_OTSU)</span><br><span class="line"></span><br><span class="line">    im_bw_t = Image.fromarray(im_bw) </span><br><span class="line">    im_bw_t.save(TEST_MASK_PATH+<span class="string">&#x27;&#123;&#125;.png&#x27;</span>.<span class="built_in">format</span>(each_test_name[index]))</span><br><span class="line">        </span><br><span class="line">    im_bw_t_n = Image.<span class="built_in">open</span>(TEST_MASK_PATH+<span class="string">&#x27;&#123;&#125;.png&#x27;</span>.<span class="built_in">format</span>(each_test_name[index]))</span><br><span class="line">    im_bw_t_nn = im_bw_t_n.resize(( w[index], h[index]),Image.ANTIALIAS)</span><br><span class="line">    im_bw_t_nn.save(TEST_MASK_PATH+<span class="string">&#x27;&#123;&#125;.png&#x27;</span>.<span class="built_in">format</span>(each_test_name[index]))</span><br><span class="line">print(<span class="string">&#x27;DONE! Save mask img！&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h1><p>本次比赛，由于时间和硬件资源不够，仅在 Colab 上采用了 <code>UNet + efficientnetb3</code> 进行了实验。还有许多可以提升的地方，例如</p>
+<ul>
+<li><p>Backbone（inceptionresnetv2, efficientnetb7）</p>
+</li>
+<li><p>损失函数</p>
+</li>
+<li><p>图像扩增</p>
+</li>
+<li><p>打伪标签</p>
+<p>在训练集中，未篡改的图像可通过 mask 来判断。把测试集中的一些明显未篡改的图像，打上全黑的 mask，加入到训练集。一是 Colab 内存不够，二是害怕判定作弊，没加。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i,img <span class="keyword">in</span> tqdm(<span class="built_in">zip</span>(<span class="built_in">list</span>(&#123;i.split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> os.listdir(TRAIN_PATH)&#125;), <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(os.listdir(TRAIN_PATH))))):</span><br><span class="line">  </span><br><span class="line">    image= cv2.imread(train_data[img])</span><br><span class="line">    mask = cv2.imread(mask_data[img],<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> cv2.countNonZero(mask) == <span class="number">0</span>:</span><br><span class="line">        cv2.imwrite(path+<span class="string">&#x27;train_ok/&#123;&#125;.jpg&#x27;</span>.<span class="built_in">format</span>(i), image)</span><br><span class="line">        cv2.imwrite(path+<span class="string">&#x27;train_ok_mask/&#123;&#125;.png&#x27;</span>.<span class="built_in">format</span>(i), mask)</span><br><span class="line">    <span class="keyword">else</span>: <span class="keyword">pass</span>    </span><br><span class="line">print(<span class="built_in">len</span>(path+ <span class="string">&#x27;train_ok/&#x27;</span>), <span class="built_in">len</span>(path+ <span class="string">&#x27;train_ok_mask/&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+<li><p>训练策略</p>
+<ul>
+<li>epoch 和 学习率</li>
+<li>低分辨率 –&gt; 高分辨率</li>
+</ul>
+</li>
+<li><p>测试集不 Resize</p>
+</li>
+</ul>
+<h2 id="Top-选手经验"><a href="#Top-选手经验" class="headerlink" title="Top 选手经验"></a>Top 选手经验</h2><h3 id="Rank-3"><a href="#Rank-3" class="headerlink" title="Rank 3"></a>Rank 3</h3><blockquote>
+<p>2021-01-07 18:00 看了 Rank 3 的思路，数据增强的思路真棒！深度学习，数据为王！！！</p>
+</blockquote>
+<blockquote>
+<p>Post: <a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/forum/postDetail?postId=161067">https://tianchi.aliyun.com/forum/postDetail?postId=161067</a></p>
+<p>repo:  <a target="_blank" rel="noopener" href="https://github.com/HighwayWu/Tianchi-FFT2?spm=5176.12282029.0.0.59d727c1TpgQpA">https://github.com/HighwayWu/Tianchi-FFT2?spm=5176.12282029.0.0.59d727c1TpgQpA</a></p>
+<p>我们在比赛开始阶段，首先使用了一个简单的模型(U-Net)在原始训练集上进行训练，结果发现在测试集上的效果很差(约400分)。<br>于是接下来先从模型架构入手，尝试了多种不同的模型，如ResNet、VGG、Xception、FCN、HRNet、Nested-UNet、VGG-UNet等等。<br>最终发现效果最好的是使用Se-Resnext50为编码器、以及融合了SCSE感知模块的U-Net(详见训练流程3.1)(约550分)。<br>值得一提的是，SCSE感知模块效果显著。主要是因为其进行的”感知”操作能够很好的让模型对篡改区域的特征进行re-weighting。<br>当然，我们也尝试过自行设计Attention Module并嵌入其中，但发现效果微乎其微。就没有继续尝试修改模型架构，接下来从训练数据入手。<br>首先观察到训练集中大量证书类数据是由同一张图片裁剪而得，所以直接使用其进行训练极容易导致过拟合。故我们制作了一批新的证书类数据并加入训练(约提升100<del>150分)。<br>其次观察到训练集中书籍封面类图片全部是真实的，而测试集中大量书籍封面类图片为篡改的。故我们也制作了一批新的书籍封面类书籍并加入训练(约提升50</del>80分)。<br>最后，将训练集进行不同的划分(如fold 1~4)，然后分别训练模型；最终将4个模型的结果融合(约提升80分)。</p>
+</blockquote>
+<h1 id="5-更多参考技巧"><a href="#5-更多参考技巧" class="headerlink" title="5 更多参考技巧"></a>5 更多参考技巧</h1><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/qubvel/segmentation_models">https://github.com/qubvel/segmentation_models</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://neptune.ai/blog/ml-experiment-tracking">https://neptune.ai/blog/ml-experiment-tracking</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/252228151">https://zhuanlan.zhihu.com/p/252228151</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/tianchi-competition-5-manipulation-detection/" title="安全AI挑战者计划第五期：伪造图像的篡改检测 Rank21分享">https://www.ashin.wang/tianchi-competition-5-manipulation-detection/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI%E7%AB%9E%E8%B5%9B/" rel="tag"># AI竞赛</a>
+              <a href="/tags/%E5%A4%A9%E6%B1%A0/" rel="tag"># 天池</a>
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" rel="tag"># 图像分割</a>
+              <a href="/tags/%E7%AF%A1%E6%94%B9%E6%A3%80%E6%B5%8B/" rel="tag"># 篡改检测</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/ipad-mini2-from-12-down-10/" rel="prev" title="iPad mini2 12.4.9 降级 10.3.3">
+      <i class="fa fa-chevron-left"></i> iPad mini2 12.4.9 降级 10.3.3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/git-sock5-proxy/" rel="next" title="git配置Sock5代理">
+      git配置Sock5代理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E9%98%9F%E4%BC%8D%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">0 队伍简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%AF%94%E8%B5%9B%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">1 比赛简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-%E6%95%B0%E6%8D%AE%E5%BD%A2%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">A 数据形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-number">2.2.</span> <span class="nav-text">B 评估标准</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">3 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">A 运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E4%BE%9D%E8%B5%96%E5%BA%93"><span class="nav-number">3.1.1.</span> <span class="nav-text">主要依赖库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NoteBook"><span class="nav-number">3.1.2.</span> <span class="nav-text">NoteBook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#py"><span class="nav-number">3.1.3.</span> <span class="nav-text">.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">B 数据处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA"><span class="nav-number">3.3.</span> <span class="nav-text">C 图像增强</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-Metric"><span class="nav-number">3.4.</span> <span class="nav-text">D Metric</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">3.5.</span> <span class="nav-text">E 模型训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B"><span class="nav-number">3.6.</span> <span class="nav-text">F 模型预测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">4 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Top-%E9%80%89%E6%89%8B%E7%BB%8F%E9%AA%8C"><span class="nav-number">4.1.</span> <span class="nav-text">Top 选手经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rank-3"><span class="nav-number">4.1.1.</span> <span class="nav-text">Rank 3</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E6%9B%B4%E5%A4%9A%E5%8F%82%E8%80%83%E6%8A%80%E5%B7%A7"><span class="nav-number">5.</span> <span class="nav-text">5 更多参考技巧</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

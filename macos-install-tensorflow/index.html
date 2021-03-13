@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="记录TensorFlow 在 macOS 上的安装笔记~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS安装TensorFlow">
+<meta property="og:url" content="https://www.ashin.wang/macos-install-tensorflow/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="记录TensorFlow 在 macOS 上的安装笔记~">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-06T14:06:32.000Z">
+<meta property="article:modified_time" content="2020-02-19T05:30:51.000Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="TensorFlow">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ashin.wang/macos-install-tensorflow/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>macOS安装TensorFlow | Ashin Wang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">From Here To Somewhere</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/macos-install-tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          macOS安装TensorFlow
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-06 22:06:32" itemprop="dateCreated datePublished" datetime="2020-02-06T22:06:32+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-19 13:30:51" itemprop="dateModified" datetime="2020-02-19T13:30:51+08:00">2020-02-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>记录TensorFlow 在 macOS 上的安装笔记~</p>
+<span id="more"></span>
+
+<h2 id="一、设置-conda源"><a href="#一、设置-conda源" class="headerlink" title="一、设置 conda源"></a>一、设置 conda源</h2><h3 id="查看源"><a href="#查看源" class="headerlink" title="查看源"></a>查看源</h3><p><code>conda config --show-sources</code></p>
+<h3 id="添加源"><a href="#添加源" class="headerlink" title="添加源"></a>添加源</h3><ul>
+<li>阿里云的源 </li>
+</ul>
+<p><code>conda config --add channels http://mirrors.aliyun.com/pypi/simple/</code></p>
+<ul>
+<li>中科大的源 </li>
+</ul>
+<p><code>conda config –add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/</code></p>
+<ul>
+<li>添加清华的源 </li>
+</ul>
+<p><code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code></p>
+<p><code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</code></p>
+<h3 id="显示源地址"><a href="#显示源地址" class="headerlink" title="显示源地址"></a>显示源地址</h3><p><code>conda config --set show_channel_urls yes</code></p>
+<h3 id="移除源"><a href="#移除源" class="headerlink" title="移除源"></a>移除源</h3><p><code>conda config --remove channels + 源</code></p>
+<h2 id="二、创建TF虚拟环境"><a href="#二、创建TF虚拟环境" class="headerlink" title="二、创建TF虚拟环境"></a>二、创建TF虚拟环境</h2><h3 id="创建环境"><a href="#创建环境" class="headerlink" title="创建环境"></a>创建环境</h3><p>创建环境名为 tensorflow 并为其安装 py3.7</p>
+<p><code>conda create -n tensorflow python=3.7</code></p>
+<h3 id="激活环境"><a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h3><p><code>source activate tensorflow</code></p>
+<h3 id="退出环境"><a href="#退出环境" class="headerlink" title="退出环境"></a>退出环境</h3><p><code>source deactivate</code></p>
+<h2 id="三、安装TensorFlow"><a href="#三、安装TensorFlow" class="headerlink" title="三、安装TensorFlow"></a>三、安装TensorFlow</h2><p>pip 临时使用清华的镜像</p>
+<p><code>pip install tensorflow -i https:pypi.tuna.tsinghua.edu.cn/simple/</code></p>
+<p>若出现安装<code>tensorboard</code>安装失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Could not find a version that satisfies the requirement tensorboard&lt;2.2.0,&gt;&#x3D;2.1.0 (from tensorflow) (from versions: 1.6.0rc0, 1.6.0, 1.7.0, 1.8.0, 1.9.0, 1.10.0, 1.11.0, 1.12.0, 1.12.1, 1.12.2, 1.13.0, 1.13.1, 1.14.0, 1.15.0, 2.0.0, 2.0.1, 2.0.2)</span><br><span class="line">ERROR: No matching distribution found for tensorboard&lt;2.2.0,&gt;&#x3D;2.1.0 (from tensorflow)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>pip install tensorboard  -i https:pypi.tuna.tsinghua.edu.cn/simple/</code>单独安装</li>
+</ul>
+<h2 id="四、测试"><a href="#四、测试" class="headerlink" title="四、测试"></a>四、测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 忽略此版本 TF 不支持 CPU 加速警告</span><br><span class="line">import os</span><br><span class="line">os.environ[&#39;TF_CPP_MIN_LOG_LEVEL&#39;] &#x3D; &#39;2&#39;</span><br><span class="line"></span><br><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">a &#x3D; tf.constant(1.)</span><br><span class="line">b &#x3D; tf.constant(2.)</span><br><span class="line">c &#x3D; tf.add(a, b)</span><br><span class="line">print(float(c))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="五、导入-base-conda-list-中的包"><a href="#五、导入-base-conda-list-中的包" class="headerlink" title="五、导入 base conda list 中的包"></a>五、导入 base conda list 中的包</h2><ol>
+<li><code>source ~/.bash_proflie</code>进入<code>（base）</code>环境</li>
+<li><code>conda list -e &gt; requirements.txt </code> 导出<code>（base）</code>环境conda list 包的详情表</li>
+<li><code>conda actvate tensorflow</code>激活 TensorFlow 环境</li>
+<li><code>conda install --yes --file requirements.txt</code> 安装包</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/macos-install-tensorflow/" title="macOS安装TensorFlow">https://www.ashin.wang/macos-install-tensorflow/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/mac-use-conda-command/" rel="prev" title="macOS使用Conda">
+      <i class="fa fa-chevron-left"></i> macOS使用Conda
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/badusb-get-wifi-password/" rel="next" title="BadUSB获取WiFi密码">
+      BadUSB获取WiFi密码 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%AE%BE%E7%BD%AE-conda%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">一、设置 conda源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">查看源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%BA%90"><span class="nav-number">1.2.</span> <span class="nav-text">添加源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%BA%90%E5%9C%B0%E5%9D%80"><span class="nav-number">1.3.</span> <span class="nav-text">显示源地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E6%BA%90"><span class="nav-number">1.4.</span> <span class="nav-text">移除源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BATF%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">二、创建TF虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">2.1.</span> <span class="nav-text">创建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E7%8E%AF%E5%A2%83"><span class="nav-number">2.2.</span> <span class="nav-text">激活环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">2.3.</span> <span class="nav-text">退出环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85TensorFlow"><span class="nav-number">3.</span> <span class="nav-text">三、安装TensorFlow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">四、测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%AF%BC%E5%85%A5-base-conda-list-%E4%B8%AD%E7%9A%84%E5%8C%85"><span class="nav-number">5.</span> <span class="nav-text">五、导入 base conda list 中的包</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

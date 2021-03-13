@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="来源：Official Kaggle API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kaggle API指南">
+<meta property="og:url" content="https://www.ashin.wang/kaggle-api-guide/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="来源：Official Kaggle API">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-08T05:50:00.000Z">
+<meta property="article:modified_time" content="2021-02-08T06:28:56.000Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="竞赛">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ashin.wang/kaggle-api-guide/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kaggle API指南 | Ashin Wang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">From Here To Somewhere</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/kaggle-api-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kaggle API指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-08 13:50:00 / 修改时间：14:28:56" itemprop="dateCreated datePublished" datetime="2021-02-08T13:50:00+08:00">2021-02-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">AI竞赛</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>来源：<a target="_blank" rel="noopener" href="https://github.com/Kaggle/kaggle-api">Official Kaggle API</a></p>
+<span id="more"></span>
+
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>pip install kaggle</code> </p>
+<p>建议使用普通用户安装，而非 <code>root</code> 用户。其中二进制文件安装路径，</p>
+<ul>
+<li><p>Linux: <code>~/.local/bin</code></p>
+</li>
+<li><p>Windows: <code>$PYTHON_HOME/Scripts</code></p>
+</li>
+</ul>
+<h1 id="API凭证"><a href="#API凭证" class="headerlink" title="API凭证"></a>API凭证</h1><ol>
+<li><p>创建 Token</p>
+<p>在 <code>https://www.kaggle.com/&lt;username&gt;/account</code> 页面点击 <code>Create API Token</code>，将会触发下载产生的凭证配置文件  <code>kaggle.json</code></p>
+</li>
+<li><p>放置配置文件 <code>echo %HOMEPATH%</code></p>
+<p>Linux: <code>~/.kaggle/kaggle.json</code> </p>
+<p>Windows: <code>C:\Users\&lt;Windows-username&gt;\.kaggle\kaggle.json</code></p>
+</li>
+<li><p>chmod</p>
+<p><code>chmod 600 ~/.kaggle/kaggle.json</code></p>
+</li>
+</ol>
+<ul>
+<li>也可以直接导入 Kaggle &lt;username&gt; and &lt;token&gt;</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export KAGGLE_USERNAME=datadinosaur</span><br><span class="line">export KAGGLE_KEY=xxxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><p>命令行工具支持以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kaggle competitions &#123;list, files, download, submit, submissions, leaderboard&#125;</span><br><span class="line">kaggle datasets &#123;list, files, download, create, version, init&#125;</span><br><span class="line">kaggle kernels &#123;list, init, push, pull, output, status&#125;</span><br><span class="line">kaggle config &#123;view, set, unset&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="赛事"><a href="#赛事" class="headerlink" title="赛事"></a>赛事</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle competitions [-h]</span><br><span class="line">                           &#123;list,files,download,submit,submissions,leaderboard&#125;</span><br><span class="line">                           ...</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line"></span><br><span class="line">commands:</span><br><span class="line">  &#123;list,files,download,submit,submissions,leaderboard&#125;</span><br><span class="line">    list                List available competitions 列出可用的比赛</span><br><span class="line">    files               List competition files 列出比赛文件</span><br><span class="line">    download            Download competition files 下载比赛文件</span><br><span class="line">    submit              Make a new competition submission 提交新的比赛提交</span><br><span class="line">    submissions         Show your competition submissions 参赛作品展示你的参赛作品</span><br><span class="line">    leaderboard         Get competition leaderboard information 排行榜获取竞争排行榜信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="比赛名单"><a href="#比赛名单" class="headerlink" title="比赛名单"></a>比赛名单</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle competitions list [-h] [--group GROUP] [--category CATEGORY] [--sort-by SORT_BY] [-p PAGE] [-s SEARCH] [-v]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  --group GROUP         Search for competitions in a specific group. Default is &#x27;general&#x27;. Valid options are &#x27;general&#x27;, &#x27;entered&#x27;, and &#x27;inClass&#x27; 搜索特定组中的比赛</span><br><span class="line">  </span><br><span class="line">  --category CATEGORY   Search for competitions of a specific category. Default is &#x27;all&#x27;. Valid options are &#x27;all&#x27;, &#x27;featured&#x27;, &#x27;research&#x27;, &#x27;recruitment&#x27;, &#x27;gettingStarted&#x27;, &#x27;masters&#x27;, and &#x27;playground&#x27; 搜索特定类别的比赛</span><br><span class="line">  </span><br><span class="line">  --sort-by SORT_BY     Sort list results. Default is &#x27;latestDeadline&#x27;. Valid options are &#x27;grouped&#x27;, &#x27;prize&#x27;, &#x27;earliestDeadline&#x27;, &#x27;latestDeadline&#x27;, &#x27;numberOfTeams&#x27;, and &#x27;recentlyCreated&#x27; 排序</span><br><span class="line">  </span><br><span class="line">  -p PAGE, --page PAGE  Page number for results paging. Page size is 20 by default 页面</span><br><span class="line">  </span><br><span class="line">  -s SEARCH, --search SEARCH 搜索</span><br><span class="line">                        Term(s) to search for</span><br><span class="line">                        </span><br><span class="line">  -v, --csv             Print results in CSV format csv格式</span><br><span class="line">                        (if not set print in table format)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="展示比赛数据"><a href="#展示比赛数据" class="headerlink" title="展示比赛数据"></a>展示比赛数据</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle competitions files [-h] [-v] [-q] [competition]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help   show this help message and exit</span><br><span class="line">  competition  Competition URL suffix (use &quot;kaggle competitions list&quot; to show options)</span><br><span class="line">               If empty, the default competition will be used (use &quot;kaggle config set competition&quot;)&quot;</span><br><span class="line">  -v, --csv    Print results in CSV format (if not set print in table format)</span><br><span class="line">  -q, --quiet  Suppress printing information about the upload/download progress 安静模式</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="下载比赛数据"><a href="#下载比赛数据" class="headerlink" title="下载比赛数据"></a>下载比赛数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle competitions download [-h] [-f FILE_NAME] [-p PATH] [-w] [-o]</span><br><span class="line">                                    [-q]</span><br><span class="line">                                    [competition]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  competition           Competition URL suffix (use &quot;kaggle competitions list&quot; to show options)</span><br><span class="line">                        If empty, the default competition will be used (use &quot;kaggle config set competition&quot;)&quot;</span><br><span class="line">  -f FILE_NAME, --file FILE_NAME</span><br><span class="line">                        File name, all files downloaded if not provided</span><br><span class="line">                        (use &quot;kaggle competitions files -c &lt;competition&gt;&quot; to show options)</span><br><span class="line">  -p PATH, --path PATH  Folder where file(s) will be downloaded, defaults to current working directory</span><br><span class="line">  -w, --wp              Download files to current working path</span><br><span class="line">  -o, --force           Skip check whether local version of file is up to date, force file download</span><br><span class="line">  -q, --quiet           Suppress printing information about the upload&#x2F;download progress</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="提交结果"><a href="#提交结果" class="headerlink" title="提交结果"></a>提交结果</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle competitions submit [-h] -f FILE_NAME -m MESSAGE [-q]</span><br><span class="line">                                  [competition]</span><br><span class="line"></span><br><span class="line">required arguments:</span><br><span class="line">  -f FILE_NAME, --file FILE_NAME</span><br><span class="line">                        File for upload (full path)</span><br><span class="line">  -m MESSAGE, --message MESSAGE</span><br><span class="line">                        Message describing this submission</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  competition           Competition URL suffix (use &quot;kaggle competitions list&quot; to show options)</span><br><span class="line">                        If empty, the default competition will be used (use &quot;kaggle config set competition&quot;)&quot;</span><br><span class="line">  -q, --quiet           Suppress printing information about the upload/download progress</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="列出参赛作品"><a href="#列出参赛作品" class="headerlink" title="列出参赛作品"></a>列出参赛作品</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle competitions submissions [-h] [-v] [-q] [competition]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help   show this help message and exit</span><br><span class="line">  competition  Competition URL suffix (use &quot;kaggle competitions list&quot; to show options)</span><br><span class="line">               If empty, the default competition will be used (use &quot;kaggle config set competition&quot;)&quot;</span><br><span class="line">  -v, --csv    Print results in CSV format (if not set print in table format)</span><br><span class="line">  -q, --quiet  Suppress printing information about the upload/download progress</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="获取比赛-leaderboard"><a href="#获取比赛-leaderboard" class="headerlink" title="获取比赛 leaderboard"></a>获取比赛 leaderboard</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle competitions leaderboard [-h] [-s] [-d] [-p PATH] [-v] [-q]</span><br><span class="line">                                       [competition]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  competition           Competition URL suffix (use &quot;kaggle competitions list&quot; to show options)</span><br><span class="line">                        If empty, the default competition will be used (use &quot;kaggle config set competition&quot;)&quot;</span><br><span class="line">  -s, --show            Show the top of the leaderboard</span><br><span class="line">  -d, --download        Download entire leaderboard</span><br><span class="line">  -p PATH, --path PATH  Folder where file(s) will be downloaded, defaults to current working directory</span><br><span class="line">  -v, --csv             Print results in CSV format (if not set print in table format)</span><br><span class="line">  -q, --quiet           Suppress printing information about the upload/download progress</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle datasets [-h]</span><br><span class="line">                       &#123;list,files,download,create,version,init,metadata,status&#125; ...</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line"></span><br><span class="line">commands:</span><br><span class="line">  &#123;list,files,download,create,version,init,metadata, status&#125;</span><br><span class="line">    list                List available datasets 列出可用数据集</span><br><span class="line">    files               List dataset files 文件列表数据集文件</span><br><span class="line">    download            Download dataset files 下载数据集文件</span><br><span class="line">    create              Create a new dataset 创建新数据集</span><br><span class="line">    version             Create a new dataset version 创建新的数据集版本</span><br><span class="line">    init                Initialize metadata file for dataset creation 初始化用于创建数据集的元数据文件</span><br><span class="line">    metadata            Download metadata about a dataset 下载有关数据集的元数据</span><br><span class="line">    status              Get the creation status for a dataset 获取数据集的创建状态</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="列出数据集"><a href="#列出数据集" class="headerlink" title="列出数据集"></a>列出数据集</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle datasets list [-h] [--sort-by SORT_BY] [--size SIZE] [--file-type FILE_TYPE] [--license LICENSE_NAME] [--tags TaG_IDS] [-s SEARCH] [-m] [--user USER] [-p PAGE] [-v]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  --sort-by SORT_BY     Sort list results. Default is &#x27;hottest&#x27;. Valid options are &#x27;hottest&#x27;, &#x27;votes&#x27;, &#x27;updated&#x27;, and &#x27;active&#x27;</span><br><span class="line">  --size SIZE           Search for datasets of a specific size. Default is &#x27;all&#x27;. Valid options are &#x27;all&#x27;, &#x27;small&#x27;, &#x27;medium&#x27;, and &#x27;large&#x27;</span><br><span class="line">  --file-type FILE_TYPE Search for datasets with a specific file type. Default is &#x27;all&#x27;. Valid options are &#x27;all&#x27;, &#x27;csv&#x27;, &#x27;sqlite&#x27;, &#x27;json&#x27;, and &#x27;bigQuery&#x27;. Please note that bigQuery datasets cannot be downloaded</span><br><span class="line">  --license LICENSE_NAME </span><br><span class="line">                        Search for datasets with a specific license. Default is &#x27;all&#x27;. Valid options are &#x27;all&#x27;, &#x27;cc&#x27;, &#x27;gpl&#x27;, &#x27;odb&#x27;, and &#x27;other&#x27;</span><br><span class="line">  --tags TAG_IDS        Search for datasets that have specific tags. Tag list should be comma separated                      </span><br><span class="line">  -s SEARCH, --search SEARCH</span><br><span class="line">                        Term(s) to search for</span><br><span class="line">  -m, --mine            Display only my items</span><br><span class="line">  --user USER           Find public datasets owned by a specific user or organization</span><br><span class="line">  -p PAGE, --page PAGE  Page number for results paging. Page size is 20 by default</span><br><span class="line">  -v, --csv             Print results in CSV format (if not set print in table format)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="列出数据集文件"><a href="#列出数据集文件" class="headerlink" title="列出数据集文件"></a>列出数据集文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle datasets files [-h] [-v] [dataset]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help  show this help message and exit</span><br><span class="line">  dataset     Dataset URL suffix in format &lt;owner&gt;/&lt;dataset-name&gt; (use &quot;kaggle datasets list&quot; to show options)</span><br><span class="line">  -v, --csv   Print results in CSV format (if not set print in table format)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="下载数据集"><a href="#下载数据集" class="headerlink" title="下载数据集"></a>下载数据集</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">usage: kaggle datasets download [-h] [-f FILE_NAME] [-p PATH] [-w] [--unzip]</span><br><span class="line">                                [-o] [-q]</span><br><span class="line">                                [dataset]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  dataset               Dataset URL suffix in format &lt;owner&gt;/&lt;dataset-name&gt; (use &quot;kaggle datasets list&quot; to show options)</span><br><span class="line">  -f FILE_NAME, --file FILE_NAME</span><br><span class="line">                        File name, all files downloaded if not provided</span><br><span class="line">                        (use &quot;kaggle datasets files -d &lt;dataset&gt;&quot; to show options)</span><br><span class="line">  -p PATH, --path PATH  Folder where file(s) will be downloaded, defaults to current working directory</span><br><span class="line">  -w, --wp              Download files to current working path</span><br><span class="line">  --unzip               Unzip the downloaded file. Will delete the zip file when completed.</span><br><span class="line">  -o, --force           Skip check whether local version of file is up to date, force file download</span><br><span class="line">  -q, --quiet           Suppress printing information about the upload/download progress</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐阅读</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/ai-competition-platform/" rel="bookmark">AI竞赛平台</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/use-colab/" rel="bookmark">Colab的使用</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/keras-plot-acc-loss-in-notebook/" rel="bookmark">Keras在NoteBook绘制acc-loss曲线</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/nlp_news_classification/" rel="bookmark">NLP-新闻分类</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/plot-confusion-matrix-heatmap/" rel="bookmark">绘制混淆矩阵热图</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/kaggle-api-guide/" title="Kaggle API指南">https://www.ashin.wang/kaggle-api-guide/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/%E7%AB%9E%E8%B5%9B/" rel="tag"># 竞赛</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/git-commit-message-conventions/" rel="prev" title="Git Commit Message Conventions">
+      <i class="fa fa-chevron-left"></i> Git Commit Message Conventions
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API%E5%87%AD%E8%AF%81"><span class="nav-number">2.</span> <span class="nav-text">API凭证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%9B%E4%BA%8B"><span class="nav-number">3.1.</span> <span class="nav-text">赛事</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%B5%9B%E5%90%8D%E5%8D%95"><span class="nav-number">3.1.1.</span> <span class="nav-text">比赛名单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E6%AF%94%E8%B5%9B%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.2.</span> <span class="nav-text">展示比赛数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%AF%94%E8%B5%9B%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.3.</span> <span class="nav-text">下载比赛数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E7%BB%93%E6%9E%9C"><span class="nav-number">3.1.4.</span> <span class="nav-text">提交结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E5%8F%82%E8%B5%9B%E4%BD%9C%E5%93%81"><span class="nav-number">3.1.5.</span> <span class="nav-text">列出参赛作品</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%AF%94%E8%B5%9B-leaderboard"><span class="nav-number">3.1.6.</span> <span class="nav-text">获取比赛 leaderboard</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.2.</span> <span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.2.1.</span> <span class="nav-text">列出数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E6%95%B0%E6%8D%AE%E9%9B%86%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.2.</span> <span class="nav-text">列出数据集文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.2.3.</span> <span class="nav-text">下载数据集</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

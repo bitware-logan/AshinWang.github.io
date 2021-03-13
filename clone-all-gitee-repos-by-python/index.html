@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="使用Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="克隆Git个人仓库的所有项目">
+<meta property="og:url" content="https://www.ashin.wang/clone-all-gitee-repos-by-python/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="使用Python">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-06T14:00:14.000Z">
+<meta property="article:modified_time" content="2020-09-21T05:43:47.000Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="Gitee">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="API">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ashin.wang/clone-all-gitee-repos-by-python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>克隆Git个人仓库的所有项目 | Ashin Wang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">From Here To Somewhere</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/clone-all-gitee-repos-by-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          克隆Git个人仓库的所有项目
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-06 22:00:14" itemprop="dateCreated datePublished" datetime="2020-03-06T22:00:14+08:00">2020-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-21 13:43:47" itemprop="dateModified" datetime="2020-09-21T13:43:47+08:00">2020-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">使用Python</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Fork 了几十个项目，想全部一次性 Download 到本地。Gitee 官方的 OpenAPI 支持获取所有仓库的信息，这样就可以通过仓库的 ssh_url 使用 Python 克隆所有的项目。</p>
+<span id="more"></span>
+
+<h2 id="一、获取仓库信息"><a href="#一、获取仓库信息" class="headerlink" title="一、获取仓库信息"></a>一、获取仓库信息</h2><p>通过 <code>列出授权用户的所有仓库： https://gitee.com/api/v5/swagger#/getV5UserRepos</code> 将获取的 json 文件保存到本地。</p>
+<h2 id="二、Python-对-json-操作"><a href="#二、Python-对-json-操作" class="headerlink" title="二、Python 对 json 操作"></a>二、Python 对 json 操作</h2><p>json.loads 用于解码 JSON 数据，该函数返回 Python 字段的数据类型。</p>
+<h2 id="三、Python-对-git-操作"><a href="#三、Python-对-git-操作" class="headerlink" title="三、Python 对 git 操作"></a>三、Python 对 git 操作</h2><p>完全搬运：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/russellyoung/p/python-cao-zuogit.html">python操作git</a></p>
+<h3 id="0-安装-gitpython-库"><a href="#0-安装-gitpython-库" class="headerlink" title="0 安装 gitpython 库"></a>0 安装 gitpython 库</h3><p><code>pip install gitpython</code></p>
+<h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1 初始化"></a>1 初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> git <span class="keyword">import</span> Repo</span><br><span class="line">Repo.init(<span class="string">&#x27;/data/test2&#x27;</span>) <span class="comment"># 创建一个git文件夹</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-添加与提交"><a href="#2-添加与提交" class="headerlink" title="2 添加与提交"></a>2 添加与提交</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">repo.index.add([<span class="string">&#x27;a.txt&#x27;</span>]) <span class="comment">#将文件提交到缓存区</span></span><br><span class="line">repo.inex.commit(<span class="string">&#x27;update new&#x27;</span>) <span class="comment"># 将缓存区文件提交到版本库</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-回滚"><a href="#3-回滚" class="headerlink" title="3 回滚"></a>3 回滚</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">repo.index.checkout([<span class="string">&#x27;a.txt&#x27;</span>]) <span class="comment"># 回滚缓存区文件</span></span><br><span class="line">repo.index.reset(commit=<span class="string">&#x27;486a9565e07ad291756159dd015eab6acda47e25&#x27;</span>,head=<span class="literal">True</span>) <span class="comment">#回滚版本库文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-分支"><a href="#4-分支" class="headerlink" title="4 分支"></a>4 分支</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo.create_head(<span class="string">&#x27;debug&#x27;</span>) <span class="comment"># 创建分支</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-tag"><a href="#5-tag" class="headerlink" title="5 tag"></a>5 tag</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo.create_tag(<span class="string">&#x27;v1.0&#x27;</span>) <span class="comment"># 创建tag</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-拉取远程仓库"><a href="#6-拉取远程仓库" class="headerlink" title="6 拉取远程仓库"></a>6 拉取远程仓库</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">clone_repo=git.Repo.clone_from(<span class="string">&#x27;https://github.com/wangfeng7399/syncmysql.git&#x27;</span>,<span class="string">&#x27;/data/test3&#x27;</span>) <span class="comment">#拉取远程代码</span></span><br><span class="line">remote = repo.remote()</span><br><span class="line"><span class="comment"># 从远程版本库拉取分支</span></span><br><span class="line">remote.pull(<span class="string">&#x27;master&#x27;</span>) <span class="comment">#后面跟需要拉取的分支名称</span></span><br><span class="line"><span class="comment"># 推送本地分支到远程版本库</span></span><br><span class="line">remote.push(<span class="string">&#x27;master&#x27;</span>) <span class="comment">#后面跟需要提交的分支名称</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-使用原生命令"><a href="#7-使用原生命令" class="headerlink" title="7 使用原生命令"></a>7 使用原生命令</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">repo=git.Git(<span class="string">&#x27;/data/test4&#x27;</span>)</span><br><span class="line">repo.checkout(<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment"># 所有git支持的命令这里都支持</span></span><br><span class="line">print(repo.status())</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、代码"><a href="#四、代码" class="headerlink" title="四、代码"></a>四、代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> git</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">git_clone</span>(<span class="params">jsons, key</span>):</span></span><br><span class="line">    str_value = [jsons]</span><br><span class="line">    key_value = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(jsons, <span class="built_in">dict</span>):</span><br><span class="line">        <span class="keyword">for</span> json_result <span class="keyword">in</span> jsons.values():</span><br><span class="line">            <span class="keyword">if</span> key <span class="keyword">in</span> jsons.keys():</span><br><span class="line">                key_value = jsons.get(key)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                git_clone(json_result, key)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(jsons, <span class="built_in">list</span>):</span><br><span class="line">        <span class="keyword">for</span> json_array <span class="keyword">in</span> jsons:</span><br><span class="line">            git_clone(json_array, key)</span><br><span class="line">    <span class="keyword">if</span> key_value != <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">        list_value = <span class="built_in">list</span>(<span class="built_in">str</span>(key_value).split())</span><br><span class="line">        print(list_value)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> repo <span class="keyword">in</span> list_value:</span><br><span class="line">        repo_name1 = <span class="built_in">str</span>(repo.replace(<span class="string">&#x27;git@gitee.com:AshinWang/&#x27;</span>,<span class="string">&#x27;&#x27;</span>))</span><br><span class="line">        repo_name2 = <span class="built_in">str</span>(repo_name1.replace(<span class="string">&#x27;.git&#x27;</span>,<span class="string">&#x27;&#x27;</span>))</span><br><span class="line">        print(repo_name2)</span><br><span class="line">        path = <span class="string">&#x27;/Users/ashin/Desktop/test_dir/&#x27;</span> + repo_name2</span><br><span class="line">        git.Repo.clone_from(repo,path)</span><br><span class="line">   </span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    path = <span class="string">&#x27;/Users/ashin/Desktop/&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path + <span class="string">&#x27;repos.json&#x27;</span>, <span class="string">&#x27;r+&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        json_data = json.load(f)</span><br><span class="line">    git_clone(json_data, <span class="string">&#x27;ssh_url&#x27;</span>)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐阅读</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/hexo-github-coding-gitee/" rel="bookmark">Hexo同时部署在GitHub、Coding、Gitee</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/python-word-cloud/" rel="bookmark">Python词云可视化</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/clone-all-gitee-repos-by-python/" title="克隆Git个人仓库的所有项目">https://www.ashin.wang/clone-all-gitee-repos-by-python/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Gitee/" rel="tag"># Gitee</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/API/" rel="tag"># API</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/re-download-fashion-mnist/" rel="prev" title="fashion_mnist数据集加载出错">
+      <i class="fa fa-chevron-left"></i> fashion_mnist数据集加载出错
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/download-cse-cic-ids2018/" rel="next" title="CSE-CIC-IDS2018下载">
+      CSE-CIC-IDS2018下载 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%8E%B7%E5%8F%96%E4%BB%93%E5%BA%93%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">一、获取仓库信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Python-%E5%AF%B9-json-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">二、Python 对 json 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Python-%E5%AF%B9-git-%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">三、Python 对 git 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-%E5%AE%89%E8%A3%85-gitpython-%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">0 安装 gitpython 库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">1 初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0%E4%B8%8E%E6%8F%90%E4%BA%A4"><span class="nav-number">3.3.</span> <span class="nav-text">2 添加与提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%9B%9E%E6%BB%9A"><span class="nav-number">3.4.</span> <span class="nav-text">3 回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%88%86%E6%94%AF"><span class="nav-number">3.5.</span> <span class="nav-text">4 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-tag"><span class="nav-number">3.6.</span> <span class="nav-text">5 tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">3.7.</span> <span class="nav-text">6 拉取远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F%E5%91%BD%E4%BB%A4"><span class="nav-number">3.8.</span> <span class="nav-text">7 使用原生命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">四、代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">76</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
