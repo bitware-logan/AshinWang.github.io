@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"S30ZCDT4BR","apiKey":"6988e9b27ba9570d9ed85020ebf48b01","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="把Hexo托管在GH Pages上，每次full load速度都非常的慢。于是，我deploy到Coding Pages进行对比测试，发现Coding的服务器也全部在境外，速度不如GH且不稳定。 在网上疯狂搜索有关于Hexo加速教程，经过几番折腾，总结几点实用的。">
@@ -266,13 +266,13 @@
       <div class="popular-posts-title"><a href="/hexo-blog-post-shell/" rel="bookmark">Hexo博客文章管理脚本</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/hexo-related-popular-posts/" rel="bookmark">Hexo开启推荐/相关阅读</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/hexo-github-coding-gitee/" rel="bookmark">Hexo同时部署在GitHub、Coding、Gitee</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/hexo-build/" rel="bookmark">Hexo框架搭建+GitHub托管笔记</a></div>
+      <div class="popular-posts-title"><a href="/hexo-related-popular-posts/" rel="bookmark">Hexo开启推荐/相关阅读</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/hexo-baidu-url-submit/" rel="bookmark">Hexo开启百度推送</a></div>
     </li>
   </ul>
 
@@ -370,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%A0%E7%B9%81%E5%B0%B1%E7%AE%80"><span class="nav-number">1.</span> <span class="nav-text">一、删繁就简</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8CDN%E5%8A%A0%E8%BD%BDcss%E3%80%81js"><span class="nav-number">2.</span> <span class="nav-text">二、使用CDN加载css、js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8gulp%E5%8E%8B%E7%BC%A9Blog%E8%B5%84%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">三、使用gulp压缩Blog资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E6%8F%92%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">1 安装相关插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0gulpfile-js%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">2 添加gulpfile.js配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B7%BB%E5%8A%A0-babelrc%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">3 添加.babelrc文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%89%A7%E8%A1%8Cgulp"><span class="nav-number">3.4.</span> <span class="nav-text">4 执行gulp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%A0%E7%B9%81%E5%B0%B1%E7%AE%80"><span class="nav-text">一、删繁就简</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8CDN%E5%8A%A0%E8%BD%BDcss%E3%80%81js"><span class="nav-text">二、使用CDN加载css、js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8gulp%E5%8E%8B%E7%BC%A9Blog%E8%B5%84%E6%BA%90"><span class="nav-text">三、使用gulp压缩Blog资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E6%8F%92%E4%BB%B6"><span class="nav-text">1 安装相关插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0gulpfile-js%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">2 添加gulpfile.js配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B7%BB%E5%8A%A0-babelrc%E6%96%87%E4%BB%B6"><span class="nav-text">3 添加.babelrc文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%89%A7%E8%A1%8Cgulp"><span class="nav-text">4 执行gulp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
