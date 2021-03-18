@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"S30ZCDT4BR","apiKey":"6988e9b27ba9570d9ed85020ebf48b01","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"appID":"S30ZCDT4BR","apiKey":"6988e9b27ba9570d9ed85020ebf48b01","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="每次使用hexo new post &quot;post-name&quot;新建一片文章时，只有title date tags，还要手动增加urlname 和 categories。 为了偷懒，修改了scaffolds中的post模板。 123456title: &amp;#123;&amp;#123; title &amp;#125;&amp;#125;date: &amp;#123;&amp;#123; date &amp;#125;&amp;#125;">
@@ -262,10 +262,10 @@
       <div class="popular-posts-title"><a href="/hexo-accelerate/" rel="bookmark">Hexo优化加速</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/hexo-blog-post-shell/" rel="bookmark">Hexo博客文章管理脚本</a></div>
+      <div class="popular-posts-title"><a href="/hexo-github-coding-gitee/" rel="bookmark">Hexo同时部署在GitHub、Coding、Gitee</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/hexo-github-coding-gitee/" rel="bookmark">Hexo同时部署在GitHub、Coding、Gitee</a></div>
+      <div class="popular-posts-title"><a href="/hexo-blog-post-shell/" rel="bookmark">Hexo博客文章管理脚本</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/hexo-related-popular-posts/" rel="bookmark">Hexo开启推荐/相关阅读</a></div>
@@ -320,6 +320,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -494,6 +495,26 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'f7ec79f5c25659c405d7',
+      clientSecret: '',
+      repo        : 'AshinWang.github.io.git',
+      owner       : 'AshinWang',
+      admin       : ['AshinWang'],
+      id          : '8144e4590a5fe5995aa6863855f0e4d7',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
