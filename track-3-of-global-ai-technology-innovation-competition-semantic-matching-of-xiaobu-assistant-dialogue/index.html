@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"appID":"S30ZCDT4BR","apiKey":"6988e9b27ba9570d9ed85020ebf48b01","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="repo ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全球人工智能技术创新大赛赛道三：小布助手对话短文本语义匹配">
+<meta property="og:url" content="https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="repo ​">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-01T13:51:29.000Z">
+<meta property="article:modified_time" content="2021-04-01T14:03:33.157Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="数据竞赛">
+<meta property="article:tag" content="AI竞赛">
+<meta property="article:tag" content="语义匹配">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>全球人工智能技术创新大赛赛道三：小布助手对话短文本语义匹配 | Ashin Wang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">From Here To Somewhere</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          全球人工智能技术创新大赛赛道三：小布助手对话短文本语义匹配
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-01 21:51:29 / 修改时间：22:03:33" itemprop="dateCreated datePublished" datetime="2021-04-01T21:51:29+08:00">2021-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iCompetition/" itemprop="url" rel="index"><span itemprop="name">iCompetition</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://github.com/AshinWang/iCompetition/tree/master/%E5%85%A8%E7%90%83%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%8A%80%E6%9C%AF%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E8%B5%9B%E9%81%93%E4%B8%89%EF%BC%9A%20%E5%B0%8F%E5%B8%83%E5%8A%A9%E6%89%8B%E5%AF%B9%E8%AF%9D%E7%9F%AD%E6%96%87%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%8C%B9%E9%85%8D">repo</a></p>
+<p>​    <span id="more"></span></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">肖战的粉丝叫什么名字 肖战的粉丝叫什么 <span class="number">1</span></span><br><span class="line"></span><br><span class="line">王者荣耀里面打野谁最厉害 王者荣耀什么英雄最好玩 <span class="number">0</span></span><br><span class="line"></span><br><span class="line">我想换个手机 我要换手机 <span class="number">1</span></span><br><span class="line"></span><br><span class="line">我是张睿 我想张睿 <span class="number">0</span></span><br><span class="line"></span><br><span class="line">不想 不想说 <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>训练数据包含输入query-pair，以及对应的真值。初赛训练样本10万，复赛训练样本30万，这份数据主要用于参赛队伍训练模型，为确保数据的高质量，每一个样本的真值都有进行人工标注校验。每行为一个训练样本，由query-pair和真值组成，每行格式如下：</p>
+<ul>
+<li>query-pair格式：query以中文为主，中间可能带有少量英文单词（如英文缩写、品牌词、设备型号等），采用UTF-8编码，未分词，两个query之间使用\t分割。</li>
+<li>真值：真值可为0或1，其中1代表query-pair语义相匹配，0则代表不匹配，真值与query-pair之间也用\t分割。</li>
+</ul>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>根据官方提供的 <a target="_blank" rel="noopener" href="https://aliyuntianchiresult.cn-hangzhou.oss.aliyun-inc.com/file/race/documents/531851/baseline_tfidf_lr_0_75.tar.gz?Expires=1617370895&OSSAccessKeyId=LTAILBoOl5drlflK&Signature=RMt4zHoNaWbhA1bp4rYvIe3oYDk=&response-content-disposition=attachment;%20">Baseline</a> ，添加特征，将此比赛当作结构化数据进行二分类，提交分数在 0.8 左右。</p>
+<h3 id="添加特征"><a href="#添加特征" class="headerlink" title="添加特征"></a>添加特征</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  字符串拆分城数字</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str2char</span>():</span></span><br><span class="line">    txt = df[<span class="string">&#x27;text&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">list</span>(x.split()))</span><br><span class="line">    x = []   </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(txt))):</span><br><span class="line">        x.append(txt[i])</span><br><span class="line">        y = x[i]   </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(y)):</span><br><span class="line">            df[<span class="string">&#x27;str2char_&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(j)] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(txt))):</span><br><span class="line">        x.append(txt[i])</span><br><span class="line">        y = x[i]       </span><br><span class="line">        <span class="keyword">for</span> value, idx <span class="keyword">in</span> <span class="built_in">zip</span>(y, <span class="built_in">range</span>(<span class="built_in">len</span>(y))):</span><br><span class="line">            df[<span class="string">&#x27;str2char_&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(idx)][i] = value</span><br><span class="line">str2char()</span><br><span class="line"></span><br><span class="line"><span class="comment">#   q1、q2 字符串中的相同字符个数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dup_num</span>():</span></span><br><span class="line">    a = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: (x.split()))</span><br><span class="line">    b = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: (x.split()))</span><br><span class="line">    x = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">        x.append(<span class="built_in">len</span>(<span class="built_in">set</span>(a[i]) &amp; <span class="built_in">set</span>(b[i])))</span><br><span class="line">    df[<span class="string">&#x27;dup_num&#x27;</span>]=pd.DataFrame(x)</span><br><span class="line">    <span class="keyword">return</span> df[<span class="string">&#x27;dup_num&#x27;</span>]</span><br><span class="line">df[<span class="string">&#x27;dup_num&#x27;</span>] = dup_num()</span><br><span class="line"></span><br><span class="line"><span class="comment">#   q1、q2 字符串中的相同字符</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dup_chr</span>():</span></span><br><span class="line">    a = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">list</span>(x.split()))</span><br><span class="line">    b = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">list</span>(x.split()))</span><br><span class="line">    x = []   </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(a))):</span><br><span class="line">        x.append(<span class="built_in">set</span>(a[i]) &amp; <span class="built_in">set</span>(b[i]))</span><br><span class="line">        y = x[i]       </span><br><span class="line">        <span class="keyword">for</span>  idx <span class="keyword">in</span>  <span class="built_in">range</span>(<span class="built_in">len</span>(y)):</span><br><span class="line">            df[<span class="string">&#x27;dup_chr_&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(idx)] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> (<span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(a))):</span><br><span class="line">        x.append(<span class="built_in">set</span>(a[i]) &amp; <span class="built_in">set</span>(b[i]))</span><br><span class="line">        y = x[i]       </span><br><span class="line">        <span class="keyword">for</span> value, idx <span class="keyword">in</span> <span class="built_in">zip</span>(y, <span class="built_in">range</span>(<span class="built_in">len</span>(y))):</span><br><span class="line">            df[<span class="string">&#x27;dup_chr_&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(idx)][i] = value</span><br><span class="line">dup_chr()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 长度</span></span><br><span class="line">df[<span class="string">&#x27;q1_len&#x27;</span>]   = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">len</span>(x.split(<span class="string">&#x27; &#x27;</span>))) </span><br><span class="line">df[<span class="string">&#x27;q2_len&#x27;</span>]   = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">len</span>(x.split(<span class="string">&#x27; &#x27;</span>))) </span><br><span class="line">df[<span class="string">&#x27;text_len&#x27;</span>] = df[<span class="string">&#x27;text&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">len</span>(x.split(<span class="string">&#x27; &#x27;</span>))) </span><br><span class="line"></span><br><span class="line"><span class="comment"># q1 q2长度差</span></span><br><span class="line">df[<span class="string">&#x27;sub_q1q2&#x27;</span>] = df[<span class="string">&#x27;q1_len&#x27;</span>] - df[<span class="string">&#x27;q2_len&#x27;</span>]</span><br><span class="line">df[<span class="string">&#x27;sub_q2q1&#x27;</span>] = df[<span class="string">&#x27;q2_len&#x27;</span>] - df[<span class="string">&#x27;q1_len&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 出现的最大值</span></span><br><span class="line">df[<span class="string">&#x27;max_q1&#x27;</span>]     = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">max</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;max_q2&#x27;</span>]     = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">max</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;max_text&#x27;</span>] = df[<span class="string">&#x27;text&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">max</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 出现的最小值</span></span><br><span class="line">df[<span class="string">&#x27;min_q1&#x27;</span>]     = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">min</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;min_q2&#x27;</span>]     = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">min</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;min_text&#x27;</span>] = df[<span class="string">&#x27;text&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">min</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line"></span><br><span class="line"><span class="comment"># max-min</span></span><br><span class="line">df[<span class="string">&#x27;max_min_q1&#x27;</span>]     = df[<span class="string">&#x27;max_q1&#x27;</span>] - df[<span class="string">&#x27;min_q1&#x27;</span>]</span><br><span class="line">df[<span class="string">&#x27;max_min_q2&#x27;</span>]     = df[<span class="string">&#x27;max_q2&#x27;</span>] - df[<span class="string">&#x27;min_q2&#x27;</span>]</span><br><span class="line">df[<span class="string">&#x27;max_min_text&#x27;</span>] = df[<span class="string">&#x27;max_text&#x27;</span>] - df[<span class="string">&#x27;min_text&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># mean值</span></span><br><span class="line">df[<span class="string">&#x27;mean_q1&#x27;</span>]     = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: mean(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;mean_q2&#x27;</span>]     = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: mean(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;mean_text&#x27;</span>] = df[<span class="string">&#x27;text&#x27;</span>].apply(<span class="keyword">lambda</span> x: mean(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line"></span><br><span class="line"><span class="comment"># std值</span></span><br><span class="line">df[<span class="string">&#x27;std_q1&#x27;</span>]     = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: std(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;std_q2&#x27;</span>]     = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: std(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line">df[<span class="string">&#x27;std_text&#x27;</span>] = df[<span class="string">&#x27;text&#x27;</span>].apply(<span class="keyword">lambda</span> x: std(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))</span><br><span class="line"></span><br><span class="line"><span class="comment"># freq 出现的最大频率</span></span><br><span class="line">df[<span class="string">&#x27;freq_q1&#x27;</span>]     = df[<span class="string">&#x27;q1&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">max</span>(((Counter(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))).values()))</span><br><span class="line">df[<span class="string">&#x27;freq_q2&#x27;</span>]     = df[<span class="string">&#x27;q2&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">max</span>(((Counter(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))).values()))</span><br><span class="line">df[<span class="string">&#x27;freq_text&#x27;</span>] = df[<span class="string">&#x27;text&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">max</span>(((Counter(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, x.split()))))).values()))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="lgbm"><a href="#lgbm" class="headerlink" title="lgbm"></a>lgbm</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lightgbm <span class="keyword">as</span> lgb</span><br><span class="line"></span><br><span class="line">scores = []</span><br><span class="line"></span><br><span class="line">nfold = <span class="number">5</span></span><br><span class="line">kf = StratifiedKFold(n_splits=nfold, shuffle=<span class="literal">True</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">lr_oof = np.zeros((<span class="built_in">len</span>(df_train), <span class="number">2</span>))</span><br><span class="line">lr_predictions = np.zeros((<span class="built_in">len</span>(df_test), <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> train_index, valid_index <span class="keyword">in</span> kf.split(train_df, label):</span><br><span class="line">    print(<span class="string">&quot;\nFold &#123;&#125;&quot;</span>.<span class="built_in">format</span>(i + <span class="number">1</span>))</span><br><span class="line">    X_train, label_train = train_df[train_index], label[train_index]</span><br><span class="line">    X_valid, label_valid = train_df[valid_index], label[valid_index]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    model = lgb.LGBMClassifier(num_leaves=<span class="number">31</span>, max_depth=<span class="number">13</span>, n_estimators=<span class="number">100000</span>, learning_rate=<span class="number">0.05</span>, verbose=-<span class="number">1</span>, metric=<span class="string">&#x27;auc&#x27;</span>)</span><br><span class="line">    model.fit(X_train, label_train, eval_set = [(X_valid, label_valid)], early_stopping_rounds=<span class="number">300</span>, verbose=<span class="number">600</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    lr_oof[valid_index] = model.predict_proba(X_valid,)</span><br><span class="line">    scores.append(roc_auc_score(label_valid, lr_oof[valid_index][:,<span class="number">1</span>]))</span><br><span class="line">    </span><br><span class="line">    lr_predictions += model.predict_proba(test_df) / nfold</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    print(scores)</span><br><span class="line">    </span><br><span class="line">print(np.mean(scores))</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐阅读</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/tianchi-competition-aisec5-manipulation-detection/" rel="bookmark">安全AI挑战者计划第五期：伪造图像的篡改检测</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/" title="全球人工智能技术创新大赛赛道三：小布助手对话短文本语义匹配">https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/" rel="tag"># 数据竞赛</a>
+              <a href="/tags/AI%E7%AB%9E%E8%B5%9B/" rel="tag"># AI竞赛</a>
+              <a href="/tags/%E8%AF%AD%E4%B9%89%E5%8C%B9%E9%85%8D/" rel="tag"># 语义匹配</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tianchi-competition-aisec6-iamgenet-attck-2/" rel="prev" title="CVPR2021 安全AI挑战者计划第六期：ImageNet无限制对抗攻击 赛道二">
+      <i class="fa fa-chevron-left"></i> CVPR2021 安全AI挑战者计划第六期：ImageNet无限制对抗攻击 赛道二
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%89%B9%E5%BE%81"><span class="nav-text">添加特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lgbm"><span class="nav-text">lgbm</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '4d1a5c237f1ecba513f0',
+      clientSecret: 'f403fbb98b9afbee3a250673d6f741dda22ba1e2',
+      repo        : 'AshinWang.github.io',
+      owner       : 'AshinWang',
+      admin       : ['AshinWang'],
+      id          : '61110b92705f26123d2702d6b80c4715',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
