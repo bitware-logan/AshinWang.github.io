@@ -2,7 +2,7 @@ https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/
 https://www.ashin.wang/kaggle-api-guide/
 https://www.ashin.wang/git-commit-message-conventions/
 https://www.ashin.wang/git-sock5-proxy/
-https://www.ashin.wang/tianchi-competition-5-manipulation-detection/
+https://www.ashin.wang/tianchi-competition-aisec5-manipulation-detection/
 https://www.ashin.wang/ipad-mini2-from-12-down-10/
 https://www.ashin.wang/lanmei-airplay/
 https://www.ashin.wang/keras_utils_get_file_path/

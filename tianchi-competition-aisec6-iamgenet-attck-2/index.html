@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"appID":"S30ZCDT4BR","apiKey":"6988e9b27ba9570d9ed85020ebf48b01","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="排名 题意 方案 初赛 复赛 参数   参考  排名初赛：82&#x2F;1557     复赛：63&#x2F;1557 题意对给出在 Imagenet 筛选的图片（1000 分类标签）进行攻击，修改图像并提交，提交的图像样本会通过一系列预先定义「攻击性、自然真实度、和原图的感知距离」指标进行机器打分。总体就是要在原图的基础上改动，不仅要保证改动最小，还要保证一定的攻击性。由于不清楚评测的分类模型，因此属于黑盒攻">
+  <meta name="description" content="排名 题意 方案 初赛 复赛 参数   参考  排名初赛：82&#x2F;1557     复赛：63&#x2F;1557 Repo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CVPR2021 安全AI挑战者计划第六期：ImageNet无限制对抗攻击 赛道二">
 <meta property="og:url" content="https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/index.html">
 <meta property="og:site_name" content="Ashin Wang&#39;s Blog">
-<meta property="og:description" content="排名 题意 方案 初赛 复赛 参数   参考  排名初赛：82&#x2F;1557     复赛：63&#x2F;1557 题意对给出在 Imagenet 筛选的图片（1000 分类标签）进行攻击，修改图像并提交，提交的图像样本会通过一系列预先定义「攻击性、自然真实度、和原图的感知距离」指标进行机器打分。总体就是要在原图的基础上改动，不仅要保证改动最小，还要保证一定的攻击性。由于不清楚评测的分类模型，因此属于黑盒攻">
+<meta property="og:description" content="排名 题意 方案 初赛 复赛 参数   参考  排名初赛：82&#x2F;1557     复赛：63&#x2F;1557 Repo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb29je3j31ns0rwu0z.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb33yiqj312m0t4kjm.jpg">
 <meta property="article:published_time" content="2021-04-01T08:46:33.000Z">
-<meta property="article:modified_time" content="2021-04-01T08:56:36.560Z">
+<meta property="article:modified_time" content="2021-04-01T13:10:12.392Z">
 <meta property="article:author" content="Ashin Wang">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="对抗攻击">
@@ -217,7 +217,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-01 16:46:33 / 修改时间：16:56:36" itemprop="dateCreated datePublished" datetime="2021-04-01T16:46:33+08:00">2021-04-01</time>
+              <time title="创建时间：2021-04-01 16:46:33 / 修改时间：21:10:12" itemprop="dateCreated datePublished" datetime="2021-04-01T16:46:33+08:00">2021-04-01</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,11 +253,12 @@
 </ul>
 <h2 id="排名"><a href="#排名" class="headerlink" title="排名"></a>排名</h2><p>初赛：82/1557    </p>
 <p>复赛：63/1557</p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>对给出在 <code>Imagenet</code> 筛选的图片（1000 分类标签）进行攻击，修改图像并提交，提交的图像样本会通过一系列预先定义「攻击性、自然真实度、和原图的感知距离」指标进行机器打分。总体就是要在原图的基础上改动，不仅要保证改动最小，还要保证一定的攻击性。由于不清楚评测的分类模型，因此属于黑盒攻击（Black-box attack）。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/AshinWang/iCompetition/tree/master/CVPR2021%20%E5%AE%89%E5%85%A8AI%E6%8C%91%E6%88%98%E8%80%85%E8%AE%A1%E5%88%92%E7%AC%AC%E5%85%AD%E6%9C%9F%EF%BC%9AImageNet%E6%97%A0%E9%99%90%E5%88%B6%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB">Repo</a> </p>
 <span id="more"></span>
 
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>对给出在 <code>Imagenet</code> 筛选的图片（1000 分类标签）进行攻击，修改图像并提交，提交的图像样本会通过一系列预先定义「攻击性、自然真实度、和原图的感知距离」指标进行机器打分。总体就是要在原图的基础上改动，不仅要保证改动最小，还要保证一定的攻击性。由于不清楚评测的分类模型，因此属于黑盒攻击（Black-box attack）。</p>
 <h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><h3 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h3><p>初赛采用的模型包括 Inceptionv3、VGG16、EfficientNet、ResNet 等，主要在这三开源库「  <a target="_blank" rel="noopener" href="https://github.com/BorealisAI/advertorch">advertorch</a>」、「<a target="_blank" rel="noopener" href="https://github.com/fra31/auto-attack">auto-attack</a>」、「<a target="_blank" rel="noopener" href="https://github.com/Harry24k/adversarial-attacks-pytorch">adversarial-attacks-pytorch</a>」进行了不同分类模型和攻击方法的组合。</p>
-<p>最终我们采用带有对抗训练的  <code>(&#39;efficientnet-b6&#39;, advprop=True)</code> 作为分类模型的 Backbone，采用  <a target="_blank" rel="noopener" href="https://github.com/BorealisAI/advertorch">advertorch</a> 中的 <code>LinfPGDAttack</code>，扰动 <code>16/255</code>，迭代 40 次，扰动 <code>32/255</code>，迭代 50 次。在 <code>Colab Tesla V100 16G</code> 大概需要 14 小时，由于 Colab 的时长限制，在 63% 时断开过一次，我们等了一天再接着生成剩下的对抗样本。</p>
+<p>整个比赛在 <a target="_blank" rel="noopener" href="https://colab.research.google.com/">Colab</a> 上进行，考虑时间成本，最终采用带有对抗训练的  <code>(&#39;efficientnet-b6&#39;, advprop=True)</code> 作为分类模型的 Backbone，采用  <a target="_blank" rel="noopener" href="https://github.com/BorealisAI/advertorch">advertorch</a> 中的 <code>LinfPGDAttack</code>，扰动 <code>16/255</code>，迭代 40 次，扰动 <code>32/255</code>，迭代 50 次。在 <code>Colab Tesla V100 16G</code> 大概需要 14 小时，由于 Colab 的时长限制，在 63% 时断开过一次，我们等了一天再接着生成剩下的对抗样本。</p>
 <p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb29je3j31ns0rwu0z.jpg"></p>
 <p>这时的分数大概在 22，后面再在对抗样本上采取「添加高斯噪声、JPEG 压缩、ISR 超分辨率重建」等方法，其中只有<code>JPEG 压缩</code>提高了大概 5 分。</p>
 <h3 id="复赛"><a href="#复赛" class="headerlink" title="复赛"></a>复赛</h3><p>复赛不在是初赛的评判模型，更加具有鲁棒性。我们根据初赛的方案生成了 5000 张图像，分数为 14.22，采取「添加高斯噪声、JPEG 压缩、ISR 超分辨率重建」等方法，全部降分。</p>
