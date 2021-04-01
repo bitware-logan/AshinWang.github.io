@@ -1,4 +1,4 @@
-https://www.ashin.wang/macos-skill/
+https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/
 https://www.ashin.wang/kaggle-api-guide/
 https://www.ashin.wang/git-commit-message-conventions/
 https://www.ashin.wang/git-sock5-proxy/

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"appID":"S30ZCDT4BR","apiKey":"6988e9b27ba9570d9ed85020ebf48b01","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="排名 题意 方案 初赛 复赛 参数   参考  排名初赛：82&#x2F;1557     复赛：63&#x2F;1557 题意对给出在 Imagenet 筛选的图片（1000 分类标签）进行攻击，修改图像并提交，提交的图像样本会通过一系列预先定义「攻击性、自然真实度、和原图的感知距离」指标进行机器打分。总体就是要在原图的基础上改动，不仅要保证改动最小，还要保证一定的攻击性。由于不清楚评测的分类模型，因此属于黑盒攻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CVPR2021 安全AI挑战者计划第六期：ImageNet无限制对抗攻击 赛道二">
+<meta property="og:url" content="https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="排名 题意 方案 初赛 复赛 参数   参考  排名初赛：82&#x2F;1557     复赛：63&#x2F;1557 题意对给出在 Imagenet 筛选的图片（1000 分类标签）进行攻击，修改图像并提交，提交的图像样本会通过一系列预先定义「攻击性、自然真实度、和原图的感知距离」指标进行机器打分。总体就是要在原图的基础上改动，不仅要保证改动最小，还要保证一定的攻击性。由于不清楚评测的分类模型，因此属于黑盒攻">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb29je3j31ns0rwu0z.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb33yiqj312m0t4kjm.jpg">
+<meta property="article:published_time" content="2021-04-01T08:46:33.000Z">
+<meta property="article:modified_time" content="2021-04-01T08:56:36.560Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="对抗攻击">
+<meta property="article:tag" content="天池">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb29je3j31ns0rwu0z.jpg">
+
+<link rel="canonical" href="https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CVPR2021 安全AI挑战者计划第六期：ImageNet无限制对抗攻击 赛道二 | Ashin Wang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">From Here To Somewhere</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CVPR2021 安全AI挑战者计划第六期：ImageNet无限制对抗攻击 赛道二
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-01 16:46:33 / 修改时间：16:56:36" itemprop="dateCreated datePublished" datetime="2021-04-01T16:46:33+08:00">2021-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">数据竞赛</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="#%E6%8E%92%E5%90%8D">排名</a></li>
+<li><a href="#%E9%A2%98%E6%84%8F">题意</a></li>
+<li><a href="#%E6%96%B9%E6%A1%88">方案</a><ul>
+<li><a href="#%E5%88%9D%E8%B5%9B">初赛</a></li>
+<li><a href="#%E5%A4%8D%E8%B5%9B">复赛</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0">参数</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<h2 id="排名"><a href="#排名" class="headerlink" title="排名"></a>排名</h2><p>初赛：82/1557    </p>
+<p>复赛：63/1557</p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>对给出在 <code>Imagenet</code> 筛选的图片（1000 分类标签）进行攻击，修改图像并提交，提交的图像样本会通过一系列预先定义「攻击性、自然真实度、和原图的感知距离」指标进行机器打分。总体就是要在原图的基础上改动，不仅要保证改动最小，还要保证一定的攻击性。由于不清楚评测的分类模型，因此属于黑盒攻击（Black-box attack）。</p>
+<span id="more"></span>
+
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><h3 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h3><p>初赛采用的模型包括 Inceptionv3、VGG16、EfficientNet、ResNet 等，主要在这三开源库「  <a target="_blank" rel="noopener" href="https://github.com/BorealisAI/advertorch">advertorch</a>」、「<a target="_blank" rel="noopener" href="https://github.com/fra31/auto-attack">auto-attack</a>」、「<a target="_blank" rel="noopener" href="https://github.com/Harry24k/adversarial-attacks-pytorch">adversarial-attacks-pytorch</a>」进行了不同分类模型和攻击方法的组合。</p>
+<p>最终我们采用带有对抗训练的  <code>(&#39;efficientnet-b6&#39;, advprop=True)</code> 作为分类模型的 Backbone，采用  <a target="_blank" rel="noopener" href="https://github.com/BorealisAI/advertorch">advertorch</a> 中的 <code>LinfPGDAttack</code>，扰动 <code>16/255</code>，迭代 40 次，扰动 <code>32/255</code>，迭代 50 次。在 <code>Colab Tesla V100 16G</code> 大概需要 14 小时，由于 Colab 的时长限制，在 63% 时断开过一次，我们等了一天再接着生成剩下的对抗样本。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb29je3j31ns0rwu0z.jpg"></p>
+<p>这时的分数大概在 22，后面再在对抗样本上采取「添加高斯噪声、JPEG 压缩、ISR 超分辨率重建」等方法，其中只有<code>JPEG 压缩</code>提高了大概 5 分。</p>
+<h3 id="复赛"><a href="#复赛" class="headerlink" title="复赛"></a>复赛</h3><p>复赛不在是初赛的评判模型，更加具有鲁棒性。我们根据初赛的方案生成了 5000 张图像，分数为 14.22，采取「添加高斯噪声、JPEG 压缩、ISR 超分辨率重建」等方法，全部降分。</p>
+<p>后面我们仅针对目标语义区域攻击，尽量减少图像在其他地方的攻击。通过「目标检测」先检测出攻击目标（本想采用分割，但是没有找到适合 ImageNet 分割的模型，就将 BBox 改成画红色矩形覆盖），再和对抗样本合成，提取目标范围的攻击，再将其覆盖到原图上，实现尽量小的攻击范围，提升自然真实度、和原图的感知距离。但比赛刚刚结束（2021 年 4 月 1 日 15:00）😭，还不知道会不会提分。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gp4cb33yiqj312m0t4kjm.jpg"></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ol>
+<li><p>Backbone： <code>(&#39;efficientnet-b6&#39;, advprop=True)</code></p>
+</li>
+<li><p>LinfPGDAttack:  <code>LinfPGDAttack(model, loss_fn=loss_fn, eps=32/255, nb_iter=60, eps_iter=0.01, rand_init=True, clip_min=0.0, clip_max=1.0, targeted=None)</code></p>
+</li>
+<li><p>Object detection: <code>  Cascade R-CNN(class_num: 676) + ppyolo(class_num: 80)</code></p>
+<p>采用 Paddle 开源的 PaddleDetection 进行目标检测，对其中的 <code>draw_bbox</code> 进行了改写。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># visualizer path: PaddleDetection/ppdet/utils/visualizer.py </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_bbox</span>(<span class="params">image, im_id, catid2name, bboxes, threshold</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Draw bbox on image</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    draw = ImageDraw.Draw(image)</span><br><span class="line">    </span><br><span class="line">    catid2color = &#123;&#125;</span><br><span class="line">    color_list = colormap(rgb=<span class="literal">True</span>)[:<span class="number">40</span>]</span><br><span class="line">    <span class="keyword">for</span> dt <span class="keyword">in</span> np.array(bboxes):</span><br><span class="line">        <span class="keyword">if</span> im_id != dt[<span class="string">&#x27;image_id&#x27;</span>]:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        catid, bbox, score = dt[<span class="string">&#x27;category_id&#x27;</span>], dt[<span class="string">&#x27;bbox&#x27;</span>], dt[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> score &lt; threshold:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        xmin, ymin, w, h = bbox</span><br><span class="line">        xmax = xmin + w</span><br><span class="line">        ymax = ymin + h</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> catid <span class="keyword">not</span> <span class="keyword">in</span> catid2color:</span><br><span class="line">            idx = np.random.randint(<span class="built_in">len</span>(color_list))</span><br><span class="line">            catid2color[catid] = color_list[idx]</span><br><span class="line">        color = <span class="built_in">tuple</span>(catid2color[catid])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># draw rectangle </span></span><br><span class="line">        draw.rectangle([(xmin, ymin), (xmax, ymax)],fill=(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">    <span class="keyword">return</span> image</span><br></pre></td></tr></table></figure></li>
+<li><p>Attack embedding：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># images1： adv</span></span><br><span class="line"><span class="comment"># images2： cln + mark</span></span><br><span class="line"><span class="comment"># images3： cln</span></span><br><span class="line"></span><br><span class="line">RESULT_PREFIXX = [<span class="string">&#x27;images1/&#x27;</span>,<span class="string">&#x27;images2/&#x27;</span>,<span class="string">&#x27;images3/&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">emb_per_image</span>(<span class="params">image_id</span>):</span></span><br><span class="line">    result_list = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(RESULT_PREFIXX)):</span><br><span class="line">        img_name = RESULT_PREFIXX[j]+<span class="built_in">str</span>(image_id)+<span class="string">&#x27;.jpg&#x27;</span></span><br><span class="line">        im = cv2.imread(img_name)       </span><br><span class="line">        result_list.append(im)</span><br><span class="line">    img1, img2, img3 = result_list[<span class="number">0</span>], result_list[<span class="number">1</span>], result_list[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#Step 1: get mask</span></span><br><span class="line">    mark = cv2.subtract(img2, img3)</span><br><span class="line">    gray = cv2.cvtColor(mark, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    _, mask = cv2.threshold(gray, <span class="number">0</span>, <span class="number">255</span>, cv2.THRESH_BINARY |cv2.THRESH_OTSU)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#Step 2: get masked</span></span><br><span class="line">    masked = cv2.add(img1, np.zeros(np.shape(img1), dtype=np.uint8), mask=mask)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Step 3: embedding(masked, cln)</span></span><br><span class="line">    cln_add_adv = cv2.add(img3, masked)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">500</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">500</span>):</span><br><span class="line">            <span class="keyword">if</span> (masked[i,j] != <span class="number">0</span> ).<span class="built_in">any</span>():</span><br><span class="line">                cln_add_adv[i,j] = masked[i,j]</span><br><span class="line">    </span><br><span class="line">    cv2.imwrite(<span class="string">&#x27;images/&#x27;</span>+<span class="built_in">str</span>(image_id)+<span class="string">&#x27;.jpg&#x27;</span>, cln_add_adv, [<span class="built_in">int</span>(cv2.IMWRITE_JPEG_QUALITY), <span class="number">75</span>])</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ol start="5">
+<li><p>JPEG 压缩</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PIL: </span></span><br><span class="line">image.save(filepath+name_fullsize, quality=<span class="number">42</span>) </span><br><span class="line"><span class="comment"># OpenCV: </span></span><br><span class="line"> cv2.imwrite(<span class="string">&#x27;images/&#x27;</span>+<span class="built_in">str</span>(image_id)+<span class="string">&#x27;.jpg&#x27;</span>, cln_add_adv, [<span class="built_in">int</span>(cv2.IMWRITE_JPEG_QUALITY), <span class="number">42</span>])</span><br></pre></td></tr></table></figure></li>
+<li><p>高斯噪声</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gasuss_noise</span>(<span class="params">image, mean=<span class="number">0</span>, var=<span class="number">0.00000001</span></span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27; </span></span><br><span class="line"><span class="string">        添加高斯噪声</span></span><br><span class="line"><span class="string">        image:原始图像</span></span><br><span class="line"><span class="string">        mean : 均值 </span></span><br><span class="line"><span class="string">        var : 方差,越大，噪声越大</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    image_name = image</span><br><span class="line">    image = cv2.imread(image)</span><br><span class="line"></span><br><span class="line">    image = np.array(image/<span class="number">255</span>, dtype=<span class="built_in">float</span>)<span class="comment">#将原始图像的像素值进行归一化，除以255使得像素值在0-1之间</span></span><br><span class="line">    noise = np.random.normal(mean, var ** <span class="number">0.5</span>, image.shape)<span class="comment">#创建一个均值为mean，方差为var呈高斯分布的图像矩阵</span></span><br><span class="line">    out = image + noise<span class="comment">#将噪声和原始图像进行相加得到加噪后的图像</span></span><br><span class="line">    <span class="keyword">if</span> out.<span class="built_in">min</span>() &lt; <span class="number">0</span>:</span><br><span class="line">        low_clip = -<span class="number">1.</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        low_clip = <span class="number">0.</span></span><br><span class="line">    out = np.clip(out, low_clip, <span class="number">1.0</span>)<span class="comment">#clip函数将元素的大小限制在了low_clip和1之间了，小于的用low_clip代替，大于1的用1代替</span></span><br><span class="line">    out = np.uint8(out*<span class="number">255</span>)<span class="comment">#解除归一化，乘以255将加噪后的图像的像素值恢复</span></span><br><span class="line">    <span class="comment">#cv.imshow(&quot;gasuss&quot;, out)</span></span><br><span class="line">    noise = noise*<span class="number">255</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#cv2.imwrite(image_name.replace(&#x27;images&#x27;, &#x27;newimages&#x27;), out)</span></span><br><span class="line">    <span class="keyword">return</span> out</span><br></pre></td></tr></table></figure></li>
+<li><p>CutMix</p>
+<p>官方 Tips 中的禁用方法，复赛试了一下，大概 9 分左右。</p>
+</li>
+<li><p>ISR</p>
+<p>主要通过降低图片分辨率，然后在重建。</p>
+</li>
+<li><p>多模融合</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ensemble</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, model1, model2</span>):</span> <span class="comment">#):</span></span><br><span class="line">        <span class="built_in">super</span>(Ensemble, self).__init__()</span><br><span class="line">        self.model1 = model1</span><br><span class="line">        self.model2 = model2</span><br><span class="line">        <span class="comment">#self.model3 = model3</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        logits1 = self.model1(x)</span><br><span class="line">        logits2 = self.model2(x)</span><br><span class="line">        <span class="comment">#logits3 = self.model3(x)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># fuse logits</span></span><br><span class="line">        logits_e = (logits1 + logits2 ) / <span class="number">2</span> <span class="comment">#+ logits3) / 3</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> logits_e</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>advertorch</li>
+</ol>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/BorealisAI/advertorch">https://github.com/BorealisAI/advertorch</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://advertorch.readthedocs.io/">https://advertorch.readthedocs.io/</a></p>
+</li>
+</ul>
+<ol start="2">
+<li>auto-attack</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/fra31/auto-attack">https://github.com/fra31/auto-attack</a></li>
+</ul>
+<ol start="3">
+<li>adversarial-attacks-pytorch</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Harry24k/adversarial-attacks-pytorch">https://github.com/Harry24k/adversarial-attacks-pytorch</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Least Likely</span></span><br><span class="line">atk = torchattacks.PGD(model, eps=<span class="number">8</span>/<span class="number">255</span>, alpha=<span class="number">2</span>/<span class="number">255</span>, steps=<span class="number">100</span>) <span class="comment">#扰动8个像素点</span></span><br><span class="line">atk.set_mode_least_likely()</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>CutMix </li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/clovaai/CutMix-PyTorch">https://github.com/clovaai/CutMix-PyTorch</a></li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ildoonet/cutmix">https://github.com/ildoonet/cutmix</a></li>
+</ul>
+<ol start="5">
+<li>ISR</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/idealo/image-super-resolution">https://github.com/idealo/image-super-resolution</a></li>
+</ul>
+<ol start="6">
+<li>PaddleDetection</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleDetection">https://github.com/PaddlePaddle/PaddleDetection</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐阅读</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/ai-competition-platform/" rel="bookmark">AI竞赛平台</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/use-colab/" rel="bookmark">Colab的使用</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/keras-plot-acc-loss-in-notebook/" rel="bookmark">Keras在NoteBook绘制acc-loss曲线</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/nlp_news_classification/" rel="bookmark">NLP-新闻分类</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/keras_utils_get_file_path/" rel="bookmark">keras_utils.get_file保存路径</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/" title="CVPR2021 安全AI挑战者计划第六期：ImageNet无限制对抗攻击 赛道二">https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" rel="tag"># 对抗攻击</a>
+              <a href="/tags/%E5%A4%A9%E6%B1%A0/" rel="tag"># 天池</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/kaggle-api-guide/" rel="prev" title="Kaggle API指南">
+      <i class="fa fa-chevron-left"></i> Kaggle API指南
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%90%8D"><span class="nav-text">排名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E8%B5%9B"><span class="nav-text">初赛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E8%B5%9B"><span class="nav-text">复赛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-text">参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '4d1a5c237f1ecba513f0',
+      clientSecret: 'f403fbb98b9afbee3a250673d6f741dda22ba1e2',
+      repo        : 'AshinWang.github.io',
+      owner       : 'AshinWang',
+      admin       : ['AshinWang'],
+      id          : '5170244445180c9aa7f6213e06541519',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
