@@ -37,6 +37,7 @@ https://www.ashin.wang/ubuntu-change-source/
 https://www.ashin.wang/macos-use-pip-command/
 https://www.ashin.wang/troubeshooting-hexo-404/
 https://www.ashin.wang/badusb-get-wifi-password/
+https://www.ashin.wang/top10-sort-algorithm/
 https://www.ashin.wang/macos-install-tensorflow/
 https://www.ashin.wang/mac-use-conda-command/
 https://www.ashin.wang/macos-finds-mouse/
