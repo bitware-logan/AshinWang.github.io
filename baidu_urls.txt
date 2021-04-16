@@ -15,7 +15,9 @@ https://www.ashin.wang/note-latexs/
 https://www.ashin.wang/null/
 https://www.ashin.wang/python-word-cloud/
 https://www.ashin.wang/arxive-goto-mirror-site/
+https://www.ashin.wang/analysis-of-unsw-nb15-dataset/
 https://www.ashin.wang/summary-of-data-resampling-methods/
+https://www.ashin.wang/statistics-cse-cic-ids-2017-2018/
 https://www.ashin.wang/airpods-change-battery/
 https://www.ashin.wang/plot-confusion-matrix-heatmap/
 https://www.ashin.wang/hexo-blog-post-shell/
