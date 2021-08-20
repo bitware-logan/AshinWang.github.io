@@ -1,3 +1,5 @@
+https://www.ashin.wang/flops-and-param/
+https://www.ashin.wang/notes-fastapi/
 https://www.ashin.wang/notes-docker/
 https://www.ashin.wang/summary-of-data-analysis-and-mining/
 https://www.ashin.wang/sql-practice/
