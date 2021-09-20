@@ -190,456 +190,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/flops-and-param/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
-      <meta itemprop="name" content="Ashin Wang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ashin Wang's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/flops-and-param/" class="post-title-link" itemprop="url">计算力与参数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-03 16:46:27" itemprop="dateCreated datePublished" datetime="2021-08-03T16:46:27+08:00">2021-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>FLOPS</strong>(Floating Point Operations Per Second)：每秒浮点运算次数，衡量硬件速度的指标</p>
-<p><strong>FLOPs</strong>(Floating Point Operations)：浮点运算次数，衡量模型计算复杂度</p>
-<p><strong>MACs</strong>(Multiply–Accumulate Operations)：乘加累积操作数，常MACs与FLOPs存在一个2倍的关系</p>
-<p><strong>Parameters</strong> <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gt3q0urwujj308s0100sj.jpg" alt="img"></p>
-<p>Ci、Co表示输入和输出通道，K卷积核大小，HW是输出的feature map大小</p>
-<p><strong>Bais</strong>：</p>
-<p><strong>GFLOPs：</strong>一个单位，1GLOPs=10亿次浮点运算</p>
-<p>**MAC(Memory Access Cost)**：MAC(内存访问成本)，计算机在进行计算时候要加载到缓存中，然后再计算，这个加载过程是需要时间的。其中，分组卷积（group convolution）是对MAC消耗比较多的操作（例如AlexNet多GPU）。</p>
-<p><strong>参数量</strong>就是指，<strong>模型所有带参数的层的权重参数总量</strong>。视觉类网络组件中带参数的层，主要有：<strong>卷积层、BN层、全连接层</strong>等。（注意：激活函数层(relu等)和Maxpooling层、Upsample层是没有参数的，不需要学习，他们只是提供了一种非线性的变换）</p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gt4th0y0lej30i3095ab3.jpg" alt="image-20210804160413346"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/notes-fastapi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
-      <meta itemprop="name" content="Ashin Wang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ashin Wang's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/notes-fastapi/" class="post-title-link" itemprop="url">FastAPI笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-29 16:27:08" itemprop="dateCreated datePublished" datetime="2021-06-29T16:27:08+08:00">2021-06-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FastAPI/" itemprop="url" rel="index"><span itemprop="name">FastAPI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Doc: <a target="_blank" rel="noopener" href="https://fastapi.tiangolo.com/zh/">https://fastapi.tiangolo.com/zh/</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/notes-fastapi/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/notes-docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
-      <meta itemprop="name" content="Ashin Wang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ashin Wang's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/notes-docker/" class="post-title-link" itemprop="url">Docker笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-04 23:04:34" itemprop="dateCreated datePublished" datetime="2021-06-04T23:04:34+08:00">2021-06-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/%E5%AE%B9%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">容器</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Docker 使用笔记。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/notes-docker/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/summary-of-data-analysis-and-mining/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
-      <meta itemprop="name" content="Ashin Wang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ashin Wang's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/summary-of-data-analysis-and-mining/" class="post-title-link" itemprop="url">数据分析与挖掘总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-27 20:21:50" itemprop="dateCreated datePublished" datetime="2021-05-27T20:21:50+08:00">2021-05-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>参考：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/115741410">数据挖掘（一）EDA-数据探索性分析</a></li>
-<li><a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.6.1cd8593alBQBSX&postId=95501">置顶Datawhale 零基础入门数据挖掘-Task3 特征工程</a></li>
-<li><a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.9.1cd8593alBQBSX&postId=95460">置顶Datawhale 零基础入门数据挖掘-Task4 建模调参</a></li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/summary-of-data-analysis-and-mining/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/sql-practice/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
-      <meta itemprop="name" content="Ashin Wang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ashin Wang's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/sql-practice/" class="post-title-link" itemprop="url">SQL刷题笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-25 22:23:22" itemprop="dateCreated datePublished" datetime="2021-05-25T22:23:22+08:00">2021-05-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SQL%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">SQL笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>SQL 刷题练习: <a target="_blank" rel="noopener" href="https://www.nowcoder.com/activity/oj?tab=1">https://www.nowcoder.com/activity/oj?tab=1</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/sql-practice/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/finder-error-36/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
-      <meta itemprop="name" content="Ashin Wang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ashin Wang's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/finder-error-36/" class="post-title-link" itemprop="url">Finder中的错误36</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-21 15:03:50" itemprop="dateCreated datePublished" datetime="2021-05-21T15:03:50+08:00">2021-05-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/macOS%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">macOS笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>复制<code>〜/ Documents / FileBackups / </code>出现 error 36</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dot_clean ~&#x2F;Documents&#x2F;FileBackups&#x2F;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -935,10 +485,473 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/2021-guangdong-industrial-intelligent-innovation-competition-intelligent-algorithm-competition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021-guangdong-industrial-intelligent-innovation-competition-intelligent-algorithm-competition/" class="post-title-link" itemprop="url">2021广东工业智造创新大赛—智能算法赛</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-28 22:04:04" itemprop="dateCreated datePublished" datetime="2021-01-28T22:04:04+08:00">2021-01-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iCompetition/" itemprop="url" rel="index"><span itemprop="name">iCompetition</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="比赛简介"><a href="#比赛简介" class="headerlink" title="比赛简介"></a>比赛简介</h2><p>大赛深入到佛山瓷砖知名企业，在产线上架设专业拍摄设备，实地采集生产过程真实数据，解决企业真实的痛点需求。大赛数据覆盖到了瓷砖产线所有常见瑕疵，包括粉团、角裂、滴釉、断墨、滴墨、B孔、落脏、边裂、缺角、砖渣、白边等。实拍图示例如下：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/AshinWang/iCompetition/blob/master/2021%E5%B9%BF%E4%B8%9C%E5%B7%A5%E4%B8%9A%E6%99%BA%E9%80%A0%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E2%80%94%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95%E8%B5%9B/img/1.jpg"><img src="https://github.com/AshinWang/iCompetition/raw/master/2021%E5%B9%BF%E4%B8%9C%E5%B7%A5%E4%B8%9A%E6%99%BA%E9%80%A0%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%E2%80%94%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95%E8%B5%9B/img/1.jpg" alt="img"></a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021-guangdong-industrial-intelligent-innovation-competition-intelligent-algorithm-competition/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/git-commit-message-conventions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/git-commit-message-conventions/" class="post-title-link" itemprop="url">Git Commit Message Conventions</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-22 13:17:51" itemprop="dateCreated datePublished" datetime="2021-01-22T13:17:51+08:00">2021-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Git Commit Message Conventions <a target="_blank" rel="noopener" href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits"> Angular 规范</a></p>
+<p>转载：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/XXHolic/blog/issues/16">Git Commit 规范参考 #16</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#">https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#</a></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/git-commit-message-conventions/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/git-sock5-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/git-sock5-proxy/" class="post-title-link" itemprop="url">git配置Sock5代理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-19 01:11:34" itemprop="dateCreated datePublished" datetime="2020-12-19T01:11:34+08:00">2020-12-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用 <code>git clone</code> 非常慢，通常在 12KiB，开启代理后提速明显~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/git-sock5-proxy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/tianchi-competition-aisec5-manipulation-detection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/tianchi-competition-aisec5-manipulation-detection/" class="post-title-link" itemprop="url">安全AI挑战者计划第五期：伪造图像的篡改检测</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-18 14:54:18" itemprop="dateCreated datePublished" datetime="2020-12-18T14:54:18+08:00">2020-12-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iCompetition/" itemprop="url" rel="index"><span itemprop="name">iCompetition</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0-队伍简介"><a href="#0-队伍简介" class="headerlink" title="0 队伍简介"></a>0 队伍简介</h1><p>队伍名称： 猛狗哭泣</p>
+<p>终榜排名： 21/1470</p>
+<p>公榜排名： 31/1470</p>
+<p>Code Repo: <a target="_blank" rel="noopener" href="https://github.com/AshinWang/tianchi-competition-5-manipulation-detection/">https://github.com/AshinWang/tianchi-competition-5-manipulation-detection/</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/tianchi-competition-aisec5-manipulation-detection/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/ipad-mini2-from-12-down-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ipad-mini2-from-12-down-10/" class="post-title-link" itemprop="url">iPad mini2 12.4.9 降级 10.3.3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-16 16:31:26" itemprop="dateCreated datePublished" datetime="2020-12-16T16:31:26+08:00">2020-12-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>iPad mini2  12.4.9 的系统超级卡，看了一些帖子和博客，通过 Vieux 成功降级。</p>
+<p> <a target="_blank" rel="noopener" href="https://github.com/MatthewPierson/Vieux">Vieux</a> 可以将 A7 芯片的苹果产品降级至 10.3.3。</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/MatthewPierson/Vieux">https://github.com/MatthewPierson/Vieux</a></p>
+<p>我的设备和系统环境：</p>
+<ul>
+<li>iPad </li>
+</ul>
+<blockquote>
+<p>名称：iPad mini2 </p>
+<p>型号：A1489 16G</p>
+<p>版本：12.4.9</p>
+</blockquote>
+<ul>
+<li>Mac</li>
+</ul>
+<blockquote>
+<p>名称：MacBook Pro (13-inch, 2017, Two Thunderbolt 3 ports)</p>
+<p>版本：10.15.7 (19H15)</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/ipad-mini2-from-12-down-10/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/lanmei-airplay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/lanmei-airplay/" class="post-title-link" itemprop="url">蓝莓投屏：AirPlay投屏软件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-11 12:49:53" itemprop="dateCreated datePublished" datetime="2020-12-11T12:49:53+08:00">2020-12-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Windows/" itemprop="url" rel="index"><span itemprop="name">Windows</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>将局域网中的 Windows 主机变成投屏设备。</p>
+<p>支持：Airplay +  DLNA</p>
+<ul>
+<li>官网<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/xfirefly/">https://github.com/xfirefly/</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.deeprd.com/">http://www.deeprd.com/</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1006,20 +1019,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

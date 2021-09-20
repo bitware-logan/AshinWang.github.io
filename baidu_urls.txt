@@ -1,9 +1,3 @@
-https://www.ashin.wang/flops-and-param/
-https://www.ashin.wang/notes-fastapi/
-https://www.ashin.wang/notes-docker/
-https://www.ashin.wang/summary-of-data-analysis-and-mining/
-https://www.ashin.wang/sql-practice/
-https://www.ashin.wang/finder-error-36/
 https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/
 https://www.ashin.wang/tianchi-competition-aisec6-iamgenet-attck-2/
 https://www.ashin.wang/2021-national-digital-ecological-innovation-competition-intelligent-algorithm-competition/
@@ -45,7 +39,6 @@ https://www.ashin.wang/ubuntu-change-source/
 https://www.ashin.wang/macos-use-pip-command/
 https://www.ashin.wang/troubeshooting-hexo-404/
 https://www.ashin.wang/badusb-get-wifi-password/
-https://www.ashin.wang/top10-sort-algorithm/
 https://www.ashin.wang/macos-install-tensorflow/
 https://www.ashin.wang/mac-use-conda-command/
 https://www.ashin.wang/macos-finds-mouse/
