@@ -704,7 +704,7 @@
 <p>手撕代码：列表分子，k1 对应的value相同的放在同一列表里面 </p>
 <p> 输入：[{‘k1’:1, ‘k2’:1},  {‘k1 ‘:2, ‘k2’:2}, {‘k1’:1, ‘k2’:2}] </p>
 <p> 输出：[{‘k1’:1, ‘k2’:1}, {‘k1’, 1, ‘k2’: 2}], [{k1’: 2,’k2’: 2}] </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">arr = [&#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">1</span>&#125;,  &#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">2</span>&#125;, &#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">2</span>&#125;, &#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">2</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment"># [&#123;&#x27;k1&#x27;:1, &#x27;k2&#x27;:1&#125;, &#123;&#x27;k1&#x27;, 1, &#x27;k2&#x27;: 2&#125;], [&#123;k1&#x27;: 2,&#x27;k2&#x27;: 2&#125;] </span></span><br><span class="line"></span><br><span class="line">res = []</span><br><span class="line">cnt = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(arr)):</span><br><span class="line">    tmp = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="built_in">len</span>(arr)):</span><br><span class="line">        <span class="keyword">if</span> arr[j][<span class="string">&#x27;k1&#x27;</span>] == arr[i][<span class="string">&#x27;k1&#x27;</span>]:</span><br><span class="line">            tmp.append(arr[i])</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> cnt &lt;= <span class="built_in">len</span>(arr):</span><br><span class="line">        res.append(tmp)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">arr = [&#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">1</span>&#125;,  &#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">2</span>&#125;, &#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">2</span>&#125;, &#123;<span class="string">&#x27;k1&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;k2&#x27;</span>:<span class="number">2</span>&#125;]</span><br><span class="line"><span class="comment"># [&#123;&#x27;k1&#x27;:1, &#x27;k2&#x27;:1&#125;, &#123;&#x27;k1&#x27;, 1, &#x27;k2&#x27;: 2&#125;], [&#123;k1&#x27;: 2,&#x27;k2&#x27;: 2&#125;] </span></span><br><span class="line"></span><br><span class="line">res = []</span><br><span class="line">cnt = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(arr)):</span><br><span class="line">    tmp = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="built_in">len</span>(arr)):</span><br><span class="line">        <span class="keyword">if</span> arr[j][<span class="string">&#x27;k1&#x27;</span>] == arr[i][<span class="string">&#x27;k1&#x27;</span>]:</span><br><span class="line">            tmp.append(arr[i])</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> cnt &lt;= <span class="built_in">len</span>(arr):</span><br><span class="line">        res.append(tmp)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1064,97 +1064,7 @@
 <li><strong>循环优化</strong></li>
 <li>多核 多线程 ：因为GIL的存在，Python很难充分利用多核CPU的优势。但是，可以通过内置的模块multiprocessing实现下面几种并行模式：</li>
 </ul>
-<h2 id="判别两个类别的字符串"><a href="#判别两个类别的字符串" class="headerlink" title="判别两个类别的字符串"></a>判别两个类别的字符串</h2><h2 id="tcp保证数据传输的三个流程"><a href="#tcp保证数据传输的三个流程" class="headerlink" title="tcp保证数据传输的三个流程"></a>tcp保证数据传输的三个流程</h2><p>TCP为了提供可靠传输：<br>（1）首先，采用三次握手来建立TCP连接，四次握手来释放TCP连接，从而保证建立的传输信道是可靠的。<br>（2）其次，TCP采用了连续ARQ协议（回退N，Go-back-N；超时自动重传）(自动重传请求（Automatic Repeat-reQuest，ARQ）)来保证数据传输的正确性，使用滑动窗口协议来保证接方能够及时处理所接收到的数据，进行流量控制。<br>（3）最后，TCP使用慢开始、拥塞避免、快重传和快恢复来进行拥塞控制，避免网络拥塞。</p>
-<h2 id="tcp-三次握手"><a href="#tcp-三次握手" class="headerlink" title="tcp 三次握手"></a>tcp 三次握手</h2><p>在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。<br>第一次握手： 建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手： 服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手： 客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。 完成三次握手，客户端与服务器开始传送数据.</p>
-<p>三次握手（Three-way Handshake）其实就是指建立一个TCP连接时，需要客户端和服务器总共发送 3 个包</p>
-<p>主要作用就是为了<strong>确认双方的接收能力和发送能力是否正常、指定自己的初始化序列号</strong>为后面的可靠性传送做准备</p>
-<p>过程如下：</p>
-<ul>
-<li>第一次握手：客户端给服务端发一个 SYN 报文，并指明客户端的初始化序列号 ISN(c)，此时客户端处于 SYN_SENT 状态</li>
-<li>第二次握手：服务器收到客户端的 SYN 报文之后，会以自己的 SYN 报文作为应答，为了确认客户端的 SYN，将客户端的 ISN+1作为ACK的值，此时服务器处于 SYN_RCVD 的状态</li>
-<li>第三次握手：客户端收到 SYN 报文之后，会发送一个 ACK 报文，值为服务器的ISN+1。此时客户端处于 ESTABLISHED 状态。服务器收到 ACK 报文之后，也处于 ESTABLISHED 状态，此时，双方已建立起了连接</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/df92e0deefb619759aa435aca99720cf4113a5ba705eb09f1636f91c89d3eb1e/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66623438396663302d626562392d313165622d383566362d3666616337376330633962332e706e67"><img src="https://camo.githubusercontent.com/df92e0deefb619759aa435aca99720cf4113a5ba705eb09f1636f91c89d3eb1e/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66623438396663302d626562392d313165622d383566362d3666616337376330633962332e706e67" alt="img"></a></p>
-<p>上述每一次握手的作用如下：</p>
-<ul>
-<li>第一次握手：客户端发送网络包，服务端收到了<br>  这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</li>
-<li>第二次握手：服务端发包，客户端收到了<br>  这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时<strong>服务器并不能确认客户端的接收能力</strong>是否正常</li>
-<li>第三次握手：客户端发包，服务端收到了<br>  这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常</li>
-</ul>
-<p>通过三次握手，就能确定双方的接收和发送能力是正常的。之后就可以正常通信了</p>
-<h2 id="为什么三次握手"><a href="#为什么三次握手" class="headerlink" title="为什么三次握手"></a>为什么三次握手</h2><p>第三次握手🤝服务端（接收端）确认自己发的包对方能接收到，如果采用两次握手的话, 客户端有可能因为网络阻塞等原因会发送多个请求报文，延时到达的请求又会与服务器建立连接，浪费掉许多服务器的资源。</p>
-<p>如果是两次握手，发送端可以确定自己发送的信息能对方能收到，也能确定对方发的包自己能收到，但接收端只能确定对方发的包自己能收到 <strong>无法确定自己发的包对方能收到</strong>，并且两次握手的话, 客户端有可能因为网络阻塞等原因会发送多个请求报文，延时到达的请求又会与服务器建立连接，浪费掉许多服务器的资源</p>
-<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><p><code>tcp</code>终止一个连接，需要经过四次挥手</p>
-<p>过程如下：</p>
-<ul>
-<li>第一次挥手：客户端发送一个 FIN 报文，报文中会指定一个序列号。此时客户端处于 FIN_WAIT1 状态，停止发送数据，等待服务端的确认</li>
-<li>第二次挥手：服务端收到 FIN 之后，会发送 ACK 报文，且把客户端的序列号值 +1 作为 ACK 报文的序列号值，表明已经收到客户端的报文了，此时服务端处于 CLOSE_WAIT 状态</li>
-<li>第三次挥手：如果服务端也想断开连接了，和客户端的第一次挥手一样，发给 FIN 报文，且指定一个序列号。此时服务端处于 <code>LAST_ACK</code> 的状态</li>
-<li>第四次挥手：客户端收到 FIN 之后，一样发送一个 ACK 报文作为应答，且把服务端的序列号值 +1 作为自己 ACK 报文的序列号值，此时客户端处于 TIME_WAIT状态。需要过一阵子以确保服务端收到自己的 ACK 报文之后才会进入 CLOSED 状态，服务端收到 ACK 报文之后，就处于关闭连接了，处于 CLOSED 状态</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/245cf8925daac2792d36f0f07066826a955175fe6e09030ae0a7ae17d1be9954/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30613365626239302d626562612d313165622d383566362d3666616337376330633962332e706e67"><img src="https://camo.githubusercontent.com/245cf8925daac2792d36f0f07066826a955175fe6e09030ae0a7ae17d1be9954/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30613365626239302d626562612d313165622d383566362d3666616337376330633962332e706e67" alt="img"></a></p>
-<h2 id="四次挥手原因"><a href="#四次挥手原因" class="headerlink" title="四次挥手原因"></a>四次挥手原因</h2><p>服务端在收到客户端断开连接<code>Fin</code>报文后，并不会立即关闭连接，而是先发送一个<code>ACK</code>包先告诉客户端收到关闭连接的请求，只有当<strong>服务器的所有报文发送完毕</strong>之后，才发送<code>FIN</code>报文断开连接，因此需要四次挥手</p>
-<p>两个两次连接</p>
-<ul>
-<li>客户端 &lt;–&gt; 服务端</li>
-<li>服务端 &lt;–&gt; 客户端</li>
-</ul>
-<h2 id="CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理"><a href="#CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理" class="headerlink" title="CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理"></a>CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理</h2><h3 id="1-1-出现的原因"><a href="#1-1-出现的原因" class="headerlink" title="1.1 出现的原因"></a>1.1 出现的原因</h3><ul>
-<li>高并发短连接的服务器上会出现这样的情况，导致创建大量的tcp连接然后close，出现大量的连接出现time_wait的状态。</li>
-</ul>
-<h3 id="1-2-大量time-wait的危害"><a href="#1-2-大量time-wait的危害" class="headerlink" title="1.2.大量time_wait的危害"></a>1.2.大量time_wait的危害</h3><ul>
-<li>在socket的TIME_WAIT状态结束之前，该socket所占用的本地端口号将一直无法释放</li>
-<li>在高并发（每秒几万qps）并且采用短连接方式进行交互的系统中运行一段时间后，系统中就会存在大量的time_wait状态，如果time_wait状态把系统所有可用端口都占完了且尚未被系统回收时，就会出现无法向服务端创建新的socket连接的情况。此时系统几乎停转，任何链接都不能建立。</li>
-<li>大量的time_wait状态也会系统一定的fd，内存和cpu资源，当然这个量一般比较小，并不是主要危害</li>
-</ul>
-<h3 id="1-3-大量time-wait解决方案"><a href="#1-3-大量time-wait解决方案" class="headerlink" title="1.3.大量time_wait解决方案"></a>1.3.大量time_wait解决方案</h3><p><strong>方式一：调整系统内核参数</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = <span class="number">1</span> 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为<span class="number">0</span>，表示关闭；</span><br><span class="line">net.ipv4.tcp_tw_recycle = <span class="number">1</span> 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为<span class="number">0</span>，表示关闭。</span><br><span class="line">net.ipv4.tcp_tw_recycle = <span class="number">1</span>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为<span class="number">0</span>，表示关闭。</span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
-
-<p>允许允许将TIME-WAIT sockets重新用于新的TCP连接，同时TIME-WAIT sockets的加快回收</p>
-<p><strong>方式二：改短连接为长连接</strong></p>
-<ul>
-<li>短连接和长连接工作方式的区别：</li>
-</ul>
-<p>短连接：</p>
-<ul>
-<li>连接-&gt;传输数据-&gt;关闭连接</li>
-<li>HTTP是无状态的，浏览器和服务器每进行一次HTTP操作，就建立一次连接，但任务结束就中断连接。</li>
-<li>也可以这样说：短连接是指SOCKET连接后发送后接收完数据后马上断开连接。</li>
-</ul>
-<p>长连接：</p>
-<ul>
-<li>连接-&gt;传输数据-&gt;保持连接 -&gt; 传输数据-&gt; 。。。-&gt;关闭连接。</li>
-<li>长连接指建立SOCKET连接后不管是否使用都保持连接，但安全性较差。</li>
-</ul>
-<p>从区别上可以看出，长连接比短连接从根本上减少了关闭连接的次数，减少了TIME_WAIT状态的产生数量，在高并发的系统中，这种方式的改动非常有效果，可以明显减少系统TIME_WAIT的数量。</p>
-<h2 id="二-大量close-wait的出现"><a href="#二-大量close-wait的出现" class="headerlink" title="二. 大量close_wait的出现"></a>二. 大量close_wait的出现</h2><h3 id="2-1-出现的原因和解决方案"><a href="#2-1-出现的原因和解决方案" class="headerlink" title="2.1 出现的原因和解决方案"></a>2.1 出现的原因和解决方案</h3><ul>
-<li>close_wait是被动关闭连接是形成的，根据TCP状态机，服务器端收到客户端发送的FIN，TCP协议栈会自动发送ACK，链接进入close_wait状态。但如果服务器端不执行socket的close()操作（即不向客户端发送FIN），状态就不能由close_wait迁移到last_ack，则系统中会存在很多close_wait状态的连接</li>
-</ul>
-<p>我觉得第一时间应该去判断是客户端的问题还是服务端的问题，有可能是客户端一直在向服务端发送FIN，也有可能是服务端一直没有发送自己的FIN。</p>
-<p>可能的原因如下：</p>
-<ul>
-<li>关闭socket不及时：例如I/O线程被意外阻塞，或者I/O线程执行的用户自定义Task比例过高，导致I/O操作处理不及时，链路不能被及时释放。</li>
-</ul>
-<p>通常，CLOSE_WAIT 状态在服务器停留时间很短，如果你发现大量的 CLOSE_WAIT 状态，那么就意味着被动关闭的一方没有及时发出 FIN 包，一般有如下几种可能：</p>
-<ul>
-<li>程序问题：如果代码层面忘记了 close 相应的 socket 连接，那么自然不会发出 FIN 包，从而导致 CLOSE_WAIT 累积；或者代码不严谨，出现死循环之类的问题，导致即便后面写了 close 也永远执行不到。</li>
-<li>响应太慢或者超时设置过小：如果连接双方不和谐，一方不耐烦直接 timeout，另一方却还在忙于耗时逻辑，就会导致 close 被延后。响应太慢是首要问题，不过换个角度看，也可能是 timeout 设置过小。</li>
-</ul>
-<h2 id="常见的网络模型"><a href="#常见的网络模型" class="headerlink" title="常见的网络模型"></a>常见的网络模型</h2><p><img src="https://pic1.zhimg.com/80/v2-a9976ebe153157fde548aaa7b8d73e28_1440w.jpg" alt="img"></p>
-<h2 id="二、三级转发"><a href="#二、三级转发" class="headerlink" title="二、三级转发"></a>二、三级转发</h2><p>二层：交换机</p>
-<p>三层：路由器</p>
-<ul>
-<li>路由器有多个端口，分别连接不同的数据链路。它通过识别目的 IP 地址的<strong>网络号</strong>，再根据<strong>路由表</strong>进行转发，路由表中有<strong>匹配</strong>的路由条目才会转发，无匹配的路由条目则直接丢弃。路由条目既可以手动设置静态路由，也可以通过路由协议自动生成动态路由。</li>
-</ul>
-<h2 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h2><p>UDP 不可靠不稳定 面向非连接</p>
-<p>TCP 可靠稳定 面向连接</p>
-<p><strong>TCP 应用场景：</strong></p>
-<p>当对网络通讯质量有要求的时候，比如：整个数据要准确无误的传递给对方，这往往用于一些要求可靠的应用，比如 HTTP、HTTPS、FTP 等传输文件的协议，POP、SMTP 等邮件传输的协议。</p>
-<p>在日常生活中，常见使用 TCP 协议的应用如下： 浏览器用的 HTTP， FlashFXP 用的 FTP，Outlook 用的 POP、SMTP，Putty 用的 Telnet、SSH，QQ 文件传输。</p>
-<p><strong>UDP 应用场景：</strong> </p>
-<p>当对网络通讯质量要求不高的时候，要求网络通讯速度能尽量的快，这时就可以使用 UDP。 </p>
-<p>比如，日常生活中，常见使用 UDP 协议的应用如下：QQ 语音，QQ 视频，TFTP 等。有些应用场景对可靠性要求不高会用到 UPD，比如长视频，要求速率。</p>
-<h2 id="python垃圾回收"><a href="#python垃圾回收" class="headerlink" title="python垃圾回收"></a>python垃圾回收</h2><p><strong>引用计数为主，分代收集为辅。</strong>在 python 中，<strong>如果一个对象的引用数为 0， python 虚拟机就会回收这个对象的内存。</strong></p>
+<h2 id="判别两个类别的字符串"><a href="#判别两个类别的字符串" class="headerlink" title="判别两个类别的字符串"></a>判别两个类别的字符串</h2><h2 id="python垃圾回收"><a href="#python垃圾回收" class="headerlink" title="python垃圾回收"></a>python垃圾回收</h2><p><strong>引用计数为主，分代收集为辅。</strong>在 python 中，<strong>如果一个对象的引用数为 0， python 虚拟机就会回收这个对象的内存。</strong></p>
 <ul>
 <li><p>导致引用计数 +1 的情况：</p>
 <blockquote>
@@ -1377,14 +1287,6 @@
 <li><p>新的微服务框架japronto 全新微服务框架，异步</p>
 </li>
 </ul>
-<h2 id="浏览器输入URL全过程"><a href="#浏览器输入URL全过程" class="headerlink" title="浏览器输入URL全过程"></a>浏览器输入URL全过程</h2><ul>
-<li>DNS 解析: 将域名解析成 IP 地址</li>
-<li>TCP 连接：TCP 三次握手</li>
-<li>发送 HTTP 请求</li>
-<li>服务器处理请求并返回 HTTP 报文</li>
-<li>浏览器解析渲染页面</li>
-<li>断开连接：TCP 四次挥手</li>
-</ul>
 <h2 id="请求的响应速度过慢"><a href="#请求的响应速度过慢" class="headerlink" title="请求的响应速度过慢"></a>请求的响应速度过慢</h2><p>如何分析排除出具体原因（面试官提示说服务端的问题）</p>
 <ul>
 <li><p>服务端：</p>
@@ -1522,8 +1424,7 @@
 <p>存储：数据库</p>
 <p>协议：HTTP/TCP/UDP</p>
 <p>优化</p>
-<p>处理大数据 spark  hadoop</p>
-<p>框架 消息</p>
+<p>处理大数据 spark flink  hadoop</p>
 <p>监控平台</p>
 <h2 id="字符串拼接方法哪个更快"><a href="#字符串拼接方法哪个更快" class="headerlink" title="字符串拼接方法哪个更快"></a>字符串拼接方法哪个更快</h2><h2 id="指针和引用区别"><a href="#指针和引用区别" class="headerlink" title="指针和引用区别"></a>指针和引用区别</h2><h2 id="红黑树及应用"><a href="#红黑树及应用" class="headerlink" title="红黑树及应用"></a><a target="_blank" rel="noopener" href="https://www.nowcoder.com/jump/super-jump/word?word=%E7%BA%A2%E9%BB%91%E6%A0%91">红黑树</a>及应用</h2><h2 id="项目用到哪些数据结构"><a href="#项目用到哪些数据结构" class="headerlink" title="项目用到哪些数据结构"></a><a href="">项目</a>用到哪些数据结构</h2><h2 id="python数据结构有哪些，各有啥特点"><a href="#python数据结构有哪些，各有啥特点" class="headerlink" title="python数据结构有哪些，各有啥特点"></a>python数据结构有哪些，各有啥特点</h2><h2 id="哈希表原理，哈希冲突怎么解决"><a href="#哈希表原理，哈希冲突怎么解决" class="headerlink" title="哈希表原理，哈希冲突怎么解决"></a><a href="">哈希表</a>原理，哈希冲突怎么解决</h2><h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a><a href="">二叉树</a>的定义</h2><h2 id="二叉树查找方式有哪些"><a href="#二叉树查找方式有哪些" class="headerlink" title="二叉树查找方式有哪些"></a><a href="">二叉树</a>查找方式有哪些</h2><h2 id="二叉树和其他数据结构相比有什么特点"><a href="#二叉树和其他数据结构相比有什么特点" class="headerlink" title="二叉树和其他数据结构相比有什么特点"></a><a href="">二叉树</a>和其他数据结构相比有什么特点</h2><h2 id="B-树有什么应用场景"><a href="#B-树有什么应用场景" class="headerlink" title="B+树有什么应用场景"></a>B+树有什么应用场景</h2><h2 id="二叉树和图有什么区别"><a href="#二叉树和图有什么区别" class="headerlink" title="二叉树和图有什么区别"></a><a href="">二叉树</a>和图有什么区别</h2><h2 id="知道最小生成树吗"><a href="#知道最小生成树吗" class="headerlink" title="知道最小生成树吗"></a>知道最小生成树吗</h2><h2 id="什么是元类"><a href="#什么是元类" class="headerlink" title="什么是元类"></a>什么是元类</h2><h2 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h2><p>1.栈（操作系统）：由操作系统自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈；</p>
 <p>2.堆（操作系统）： 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收，分配方式倒是类似于链表。</p>
@@ -1600,7 +1501,138 @@
 
 Bloom filter日后会在本BLOG内详细阐述。
 </code></pre>
-<h2 id="TCP的重传机制、快速重传是怎样的"><a href="#TCP的重传机制、快速重传是怎样的" class="headerlink" title="TCP的重传机制、快速重传是怎样的"></a>TCP的重传机制、快速重传是怎样的</h2><p>重传机制的其中一个方式，就是在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 <code>ACK</code> 确认应答报文，就会重发该数据，也就是我们常说的<strong>超时重传</strong>。</p>
+<h2 id="统计在文件夹-root-下，包含“word”的文件的个数"><a href="#统计在文件夹-root-下，包含“word”的文件的个数" class="headerlink" title="统计在文件夹/root 下，包含“word”的文件的个数"></a>统计在文件夹/root 下，包含“word”的文件的个数</h2><ul>
+<li>统计当前目录下文件的个数（不包括目录）</li>
+</ul>
+<p>``$ ls -l | grep “^-“ | wc -l`</p>
+<ul>
+<li>统计当前目录下文件的个数（包括子目录）</li>
+</ul>
+<p>``$ ls -lR| grep “^-“ | wc -l`</p>
+<ul>
+<li>查看某目录下文件夹(目录)的个数（包括子目录）</li>
+</ul>
+<p>``$ ls -lR | grep “^d” | wc -l`</p>
+<ul>
+<li><code>grep &quot;^-&quot;</code><br>  过滤<code>ls</code>的输出信息，只保留一般文件，只保留目录是<code>grep &quot;^d&quot;</code>。</li>
+<li><code>wc -l</code><br>  统计输出信息的行数，统计结果就是输出信息的行数，一行信息对应一个文件，所以就是文件的个数。</li>
+</ul>
+<h2 id="MySQL的调优"><a href="#MySQL的调优" class="headerlink" title="MySQL的调优"></a>MySQL的调优</h2><h2 id="现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。"><a href="#现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。" class="headerlink" title="现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。"></a>现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。</h2><p>mapreduce</p>
+<p>Len(qq—nums) 5 6 7 8 9 10 11 划分片段</p>
+<p>分治 </p>
+<p>位图法：40 亿个不重复整数，我们用 40 亿个 bit 来表示，初始位均为 0，那么总共需要内存：4,000,000,000b≈512M。我们读取这 40 亿个整数，将对应的 bit 设置为 1。接着读取要查询的数，查看相应位是否为 1，如果为 1 表示存在，如果为 0 表示不存在。</p>
+<p>可以hash一下，拆分成N多库N多表N多机器，比如一台机器分配100万用户，查询毫无压力吧。再说登录并发不算高，谁没事登着玩啊。</p>
+<h2 id="迭代器-1"><a href="#迭代器-1" class="headerlink" title="迭代器"></a>迭代器</h2><p>是访问集合元素的一种方式，从集合的第一个元素开始访问，直到所有元素被访问结束。其优点是不需要事先准备好整个迭代过程中的所有元素，仅在迭代到某个元素时才开始计算该元素。适合遍历比较巨大的集合。<strong>iter</strong>()：方法返回迭代器本身， <strong>next</strong>()：方法用于返回容器中下一个元素或数据。</p>
+<h2 id="生成器-1"><a href="#生成器-1" class="headerlink" title="生成器"></a>生成器</h2><p>带有yield的函数不再是一个普通函数，而是一个生成器。当函数被调用时，返回一个生成器对象。不像一般函数在生成值后退出，生成器函数在生成值后会自动挂起并暂停他们的执行状态。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;迭代器&#x27;&#x27;&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;for x in iter([1, 2, 3, 4, 5]):&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">iter</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]):</span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;生成器&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myyield</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">        print(<span class="string">&quot;开始生成...:&quot;</span>)</span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line">        print(<span class="string">&quot;完成一次...:&quot;</span>)</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> myyield(<span class="number">4</span>):</span><br><span class="line">    print(<span class="string">&quot;遍历得到的值:&quot;</span>,i)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包可以实现先将一个参数传递给一个函数，而并不立即执行，以达到延迟求值的目的。</p>
+<p>满足以下三个条件：必须有一个内嵌函数；内嵌函数必须引用外部函数中变量；外部函数返回值必须是内嵌函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delay_fun</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">caculator</span>():</span></span><br><span class="line">        <span class="keyword">return</span> x+y</span><br><span class="line">    <span class="keyword">return</span> caculator</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;返回一个求和的函数，并不求和&#x27;</span>)</span><br><span class="line">msum = delay_fun(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">print(<span class="string">&#x27;调用并求和:&#x27;</span>)</span><br><span class="line">print(msum())</span><br></pre></td></tr></table></figure>
+
+<h2 id="args-和-kwargs"><a href="#args-和-kwargs" class="headerlink" title="**args 和 *kwargs"></a>*<em>*args 和 *<em>kwargs</em></em></h2><p>这两个是Python中的可变参数，用于接受参数的传递。<em>args表示任何多个无名参数，它是一个元组，**kwargs表示关键字参数，它是一个字典。同时使用</em>args和<strong>kwargs时，必须*args在</strong>kwargs之前</p>
+<h2 id="property-和-setter"><a href="#property-和-setter" class="headerlink" title="@property 和 @setter"></a><strong>@property 和 @setter</strong></h2><p>@property负责把一个方法变成属性调用。在对实例操作时，不暴露接口，而是通过getter和setter方法实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an intager&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value&lt;<span class="number">0</span> <span class="keyword">or</span> value&gt;<span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0~100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line">s.score = <span class="number">60</span></span><br><span class="line">print(s.score)</span><br><span class="line">s.score = <span class="number">999</span></span><br><span class="line">print(s.score)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Python-方法"><a href="#Python-方法" class="headerlink" title="Python 方法"></a>Python 方法</h2><p>Python中有三种方法，实例方法、类方法(@classmethod)、静态方法(@staticmethod)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        print(<span class="string">&quot;executing foo(%s,%s)&quot;</span> % (self, x))</span><br><span class="line">        print(<span class="string">&#x27;self:&#x27;</span>, self)</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">class_foo</span>(<span class="params">cls, x</span>):</span></span><br><span class="line">        print(<span class="string">&quot;executing class_foo(%s,%s)&quot;</span> % (cls, x))</span><br><span class="line">        print(<span class="string">&#x27;cls:&#x27;</span>, cls)</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">static_foo</span>(<span class="params">x</span>):</span></span><br><span class="line">        print(<span class="string">&quot;executing static_foo(%s)&quot;</span> % x)</span><br><span class="line">a = A()</span><br><span class="line">print(a.foo(<span class="number">1</span>))</span><br><span class="line">print(a.class_foo(<span class="number">1</span>))</span><br><span class="line">print(a.static_foo(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="import之类的知识点"><a href="#import之类的知识点" class="headerlink" title="import之类的知识点"></a>import之类的知识点</h2><p> 模块（Module）和 <strong>包（Package）</strong> </p>
+<ul>
+<li>模块<ul>
+<li>不管是对常见的<code>*.py</code>文件，或是编译优化的<code>*.pyc</code>, <code>*.pyo</code>文件、扩展类型的<code>*.pyd</code>，<code>*.pyw</code>文件来说， 它们是属于Python代码载体的最小单元，这样单独存在的文件我们都称之为“模块”。</li>
+</ul>
+</li>
+<li>包<ul>
+<li> import 导入该目录时，会执行 <strong>__init__.py</strong> 里面的代码。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Python进程、线程、协程概念"><a href="#Python进程、线程、协程概念" class="headerlink" title="Python进程、线程、协程概念"></a>Python进程、线程、协程概念</h2><h2 id="常见Web安全"><a href="#常见Web安全" class="headerlink" title="常见Web安全"></a>常见Web安全</h2><h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>当应用程序将用户输入的内容，拼接到 SQL 语句中，一起提交给数据库执行时，就会产生SQL注入威胁。由于用户的输入，也是SQL语句的一部分，所以攻击者可以利用这部分可以控制的内容，注入自己定义的语句，改变 SQL 语句执行逻辑，让数据库执行任意自己需要的指令。通过控制部分 SQL 语句，攻击者可以查洵数据库中任何自己需要的数据，利用数据库的一些特性，可以直接获取数据库服务器的系统权限。</p>
+<p>本来 SQL 注入攻击需要攻击者对 SQL 语句非常了解，所以对攻击者的技术有一定要求。但是现在已经出现了大量 SQL 注入利用工具，可以让任何攻击者，只要点几下鼠标，就能达到攻击效果，这使得 SQL 注入的威胁极大增加。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">USER</span> <span class="keyword">WHERE</span> username <span class="operator">=</span> &quot;Mark&quot;; <span class="keyword">AND</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span><span class="comment">-- AND PASSWORD=&quot;1234&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如何防范？</strong></p>
+<p>不信任用户输入的数据，确保用户输入必须经过检查，目前许多成熟的 Web 框架都支持ORM 服务，大部分都基本防范了 SQL 注入。保护网站不受注入攻击危害，主要落实到代码库构建上。比如说，缓解 SQL 注入风险的首选方法就是始终尽量采用参数化语句。更进一步，可以考虑使用第三方身份验证工作流来外包你的数据库防护。</p>
+<h3 id="XSS-跨站脚本攻击"><a href="#XSS-跨站脚本攻击" class="headerlink" title="XSS 跨站脚本攻击"></a>XSS 跨站脚本攻击</h3><p>跨站脚本攻击（Cross Site Scripting)，为不和层叠样式表(Cascading Style Sheets, CSS）的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意 html 代码，当用户浏览该页之时，嵌入其中Web里面的html代码会被执行，从而达到恶意攻击用户的特殊目的。</p>
+<ul>
+<li>反射型跨站脚本攻击</li>
+</ul>
+<p>攻击者会通过社会工程学手段，发送一个URL连接给用户打开，在用户打开页面的同时，浏览器会执行页面中<strong>嵌入的恶意脚本</strong>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0qjxdh62j30kc0450sv.jpg" alt="img"></p>
+<ul>
+<li>存储型跨站脚本攻击</li>
+</ul>
+<p>攻击者利用 web 应用程序提供的录入或修改数据功能，将<strong>数据存储到服务器或用户 cookie 中</strong>，当其他用户浏览展示该数据的页面时，浏览器会执行页面中嵌入的恶意脚本。所有浏览者都会受到攻击。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0qjzfo2dj30gj055dg3.jpg" alt="img"></p>
+<ul>
+<li>命令注入</li>
+</ul>
+<p>OS 命令注入攻击指通过 Web 应用，执行非法的操作系统命令达到攻击的目的。只要在能调用 Shell 函数的地方就有存在被攻击的风险。倘若调用 Shell 时存在疏漏，就可以执行插入的非法命令。命令注入攻击可以向 Shell 发送命令，让 Windows 或 Linux 操作系统的命令行启动程序。也就是说，通过命令注入攻击可执行操作系统上安装着的各种程序。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0qjyu69mj30i904aglm.jpg" alt="img"></p>
+<h3 id="CSRF-跨站请求伪造"><a href="#CSRF-跨站请求伪造" class="headerlink" title="CSRF 跨站请求伪造"></a>CSRF 跨站请求伪造</h3><p>CSRF(Cross Site Request Forgery)，利用已登录的用户身份，以用户的名义发送恶意请求，完成非法操作。</p>
+<p>例如，如果用户浏览并信任具有 CSRF 漏洞的网站 A，则浏览器会生成相应的 cookie，并且用户访问危险的网站B而不退出网站。危险网站 B 要求访问网站 A 并提出要求。 浏览器使用用户的 cookie 信息访问网站  A。 由于网站 A 不知道是用户自身发出的请求还是危险网站 B 发出的请求，因此将处理危险网站 B 的请求，从而完成了用户操作目的的模拟。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0qoc49hjj30c008fmxn.jpg" alt="img"></p>
+<h3 id="越权访问"><a href="#越权访问" class="headerlink" title="越权访问"></a>越权访问</h3><p>越权漏洞是指应用在检查授权（Authorization）时存在纰漏，使得攻击者在获得低权限用户帐后后，可以利用一些方式绕过权限检查，访问或者操作到原本无权访问的高权限功能。在实际的代码安全审查中，这类漏洞往往很难通过工具进行自动化检测，因此在实际应用中危害很大。其与未授权访问有一定差别。目前存在着两种越权操作类型：垂直越权操作和水平越权操作。</p>
+<p>垂直越权漏洞，也称为<strong>权限提升</strong>，是一种<strong>“基于 UR L的访问控制”</strong>设计缺陷引起的漏洞。由于 Web 应用程序没有做权限控制或者仅在菜单上做了权限控制，导致恶意用户只要猜测其他管理页面的 URL，就可以访问或控制其他角色拥有的数据或页面，达到权限提升的目的。</p>
+<p>水平越权漏洞，是一种<strong>“基于数据的访问控制”</strong>设计缺陷引起的漏洞。由于服务器端在接收到请求数据进行操作时没有判断数据的所属人而导致的越权数据访问漏洞。如服务器端从客户端提交的 request 参数(用户能够控制的数据)中获取用户 id，恶意攻击者通过变换请求 ID 的值，查看或修改不属于本人的数据。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0qr8109nj30kc0akdg2.jpg" alt="img"></p>
+<h3 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h3><p>开发人员使用模糊测试来查找软件、操作系统或网络中的编程错误和安全漏洞。然而，攻击者可以使用同样的技术来寻找你网站或服务器上的漏洞。</p>
+<p>采用模糊测试方法，攻击者首先向应用输入大量随机数据（模糊）让应用崩溃。下一步就是用模糊测试工具发现应用的弱点。如果目标应用中存在漏洞，攻击者即可展开进一步漏洞利用。</p>
+<p>对抗模糊攻击的最佳方法就是保持更新安全设置和其他应用，尤其是在安全补丁发布后不更新就会遭遇恶意黑客利用漏洞的情况下。</p>
+<h3 id="零日攻击"><a href="#零日攻击" class="headerlink" title="零日攻击"></a>零日攻击</h3><p>零日攻击是模糊攻击的扩展，但不要求识别漏洞本身。此类攻击最近的案例是谷歌发现的，他们在 Windows 和 Chrome 软件中发现了潜在的零日攻击。</p>
+<p>在两种情况下，恶意黑客能够从零日攻击中获利。</p>
+<ul>
+<li>第一种情况是，如果能够获得关于即将到来的安全更新的信息，攻击者就可以在更新上线前分析出漏洞的位置。</li>
+<li>第二种情况是，网络罪犯获取补丁信息，然后攻击尚未更新系统的用户。</li>
+<li>保护自己和自身网站不受零日攻击影响最简便的方法，就是在新版本发布后及时更新你的软件。</li>
+</ul>
+<h3 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h3><p>路径遍历攻击不像上述几种攻击方法那么常见，但仍然是任何 Web 应用的一大威胁。路径遍历攻击针对 Web root 文件夹，访问目标文件夹外部的未授权文件或目录。攻击者试图将移动模式注入服务器目录，以便向上爬升。成功的路径遍历攻击能够获得网站访问权，染指配置文件、数据库和同一实体服务器上的其他网站和文件。</p>
+<p>网站能否抵御路径遍历攻击取决于你的输入净化程度。这意味着保证用户输入安全，并且不能从你的服务器恢复出用户输入内容。最直观的建议就是打造你的代码库，这样用户的任何信息都不会传输到文件系统 API。即使这条路走不通，也有其他技术解决方案可用。</p>
+<h3 id="DDoS"><a href="#DDoS" class="headerlink" title="DDoS"></a>DDoS</h3><p>DDoS攻击本身不能使恶意黑客突破安全措施，但会令网站暂时或永久掉线。卡巴斯基实验室《2017年IT安全风险调查》指出，单次DDoS攻击可令小企业平均损失12.3万美元，大型企业的损失水平在230万美元左右。</p>
+<p>DDoS 旨在用请求洪水压垮目标 Web 服务器，让其他访客无法访问网站。僵尸网络通常能够利用之前感染的计算机从全球各地协同发送大量请求。而且，DDoS 攻击常与其他攻击方法搭配使用；攻击者利用 DDoS 攻击吸引安全系统火力，从而暗中利用漏洞入侵系统。</p>
+<p>保护网站免遭 DDoS 攻击侵害一般要从几个方面着手。首先，需通过内容分发网络（CDN）、负载均衡器和可扩展资源缓解高峰流量。其次，需部署 Web 应用防火墙（WAF），防止DDoS攻击隐蔽注入攻击或跨站脚本等其他网络攻击方法。</p>
+<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击常见于用户与服务器间传输数据不加密的网站。作为用户，只要看看网站的URL是不是以HTTPS开头就能发现这一潜在风险了，因为HTTPS中的“S”指的就是数据是加密的，缺了“S”就是未加密。</p>
+<p>攻击者利用中间人类型的攻击收集信息，通常是敏感信息。数据在双方之间传输时可能遭到恶意黑客拦截，如果数据未加密，攻击者就能轻易读取个人信息、登录信息或其他敏感信息。</p>
+<p>在网站上安装安全套接字层（SSL）就能缓解中间人攻击风险。SSL证书加密各方间传输的信息，攻击者即使拦截到了也无法轻易破解。现代托管提供商通常已经在托管服务包中配置了SSL证书。</p>
+<h3 id="暴力破解攻击"><a href="#暴力破解攻击" class="headerlink" title="暴力破解攻击"></a>暴力破解攻击</h3><p>暴力破解攻击是获取Web应用登录信息相当直接的一种方式。但同时也是非常容易缓解的攻击方式之一，尤其是从用户侧加以缓解最为方便。</p>
+<p>暴力破解攻击中，攻击者试图猜解用户名和密码对，以便登录用户账户。当然，即使采用多台计算机，除非密码相当简单且明显，否则破解过程可能需耗费几年时间。</p>
+<p>保护登录信息的最佳办法，是创建强密码，或者使用双因子身份验证（2FA）。作为网站拥有者，你可以要求用户同时设置强密码和2FA，以便缓解网络罪犯猜出密码的风险。</p>
+<h3 id="使用未知代码或第三方代码"><a href="#使用未知代码或第三方代码" class="headerlink" title="使用未知代码或第三方代码"></a>使用未知代码或第三方代码</h3><p>尽管不是对网站的直接攻击，使用由第三方创建的未经验证代码，也可能导致严重的安全漏洞。</p>
+<p>代码或应用的原始创建者可能会在代码中隐藏恶意字符串，或者无意中留下后门。一旦将“受感染”的代码引入网站，那你就会面临恶意字符串执行或后门遭利用的风险。其后果可以从单纯的数据传输直到网站管理权限陷落。</p>
+<p>想要避免围绕潜在数据泄露的风险，请让你的开发人员分析并审计代码的有效性。此外，确保所用插件（尤其是WordPress插件）及时更新，并定期接收安全补丁：研究显示，超过 1.7 万个 WordPress 插件（约占研究当时采样数量的47%）两年内没有更新。</p>
+<h3 id="网络钓鱼"><a href="#网络钓鱼" class="headerlink" title="网络钓鱼"></a>网络钓鱼</h3><p>网络钓鱼是另一种没有直接针对网站的攻击方法，但我们不能将它排除在名单之外，因为网络钓鱼也会破坏你系统的完整性。根据 FBI《互联网犯罪报告》的说法，其原因在于网络钓鱼是最常见的社会工程网络犯罪。</p>
+<p>网络钓鱼攻击用到的标准工具就是电子邮件。攻击者通常会伪装成其他人，诱骗受害者给出敏感信息或执行银行转账。此类攻击可以是古怪的 419 骗局（属于预付费欺诈类骗局），或者涉及假冒电子邮件地址、貌似真实的网站和极具说服力用语的高端攻击。后者以鱼叉式网络钓鱼之名广为人知。</p>
+<p>缓解网络钓鱼骗局风险最有效的办法，是培训员工和自身，增强对此类欺诈的辨识能力。保持警惕，总是检查发送者电子邮件地址是否合法，邮件内容是否古怪，请求是否不合常理。另外，谨记：天上不会掉馅饼，事出反常必有妖。</p>
+<h3 id="DDoS-1"><a href="#DDoS-1" class="headerlink" title="DDoS"></a>DDoS</h3><p>将DDoS的攻击方式分成4类，分别是攻击网络带宽、攻击系统、攻击应用、混合攻击。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0t7mcu6gj30u00hx797.jpg" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0tanmak6j30u00eljv1.jpg" alt="原创 | DDoS攻击技术分析与防御"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0taws3cxj30u00g4di9.jpg" alt="原创 | DDoS攻击技术分析与防御"></p>
+<p>DRDoS(DistributedReflectionDenialofService，分布式反射拒绝服务)，是指攻击者利用路由器、服务器等设施对请求产生应答，从而反射出大量的流量对受害者进行攻击的一种DDoS攻击方式。这种攻击方式隐蔽，更大危害还来自于使用反射过程的放大。放大是一种特殊的反射攻击，其特殊之处在于反射器对于网络流量具有放大作用，可以将攻击者较小的流量放大成较大流量，从而造成更加严重的带宽消耗。</p>
+<h3 id="DDoS检测"><a href="#DDoS检测" class="headerlink" title="DDoS检测"></a>DDoS检测</h3><ul>
+<li><p>特征检测（首先对异常信息源建模分析提取特征向量，根据特征设计针对性的特征检测算法，若新数据样本检测出相应的特征值，则发布预警或进行反应）</p>
+</li>
+<li><p>异常检测（创建正常的系统或者网络的基准轮廓，异常）</p>
+</li>
+<li><p><strong>网络流量实时监测系统</strong></p>
+<p>  ( 1 ) 发现网络流量突然暴增，出现异常变化。</p>
+<p>  ( 2 ) 个别网络协议（如：ICMP、UDP、TCP；HTTP、DNS等）突然暴增。</p>
+<p>  ( 3 ) 出现相同源地址的大量数据包、大量垃圾数据包。</p>
+</li>
+<li><p><strong>基于设备运行状态</strong></p>
+<p>  ( 1 ) 监控业务系统性能，网络设备、服务器CUP占用率突然增高。</p>
+<p>  ( 2 ) 业务系统的业务请求连接突然大量增加。</p>
+<p>  ( 3 ) 服务器出现大量垃圾数据包。</p>
+<p>  ( 4 ) 将服务器网络断开后，异常状态消失。</p>
+</li>
+</ul>
+<h2 id="OSI-七层协议"><a href="#OSI-七层协议" class="headerlink" title="OSI 七层协议"></a>OSI 七层协议</h2><h2 id="TCP的重传机制、快速重传是怎样的"><a href="#TCP的重传机制、快速重传是怎样的" class="headerlink" title="TCP的重传机制、快速重传是怎样的"></a>TCP的重传机制、快速重传是怎样的</h2><p>重传机制的其中一个方式，就是在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 <code>ACK</code> 确认应答报文，就会重发该数据，也就是我们常说的<strong>超时重传</strong>。</p>
 <p>TCP 会在以下两种情况发生超时重传：</p>
 <ul>
 <li>数据包丢失</li>
@@ -2015,102 +2047,111 @@ Bloom filter日后会在本BLOG内详细阐述。
 <p>也就是没有像「超时重传」一夜回到解放前，而是还在比较高的值，后续呈线性增长。</p>
 <h4 id="拥塞算法示意图"><a href="#拥塞算法示意图" class="headerlink" title="拥塞算法示意图"></a>拥塞算法示意图</h4><p>好了，以上就是拥塞控制的全部内容了，看完后，你再来看下面这张图片，每个过程我相信你都能明白：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xiaolincoder/ImageHost2/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP-%E5%8F%AF%E9%9D%A0%E7%89%B9%E6%80%A7/31.png" alt="TCP 拥塞控制">TCP 拥塞控制</p>
-<h2 id="统计在文件夹-root-下，包含“word”的文件的个数"><a href="#统计在文件夹-root-下，包含“word”的文件的个数" class="headerlink" title="统计在文件夹/root 下，包含“word”的文件的个数"></a>统计在文件夹/root 下，包含“word”的文件的个数</h2><ul>
-<li>统计当前目录下文件的个数（不包括目录）</li>
-</ul>
-<p>``$ ls -l | grep “^-“ | wc -l`</p>
+<h2 id="tcp保证数据传输的三个流程"><a href="#tcp保证数据传输的三个流程" class="headerlink" title="tcp保证数据传输的三个流程"></a>tcp保证数据传输的三个流程</h2><p>TCP为了提供可靠传输：<br>（1）首先，采用三次握手来建立TCP连接，四次握手来释放TCP连接，从而保证建立的传输信道是可靠的。<br>（2）其次，TCP采用了连续ARQ协议（回退N，Go-back-N；超时自动重传）(自动重传请求（Automatic Repeat-reQuest，ARQ）)来保证数据传输的正确性，使用滑动窗口协议来保证接方能够及时处理所接收到的数据，进行流量控制。<br>（3）最后，TCP使用慢开始、拥塞避免、快重传和快恢复来进行拥塞控制，避免网络拥塞。</p>
+<h2 id="tcp-三次握手"><a href="#tcp-三次握手" class="headerlink" title="tcp 三次握手"></a>tcp 三次握手</h2><p>在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。<br>第一次握手： 建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手： 服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手： 客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。 完成三次握手，客户端与服务器开始传送数据.</p>
+<p>三次握手（Three-way Handshake）其实就是指建立一个TCP连接时，需要客户端和服务器总共发送 3 个包</p>
+<p>主要作用就是为了<strong>确认双方的接收能力和发送能力是否正常、指定自己的初始化序列号</strong>为后面的可靠性传送做准备</p>
+<p>过程如下：</p>
 <ul>
-<li>统计当前目录下文件的个数（包括子目录）</li>
+<li>第一次握手：客户端给服务端发一个 SYN 报文，并指明客户端的初始化序列号 ISN(c)，此时客户端处于 SYN_SENT 状态</li>
+<li>第二次握手：服务器收到客户端的 SYN 报文之后，会以自己的 SYN 报文作为应答，为了确认客户端的 SYN，将客户端的 ISN+1作为ACK的值，此时服务器处于 SYN_RCVD 的状态</li>
+<li>第三次握手：客户端收到 SYN 报文之后，会发送一个 ACK 报文，值为服务器的ISN+1。此时客户端处于 ESTABLISHED 状态。服务器收到 ACK 报文之后，也处于 ESTABLISHED 状态，此时，双方已建立起了连接</li>
 </ul>
-<p>``$ ls -lR| grep “^-“ | wc -l`</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/df92e0deefb619759aa435aca99720cf4113a5ba705eb09f1636f91c89d3eb1e/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66623438396663302d626562392d313165622d383566362d3666616337376330633962332e706e67"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0vu3wk8qj30fd0aemxk.jpg" alt="img"></a></p>
+<p>上述每一次握手的作用如下：</p>
 <ul>
-<li>查看某目录下文件夹(目录)的个数（包括子目录）</li>
+<li>第一次握手：客户端发送网络包，服务端收到了<br>  这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</li>
+<li>第二次握手：服务端发包，客户端收到了<br>  这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时<strong>服务器并不能确认客户端的接收能力</strong>是否正常</li>
+<li>第三次握手：客户端发包，服务端收到了<br>  这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常</li>
 </ul>
-<p>``$ ls -lR | grep “^d” | wc -l`</p>
+<p>通过三次握手，就能确定双方的接收和发送能力是正常的。之后就可以正常通信了</p>
+<h2 id="为什么三次握手"><a href="#为什么三次握手" class="headerlink" title="为什么三次握手"></a>为什么三次握手</h2><p>第三次握手🤝服务端（接收端）确认自己发的包对方能接收到，如果采用两次握手的话, 客户端有可能因为网络阻塞等原因会发送多个请求报文，延时到达的请求又会与服务器建立连接，浪费掉许多服务器的资源。</p>
+<p>如果是两次握手，发送端可以确定自己发送的信息能对方能收到，也能确定对方发的包自己能收到，但接收端只能确定对方发的包自己能收到 <strong>无法确定自己发的包对方能收到</strong>，并且两次握手的话, 客户端有可能因为网络阻塞等原因会发送多个请求报文，延时到达的请求又会与服务器建立连接，浪费掉许多服务器的资源</p>
+<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><p><code>tcp</code>终止一个连接，需要经过四次挥手</p>
+<p>过程如下：</p>
 <ul>
-<li><code>grep &quot;^-&quot;</code><br>  过滤<code>ls</code>的输出信息，只保留一般文件，只保留目录是<code>grep &quot;^d&quot;</code>。</li>
-<li><code>wc -l</code><br>  统计输出信息的行数，统计结果就是输出信息的行数，一行信息对应一个文件，所以就是文件的个数。</li>
+<li>第一次挥手：客户端发送一个 FIN 报文，报文中会指定一个序列号。此时客户端处于 FIN_WAIT1 状态，停止发送数据，等待服务端的确认</li>
+<li>第二次挥手：服务端收到 FIN 之后，会发送 ACK 报文，且把客户端的序列号值 +1 作为 ACK 报文的序列号值，表明已经收到客户端的报文了，此时服务端处于 CLOSE_WAIT 状态</li>
+<li>第三次挥手：如果服务端也想断开连接了，和客户端的第一次挥手一样，发给 FIN 报文，且指定一个序列号。此时服务端处于 <code>LAST_ACK</code> 的状态</li>
+<li>第四次挥手：客户端收到 FIN 之后，一样发送一个 ACK 报文作为应答，且把服务端的序列号值 +1 作为自己 ACK 报文的序列号值，此时客户端处于 TIME_WAIT状态。需要过一阵子以确保服务端收到自己的 ACK 报文之后才会进入 CLOSED 状态，服务端收到 ACK 报文之后，就处于关闭连接了，处于 CLOSED 状态</li>
 </ul>
-<h2 id="MySQL的调优"><a href="#MySQL的调优" class="headerlink" title="MySQL的调优"></a>MySQL的调优</h2><h2 id="现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。"><a href="#现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。" class="headerlink" title="现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。"></a>现有100亿个QQ号，如何快速判断某个QQ号是否在其中，存储方式自己考虑，越快越好（运行时间），空间越小越好。</h2><p>mapreduce</p>
-<p>Len(qq—nums) 5 6 7 8 9 10 11 划分片段</p>
-<p>分治 </p>
-<p>位图法：40 亿个不重复整数，我们用 40 亿个 bit 来表示，初始位均为 0，那么总共需要内存：4,000,000,000b≈512M。我们读取这 40 亿个整数，将对应的 bit 设置为 1。接着读取要查询的数，查看相应位是否为 1，如果为 1 表示存在，如果为 0 表示不存在。</p>
-<p>可以hash一下，拆分成N多库N多表N多机器，比如一台机器分配100万用户，查询毫无压力吧。再说登录并发不算高，谁没事登着玩啊。</p>
-<h2 id="迭代器-1"><a href="#迭代器-1" class="headerlink" title="迭代器"></a>迭代器</h2><p>是访问集合元素的一种方式，从集合的第一个元素开始访问，直到所有元素被访问结束。其优点是不需要事先准备好整个迭代过程中的所有元素，仅在迭代到某个元素时才开始计算该元素。适合遍历比较巨大的集合。<strong>iter</strong>()：方法返回迭代器本身， <strong>next</strong>()：方法用于返回容器中下一个元素或数据。</p>
-<h2 id="生成器-1"><a href="#生成器-1" class="headerlink" title="生成器"></a>生成器</h2><p>带有yield的函数不再是一个普通函数，而是一个生成器。当函数被调用时，返回一个生成器对象。不像一般函数在生成值后退出，生成器函数在生成值后会自动挂起并暂停他们的执行状态。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;迭代器&#x27;&#x27;&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;for x in iter([1, 2, 3, 4, 5]):&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">iter</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]):</span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;生成器&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myyield</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">        print(<span class="string">&quot;开始生成...:&quot;</span>)</span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line">        print(<span class="string">&quot;完成一次...:&quot;</span>)</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> myyield(<span class="number">4</span>):</span><br><span class="line">    print(<span class="string">&quot;遍历得到的值:&quot;</span>,i)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包可以实现先将一个参数传递给一个函数，而并不立即执行，以达到延迟求值的目的。</p>
-<p>满足以下三个条件：必须有一个内嵌函数；内嵌函数必须引用外部函数中变量；外部函数返回值必须是内嵌函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delay_fun</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">caculator</span>():</span></span><br><span class="line">        <span class="keyword">return</span> x+y</span><br><span class="line">    <span class="keyword">return</span> caculator</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;返回一个求和的函数，并不求和&#x27;</span>)</span><br><span class="line">msum = delay_fun(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">print(<span class="string">&#x27;调用并求和:&#x27;</span>)</span><br><span class="line">print(msum())</span><br></pre></td></tr></table></figure>
-
-<h2 id="args-和-kwargs"><a href="#args-和-kwargs" class="headerlink" title="**args 和 *kwargs"></a>*<em>*args 和 *<em>kwargs</em></em></h2><p>这两个是Python中的可变参数，用于接受参数的传递。<em>args表示任何多个无名参数，它是一个元组，**kwargs表示关键字参数，它是一个字典。同时使用</em>args和<strong>kwargs时，必须*args在</strong>kwargs之前</p>
-<h2 id="property-和-setter"><a href="#property-和-setter" class="headerlink" title="@property 和 @setter"></a><strong>@property 和 @setter</strong></h2><p>@property负责把一个方法变成属性调用。在对实例操作时，不暴露接口，而是通过getter和setter方法实现。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an intager&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value&lt;<span class="number">0</span> <span class="keyword">or</span> value&gt;<span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0~100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line">s.score = <span class="number">60</span></span><br><span class="line">print(s.score)</span><br><span class="line">s.score = <span class="number">999</span></span><br><span class="line">print(s.score)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Python-方法"><a href="#Python-方法" class="headerlink" title="Python 方法"></a>Python 方法</h2><p>Python中有三种方法，实例方法、类方法(@classmethod)、静态方法(@staticmethod)。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        print(<span class="string">&quot;executing foo(%s,%s)&quot;</span> % (self, x))</span><br><span class="line">        print(<span class="string">&#x27;self:&#x27;</span>, self)</span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">class_foo</span>(<span class="params">cls, x</span>):</span></span><br><span class="line">        print(<span class="string">&quot;executing class_foo(%s,%s)&quot;</span> % (cls, x))</span><br><span class="line">        print(<span class="string">&#x27;cls:&#x27;</span>, cls)</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">static_foo</span>(<span class="params">x</span>):</span></span><br><span class="line">        print(<span class="string">&quot;executing static_foo(%s)&quot;</span> % x)</span><br><span class="line">a = A()</span><br><span class="line">print(a.foo(<span class="number">1</span>))</span><br><span class="line">print(a.class_foo(<span class="number">1</span>))</span><br><span class="line">print(a.static_foo(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="import之类的知识点"><a href="#import之类的知识点" class="headerlink" title="import之类的知识点"></a>import之类的知识点</h2><p> 模块（Module）和 <strong>包（Package）</strong> </p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/245cf8925daac2792d36f0f07066826a955175fe6e09030ae0a7ae17d1be9954/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30613365626239302d626562612d313165622d383566362d3666616337376330633962332e706e67"><img src="https://camo.githubusercontent.com/245cf8925daac2792d36f0f07066826a955175fe6e09030ae0a7ae17d1be9954/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30613365626239302d626562612d313165622d383566362d3666616337376330633962332e706e67" alt="img"></a></p>
+<h2 id="四次挥手原因"><a href="#四次挥手原因" class="headerlink" title="四次挥手原因"></a>四次挥手原因</h2><p>服务端在收到客户端断开连接<code>Fin</code>报文后，并不会立即关闭连接，而是先发送一个<code>ACK</code>包先告诉客户端收到关闭连接的请求，只有当<strong>服务器的所有报文发送完毕</strong>之后，才发送<code>FIN</code>报文断开连接，因此需要四次挥手</p>
+<p>两个两次连接</p>
 <ul>
-<li>模块<ul>
-<li>不管是对常见的<code>*.py</code>文件，或是编译优化的<code>*.pyc</code>, <code>*.pyo</code>文件、扩展类型的<code>*.pyd</code>，<code>*.pyw</code>文件来说， 它们是属于Python代码载体的最小单元，这样单独存在的文件我们都称之为“模块”。</li>
+<li>客户端 &lt;–&gt; 服务端</li>
+<li>服务端 &lt;–&gt; 客户端</li>
 </ul>
+<h2 id="CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理"><a href="#CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理" class="headerlink" title="CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理"></a>CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理</h2><h3 id="1-1-出现的原因"><a href="#1-1-出现的原因" class="headerlink" title="1.1 出现的原因"></a>1.1 出现的原因</h3><ul>
+<li>高并发短连接的服务器上会出现这样的情况，导致创建大量的tcp连接然后close，出现大量的连接出现time_wait的状态。</li>
+</ul>
+<h3 id="1-2-大量time-wait的危害"><a href="#1-2-大量time-wait的危害" class="headerlink" title="1.2.大量time_wait的危害"></a>1.2.大量time_wait的危害</h3><ul>
+<li>在socket的TIME_WAIT状态结束之前，该socket所占用的本地端口号将一直无法释放</li>
+<li>在高并发（每秒几万qps）并且采用短连接方式进行交互的系统中运行一段时间后，系统中就会存在大量的time_wait状态，如果time_wait状态把系统所有可用端口都占完了且尚未被系统回收时，就会出现无法向服务端创建新的socket连接的情况。此时系统几乎停转，任何链接都不能建立。</li>
+<li>大量的time_wait状态也会系统一定的fd，内存和cpu资源，当然这个量一般比较小，并不是主要危害</li>
+</ul>
+<h3 id="1-3-大量time-wait解决方案"><a href="#1-3-大量time-wait解决方案" class="headerlink" title="1.3.大量time_wait解决方案"></a>1.3.大量time_wait解决方案</h3><p><strong>方式一：调整系统内核参数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = <span class="number">1</span> 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为<span class="number">0</span>，表示关闭；</span><br><span class="line">net.ipv4.tcp_tw_recycle = <span class="number">1</span> 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为<span class="number">0</span>，表示关闭。</span><br><span class="line">net.ipv4.tcp_tw_recycle = <span class="number">1</span>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为<span class="number">0</span>，表示关闭。</span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>允许允许将TIME-WAIT sockets重新用于新的TCP连接，同时TIME-WAIT sockets的加快回收</p>
+<p><strong>方式二：改短连接为长连接</strong></p>
+<ul>
+<li>短连接和长连接工作方式的区别：</li>
+</ul>
+<p>短连接：</p>
+<ul>
+<li>连接-&gt;传输数据-&gt;关闭连接</li>
+<li>HTTP是无状态的，浏览器和服务器每进行一次HTTP操作，就建立一次连接，但任务结束就中断连接。</li>
+<li>也可以这样说：短连接是指SOCKET连接后发送后接收完数据后马上断开连接。</li>
+</ul>
+<p>长连接：</p>
+<ul>
+<li>连接-&gt;传输数据-&gt;保持连接 -&gt; 传输数据-&gt; 。。。-&gt;关闭连接。</li>
+<li>长连接指建立SOCKET连接后不管是否使用都保持连接，但安全性较差。</li>
+</ul>
+<p>从区别上可以看出，长连接比短连接从根本上减少了关闭连接的次数，减少了TIME_WAIT状态的产生数量，在高并发的系统中，这种方式的改动非常有效果，可以明显减少系统TIME_WAIT的数量。</p>
+<h2 id="二-大量close-wait的出现"><a href="#二-大量close-wait的出现" class="headerlink" title="二. 大量close_wait的出现"></a>二. 大量close_wait的出现</h2><h3 id="2-1-出现的原因和解决方案"><a href="#2-1-出现的原因和解决方案" class="headerlink" title="2.1 出现的原因和解决方案"></a>2.1 出现的原因和解决方案</h3><ul>
+<li>close_wait是被动关闭连接是形成的，根据TCP状态机，服务器端收到客户端发送的FIN，TCP协议栈会自动发送ACK，链接进入close_wait状态。但如果服务器端不执行socket的close()操作（即不向客户端发送FIN），状态就不能由close_wait迁移到last_ack，则系统中会存在很多close_wait状态的连接</li>
+</ul>
+<p>我觉得第一时间应该去判断是客户端的问题还是服务端的问题，有可能是客户端一直在向服务端发送FIN，也有可能是服务端一直没有发送自己的FIN。</p>
+<p>可能的原因如下：</p>
+<ul>
+<li>关闭socket不及时：例如I/O线程被意外阻塞，或者I/O线程执行的用户自定义Task比例过高，导致I/O操作处理不及时，链路不能被及时释放。</li>
+</ul>
+<p>通常，CLOSE_WAIT 状态在服务器停留时间很短，如果你发现大量的 CLOSE_WAIT 状态，那么就意味着被动关闭的一方没有及时发出 FIN 包，一般有如下几种可能：</p>
+<ul>
+<li>程序问题：如果代码层面忘记了 close 相应的 socket 连接，那么自然不会发出 FIN 包，从而导致 CLOSE_WAIT 累积；或者代码不严谨，出现死循环之类的问题，导致即便后面写了 close 也永远执行不到。</li>
+<li>响应太慢或者超时设置过小：如果连接双方不和谐，一方不耐烦直接 timeout，另一方却还在忙于耗时逻辑，就会导致 close 被延后。响应太慢是首要问题，不过换个角度看，也可能是 timeout 设置过小。</li>
+</ul>
+<h2 id="常见的网络模型"><a href="#常见的网络模型" class="headerlink" title="常见的网络模型"></a>常见的网络模型</h2><p><img src="https://pic1.zhimg.com/80/v2-a9976ebe153157fde548aaa7b8d73e28_1440w.jpg" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0vhso1xrj30ak07xwf4.jpg" alt="img"></p>
+<p>A ： 私有号段：10.0.0.0-10.255.255.255</p>
+<p>B：  私有号段：172.16.0.0-172.31.255.255</p>
+<p>C：  私有号段：192.168.0.0-192.168.255.255</p>
+<h2 id="二、三级转发"><a href="#二、三级转发" class="headerlink" title="二、三级转发"></a>二、三级转发</h2><p>二层：交换机</p>
+<p>三层：路由器</p>
+<ul>
+<li>路由器有多个端口，分别连接不同的数据链路。它通过识别目的 IP 地址的<strong>网络号</strong>，再根据<strong>路由表</strong>进行转发，路由表中有<strong>匹配</strong>的路由条目才会转发，无匹配的路由条目则直接丢弃。路由条目既可以手动设置静态路由，也可以通过路由协议自动生成动态路由。</li>
+</ul>
+<h2 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h2><ul>
+<li><p>UDP 不可靠不稳定 面向非连接</p>
 </li>
-<li>包<ul>
-<li> import 导入该目录时，会执行 <strong>__init__.py</strong> 里面的代码。</li>
-</ul>
+<li><p>TCP 可靠稳定 面向连接</p>
 </li>
 </ul>
-<h2 id="Python进程、线程、协程概念"><a href="#Python进程、线程、协程概念" class="headerlink" title="Python进程、线程、协程概念"></a>Python进程、线程、协程概念</h2><h3 id="一、进程"><a href="#一、进程" class="headerlink" title="一、进程"></a>一、进程</h3><h3 id="进程的概念"><a href="#进程的概念" class="headerlink" title="进程的概念"></a>进程的概念</h3><h3 id="1-进程是一个实体。每个进程都有自己的地址空间-CPU分配-。实体空间包括三部分："><a href="#1-进程是一个实体。每个进程都有自己的地址空间-CPU分配-。实体空间包括三部分：" class="headerlink" title="1.进程是一个实体。每个进程都有自己的地址空间(CPU分配)。实体空间包括三部分："></a>1.进程是一个实体。每个进程都有自己的地址空间(CPU分配)。实体空间包括三部分：</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 文本区域：存储处理器执行的代码。</span><br><span class="line">* 数据区域：存储变量或进程执行期间使用的动态分配的内存。</span><br><span class="line">* 堆栈：进程执行时调用的指令和本地变量。</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-进程是一个“执行中的程序”。"><a href="#2-进程是一个“执行中的程序”。" class="headerlink" title="2.进程是一个“执行中的程序”。"></a>2.进程是一个“执行中的程序”。</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">程序是指令与数据的有序集合,程序本身是没有生命的,只有CPU赋予程序生命时(CPU执行程序),它才能成为一个活动的实体,称为“进程”。</span><br></pre></td></tr></table></figure>
-
-<p><strong>概括来说，进程就是一个具有独立功能的程序在某个数据集上的一次运行活动</strong></p>
-<h3 id="进程的特点"><a href="#进程的特点" class="headerlink" title="进程的特点"></a>进程的特点</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 动态性：进程是程序的一次执行过程，动态产生，动态消亡。</span><br><span class="line">* 独立性：进程是一个能独立运行的基本单元。是系统分配资源与调度的基本单元。</span><br><span class="line">* 并发性：任何进程都可以与其他进程并发执行。</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、并发与并行"><a href="#二、并发与并行" class="headerlink" title="二、并发与并行"></a>二、并发与并行</h2><p><strong>并发：在操作系统中，某一时间段，几个程序在同一个CPU上运行，但在任意一个时间点上，只有一个程序在CPU上运行。</strong></p>
-<p>当有多个线程时，如果系统只有一个CPU，那么CPU不可能真正同时进行多个线程，CPU的运行时间会被划分成若干个时间段，每个时间段分配给各个线程去执行，一个时间段里某个线程运行时，其他线程处于挂起状态，这就是并发。并发解决了程序排队等待的问题，如果一个程序发生阻塞，其他程序仍然可以正常执行。</p>
-<p><strong>并行：当操作系统有多个CPU时，一个CPU处理A线程，另一个CPU处理B线程，两个线程互相不抢占CPU资源，可以同时进行，这种方式成为并行。</strong></p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>并发只是在宏观上给人感觉有多个程序在同时运行，但在实际的单CPU系统中，每一时刻只有一个程序在运行，微观上这些程序是分时交替执行。<br>在多CPU系统中，将这些并发执行的程序分配到不同的CPU上处理，每个CPU用来处理一个程序，这样多个程序便可以实现同时执行。</p>
-<h2 id="三、线程"><a href="#三、线程" class="headerlink" title="三、线程"></a>三、线程</h2><h3 id="3-1、线程的引入"><a href="#3-1、线程的引入" class="headerlink" title="3.1、线程的引入"></a>3.1、线程的引入</h3><p>60年代，操作系统中拥有资源并独立运行的基本单位是进程，进程是资源的拥有者，进程的创建、撤销、切换花销太大。多CPU处理出现，可以满足多个单位同时运行，但是多个进程并行花销太大。80年代，出现了<strong>轻量级的，能够独立运行的基本单位，线程。</strong></p>
-<h3 id="3-2、线程的概念"><a href="#3-2、线程的概念" class="headerlink" title="3.2、线程的概念"></a>3.2、线程的概念</h3><ul>
-<li><strong>线程是进程中的一个实体，是被系统独立调度和分派的基本单位。</strong> 线程的实体包括程序，数据，TCB。TCB包括：</li>
-</ul>
-<ol>
-<li>线程状态</li>
-<li>线程不运行时，被保存的现场资源</li>
-<li>一组执行堆栈</li>
-<li>每个线程的局部变量</li>
-<li>访问统一进程中的资源</li>
-</ol>
-<ul>
-<li><strong>线程自己不拥有系统资源，只拥有一点运行中必不可少的资源。</strong></li>
-<li><strong>同一进程中的多个线程并发执行，这些线程共享进程所拥有的资源。</strong></li>
-</ul>
-<h3 id="3-3、进程与线程的区别"><a href="#3-3、进程与线程的区别" class="headerlink" title="3.3、进程与线程的区别"></a>3.3、进程与线程的区别</h3><ul>
-<li>进程是CPU资源分配的基本单位，线程是独立运行和独立调度的基本单位（CPU上真正运行的是线程）。</li>
-<li>进程拥有自己的资源空间，一个进程包含若干个线程，线程与CPU资源分配无关，多个线程共享同一进程内的资源。</li>
-<li>线程的调度与切换比进程快很多。</li>
-</ul>
-<h3 id="四、协程"><a href="#四、协程" class="headerlink" title="四、协程"></a>四、协程</h3><p><strong>协程是一种比线程更加轻量级的存在，最重要的是，协程不被操作系统内核管理，协程是完全由程序控制的。</strong></p>
-<p><em>运行效率极高，协程的切换完全由程序控制，不像线程切换需要花费操作系统的开销,线程数量越多，协程的优势就越明显。</em></p>
-<p>协程不需要多线程的锁机制，因为只有一个线程，不存在变量冲突。</p>
-<p>对于多核CPU，利用多进程+协程的方式，能充分利用CPU，获得极高的性能。</p>
-<p>如果一个线程等待某些条件，可以充分利用这个时间去做其它事情，其实这就是：协程方式</p>
-<ul>
-<li>进程是资源分配的单位</li>
-<li>线程是操作系统调度的单位</li>
-<li>进程切换需要的资源很最大，效率很低</li>
-<li>线程切换需要的资源一般，效率一般（当然了在不考虑GIL的情况下）</li>
-<li>协程切换任务资源很小，效率高</li>
-<li>多进程、多线程根据cpu核数不一样可能是并行的，但是协程是在一个线程中，所以是并发</li>
+<p><strong>TCP 应用场景：</strong></p>
+<p>当对网络通讯质量有要求的时候，比如：整个数据要准确无误的传递给对方，这往往用于一些要求可靠的应用，比如 HTTP、HTTPS、FTP 等传输文件的协议，POP、SMTP 等邮件传输的协议。</p>
+<p>在日常生活中，常见使用 TCP 协议的应用如下： 浏览器用的 HTTP， FlashFXP 用的 FTP，Outlook 用的 POP、SMTP，Putty 用的 Telnet、SSH，QQ 文件传输。</p>
+<p><strong>UDP 应用场景：</strong> </p>
+<p>当对网络通讯质量要求不高的时候，要求网络通讯速度能尽量的快，这时就可以使用 UDP。 </p>
+<p>比如，日常生活中，常见使用 UDP 协议的应用如下：QQ 语音，QQ 视频，TFTP 等。有些应用场景对可靠性要求不高会用到 UPD，比如长视频，要求速率。</p>
+<h2 id="浏览器输入URL全过程"><a href="#浏览器输入URL全过程" class="headerlink" title="浏览器输入URL全过程"></a>浏览器输入URL全过程</h2><ul>
+<li>DNS 解析: 将域名解析成 IP 地址</li>
+<li>TCP 连接：TCP 三次握手</li>
+<li>发送 HTTP 请求</li>
+<li>服务器处理请求并返回 HTTP 报文</li>
+<li>浏览器解析渲染页面</li>
+<li>断开连接：TCP 四次挥手</li>
 </ul>
 
       
