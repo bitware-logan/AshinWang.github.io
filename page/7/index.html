@@ -863,7 +863,7 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbtoun6ic4g30m908r0wt.gif" alt="img"></p>
 <p>算法分析：稳定排序，内排序，时间复杂度：O(n^2)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 进行多次循环</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n - c):</span><br><span class="line">            <span class="keyword">if</span> nums[i - <span class="number">1</span>] &gt; nums[i]:</span><br><span class="line">                nums[i - <span class="number">1</span>], nums[i] = nums[i], nums[i - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 进行多次循环</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n - c): <span class="comment"># 搜索区间减少 c 个</span></span><br><span class="line">            <span class="keyword">if</span> nums[i - <span class="number">1</span>] &gt; nums[i]:</span><br><span class="line">                nums[i - <span class="number">1</span>], nums[i] = nums[i], nums[i - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
 
 
 
@@ -877,7 +877,7 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbtprp6xjfg30mj06wdsb.gif" alt="img"></p>
 <p><strong>稳定性：</strong>用数组实现的选择排序是不稳定的，用链表实现的选择排序是稳定的；时间复杂度：O(n^2) ，<code>n</code>是数组长度</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line">    <span class="comment"># n2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, n):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; nums[j]:</span><br><span class="line">                nums[i], nums[j] = nums[j], nums[i]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line">    <span class="comment"># n2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, n): <span class="comment"># 空间从头开始缩减</span></span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; nums[j]:</span><br><span class="line">                nums[i], nums[j] = nums[j], nums[i]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
 
 
 
@@ -903,13 +903,13 @@
 
 <h2 id="5-归并排序-MergeSort"><a href="#5-归并排序-MergeSort" class="headerlink" title="5 归并排序_MergeSort"></a>5 归并排序_MergeSort</h2><blockquote>
 <p>归并排序的思想：将序列分解成最小有序子序列，再逐个将有序的子序列进行合并，得到有序的子序列段，最终得到一个完整的有序序列。</p>
-<p>分治：先将数组分成子序列，让子序列有序，再将子序列间有序，合并成有序数组。</p>
+<p><strong>分治：先将数组分成子序列，让子序列有序，再将子序列间有序，合并成有序数组。</strong></p>
 </blockquote>
 <p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbuvg1qamsg30mj0e1k05.gif" alt="img"></p>
 <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gv87ene21hj611h0u0whh02.jpg" style="zoom:50%;" />
 
 <p>算法分析：稳定排序，外排序（占用额外内存），时间复杂度O(nlogn)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> nums</span><br><span class="line">    mid = <span class="built_in">len</span>(nums) // <span class="number">2</span></span><br><span class="line">    <span class="comment"># 分</span></span><br><span class="line">    left = merge_sort(nums[:mid])</span><br><span class="line">    right = merge_sort(nums[mid:])</span><br><span class="line">    <span class="comment"># 合并</span></span><br><span class="line">    <span class="keyword">return</span> merge(left, right)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">left, right</span>):</span></span><br><span class="line">    res = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(left) <span class="keyword">and</span> j &lt; <span class="built_in">len</span>(right):</span><br><span class="line">        <span class="keyword">if</span> left[i] &lt;= right[j]:</span><br><span class="line">            res.append(left[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res.append(right[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    res += left[i:]</span><br><span class="line">    res += right[j:]</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> nums</span><br><span class="line">    mid = <span class="built_in">len</span>(nums) // <span class="number">2</span></span><br><span class="line">    <span class="comment"># 分</span></span><br><span class="line">    left = merge_sort(nums[:mid])</span><br><span class="line">    right = merge_sort(nums[mid:])</span><br><span class="line">    <span class="comment"># 合并</span></span><br><span class="line">    <span class="keyword">return</span> merge(left, right)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">left, right</span>):</span></span><br><span class="line">    res = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(left) <span class="keyword">and</span> j &lt; <span class="built_in">len</span>(right):</span><br><span class="line">        <span class="keyword">if</span> left[i] &lt;= right[j]:</span><br><span class="line">            res.append(left[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res.append(right[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    <span class="comment"># +, 而不是追加</span></span><br><span class="line">    res += left[i:]</span><br><span class="line">    res += right[j:]</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
 
 
@@ -923,8 +923,9 @@
 </ul>
 <p><img src="https://pic.leetcode-cn.com/d13bd82917a8eba049efa261bebd3beb74b9e7c1adf39ce51bf1c9dd60d49f57-Quicksort-example.gif"></p>
 <p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbuvm1jkf0g30mj070jyl.gif" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/20191204143557117.gif#pic_center#pic_center"></p>
 <p>算法分析：不稳定排序，内排序，时间复杂度度O(nlogn)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">quick</span>(<span class="params">left, right</span>):</span></span><br><span class="line">        <span class="keyword">if</span> left &gt;= right:</span><br><span class="line">            <span class="keyword">return</span> nums</span><br><span class="line">        pivot = left</span><br><span class="line">        i = left</span><br><span class="line">        j = right</span><br><span class="line">        <span class="keyword">while</span> i &lt; j:</span><br><span class="line">            <span class="keyword">while</span> i &lt; j <span class="keyword">and</span> nums[j] &gt; nums[pivot]:</span><br><span class="line">                j -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> i &lt; j <span class="keyword">and</span> nums[i] &lt;= nums[pivot]:</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            nums[i], nums[j] = nums[j], nums[i]</span><br><span class="line">        nums[pivot], nums[j] = nums[j], nums[pivot]</span><br><span class="line">        quick(left, j - <span class="number">1</span>)</span><br><span class="line">        quick(j + <span class="number">1</span>, right)</span><br><span class="line">        <span class="keyword">return</span> nums</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> quick(<span class="number">0</span>, n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 版本</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">quick</span>(<span class="params">left, right</span>):</span></span><br><span class="line">        <span class="keyword">if</span> left &gt;= right:</span><br><span class="line">            <span class="keyword">return</span> nums</span><br><span class="line">        pivot = left</span><br><span class="line">        i = left</span><br><span class="line">        j = right</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> i &lt; j:</span><br><span class="line">            <span class="keyword">while</span> i &lt; j <span class="keyword">and</span> nums[j] &gt; nums[pivot]:</span><br><span class="line">                j -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> i &lt; j <span class="keyword">and</span> nums[i] &lt;= nums[pivot]:</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            nums[i], nums[j] = nums[j], nums[i]</span><br><span class="line">        nums[pivot], nums[j] = nums[j], nums[pivot]</span><br><span class="line">        </span><br><span class="line">        quick(left, j - <span class="number">1</span>)</span><br><span class="line">        quick(j + <span class="number">1</span>, right)</span><br><span class="line">        <span class="keyword">return</span> nums</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> quick(<span class="number">0</span>, n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -932,51 +933,19 @@
 
 <h2 id="7-堆排序-HeapSort"><a href="#7-堆排序-HeapSort" class="headerlink" title="7 堆排序_HeapSort"></a>7 堆排序_HeapSort</h2><p>堆排序是利用堆这个数据结构设计的排序算法。</p>
 <p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbuvq87o7sg30f70a4hdt.gif" alt="img"></p>
-<p>建堆，从底向上调整堆，使得父亲节点比孩子节点值大，构成大顶堆；<br>交换堆顶和最后一个元素，重新调整堆。</p>
+<p>建堆，<strong>从底向上</strong>（自底向上）调整堆，使得父亲节点比孩子节点值大，构成大顶堆；,交换堆顶和最后一个元素，重新调整堆。</p>
 <p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbuvq613sbg30go0goabf.gif" alt="img"></p>
 <p>算法分析：不稳定排序，内排序，时间复杂度为O(nlogn)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    <span class="comment"># 调整堆</span></span><br><span class="line">    <span class="comment"># 迭代写法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">adjust_heap</span>(<span class="params">nums, startpos, endpos</span>):</span></span><br><span class="line">        newitem = nums[startpos]</span><br><span class="line">        pos = startpos</span><br><span class="line">        childpos = pos * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> childpos &lt; endpos:</span><br><span class="line">            rightpos = childpos + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> rightpos &lt; endpos <span class="keyword">and</span> nums[rightpos] &gt;= nums[childpos]:</span><br><span class="line">                childpos = rightpos</span><br><span class="line">            <span class="keyword">if</span> newitem &lt; nums[childpos]:</span><br><span class="line">                nums[pos] = nums[childpos]</span><br><span class="line">                pos = childpos</span><br><span class="line">                childpos = pos * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        nums[pos] = newitem</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 递归写法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">adjust_heap</span>(<span class="params">nums, startpos, endpos</span>):</span></span><br><span class="line">        pos = startpos</span><br><span class="line">        chilidpos = pos * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> chilidpos &lt; endpos:</span><br><span class="line">            rightpos = chilidpos + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> rightpos &lt; endpos <span class="keyword">and</span> nums[rightpos] &gt; nums[chilidpos]:</span><br><span class="line">                chilidpos = rightpos</span><br><span class="line">            <span class="keyword">if</span> nums[chilidpos] &gt; nums[pos]:</span><br><span class="line">                nums[pos], nums[chilidpos] = nums[chilidpos], nums[pos]</span><br><span class="line">                adjust_heap(nums, pos, endpos)</span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line">    <span class="comment"># 建堆</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(n // <span class="number">2</span>)):</span><br><span class="line">        adjust_heap(nums, i, n)</span><br><span class="line">    <span class="comment"># 调整堆</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        nums[<span class="number">0</span>], nums[i] = nums[i], nums[<span class="number">0</span>]</span><br><span class="line">        adjust_heap(nums, <span class="number">0</span>, i)</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span>(<span class="params">nums</span>):</span></span><br><span class="line">    <span class="comment"># 调整堆    </span></span><br><span class="line">    <span class="comment"># 递归写法，自底向上</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">adjust_heap</span>(<span class="params">nums, startpos, endpos</span>):</span></span><br><span class="line">        pos = startpos</span><br><span class="line">        chilidpos = pos * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> chilidpos &lt; endpos:</span><br><span class="line">            rightpos = chilidpos + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> rightpos &lt; endpos <span class="keyword">and</span> nums[rightpos] &gt; nums[chilidpos]:</span><br><span class="line">                chilidpos = rightpos</span><br><span class="line">            <span class="keyword">if</span> nums[chilidpos] &gt; nums[pos]:</span><br><span class="line">                nums[pos], nums[chilidpos] = nums[chilidpos], nums[pos]</span><br><span class="line">                adjust_heap(nums, pos, endpos)</span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">len</span>(nums)</span><br><span class="line">    <span class="comment"># 建堆</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(n // <span class="number">2</span>)):</span><br><span class="line">        adjust_heap(nums, i, n)</span><br><span class="line">    <span class="comment"># 调整堆</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        nums[<span class="number">0</span>], nums[i] = nums[i], nums[<span class="number">0</span>]</span><br><span class="line">        adjust_heap(nums, <span class="number">0</span>, i)</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20. 有效的括号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parentheses/">20. 有效的括号</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这个思考的过程其实就是栈的实现过程。因此我们考虑使用栈，当遇到匹配的最小括号对时，我们将这对括号从栈中删除（即出栈），如果最后栈为空，那么它是有效的括号，反之不是。</span><br><span class="line"><span class="comment"># s = &quot;()[]&#123;&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; bool:</span></span><br><span class="line">        dic = &#123;<span class="string">&#x27;)&#x27;</span>:<span class="string">&#x27;(&#x27;</span>,<span class="string">&#x27;]&#x27;</span>:<span class="string">&#x27;[&#x27;</span>,<span class="string">&#x27;&#125;&#x27;</span>:<span class="string">&#x27;&#123;&#x27;</span>&#125;</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> stack <span class="keyword">and</span> i <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="keyword">if</span> stack[-<span class="number">1</span>] == dic[i]: </span><br><span class="line">                    stack.pop()</span><br><span class="line">                <span class="keyword">else</span>: </span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                stack.append(i)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> stack</span><br><span class="line"></span><br><span class="line">作者：z1m</span><br><span class="line">链接：https://leetcode-cn.com/problems/valid-parentheses/solution/zhu-bu-fen-xi-tu-jie-zhan-zhan-shi-zui-biao-zhun-d/</span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-
-
-<h2 id="8-计数排序-CountingSort"><a href="#8-计数排序-CountingSort" class="headerlink" title="8 计数排序_CountingSort"></a>8 计数排序_CountingSort</h2><p>计数排序是典型的空间换时间算法，开辟额外数据空间存储用索引号记录数组的值和数组值个数</p>
-<p>算法描述：</p>
-<ul>
-<li>找出待排序的数组的最大值和最小值</li>
-<li>统计数组值的个数</li>
-<li>反向填充目标数组</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbuvuexgkng30s40fhjww.gif" alt="img"></p>
-<p>算法分析：稳定排序，外排序，时间复杂度O(n + k)，但是对于数据范围很大的数组，需要大量时间和内存。</p>
-<h2 id="9-桶排序-BucketSort"><a href="#9-桶排序-BucketSort" class="headerlink" title="9 桶排序_BucketSort"></a>9 桶排序_BucketSort</h2><p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbuvy7lbqqj308n03nt8q.jpg" alt="img"></p>
-<p>桶排序是计数排序的升级版，原理是：输入数据服从均匀分布的，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的算法或是以递归方式继续使用桶排序，此文编码采用递归方式）</p>
-<p>算法描述：</p>
-<ul>
-<li>人为设置一个桶的BucketSize，作为每个桶放置多少个不同数值（意思就是BucketSize = 5，可以放5个不同数字比如[1, 2, 3,4,5]也可以放 100000个3，只是表示该桶能存几个不同的数值）</li>
-<li>遍历待排序数据，并且把数据一个一个放到对应的桶里去</li>
-<li>对每个不是桶进行排序，可以使用其他排序方法，也递归排序</li>
-<li>不是空的桶里数据拼接起来</li>
-</ul>
-<p>算法分析：稳定排序，外排序，时间复杂度O(n + k)<em>O</em>(<em>n</em>+<em>k</em>)，<code>k</code>为桶的个数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bucket_sort</span>(<span class="params">nums, bucketSize</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> nums</span><br><span class="line">    _min = <span class="built_in">min</span>(nums)</span><br><span class="line">    _max = <span class="built_in">max</span>(nums)</span><br><span class="line">    <span class="comment"># 需要桶个数</span></span><br><span class="line">    bucketNum = (_max - _min) // bucketSize + <span class="number">1</span></span><br><span class="line">    buckets = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(bucketNum)]</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="comment"># 放入相应的桶中</span></span><br><span class="line">        buckets[(num - _min) // bucketSize].append(num)</span><br><span class="line">    res = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> bucket <span class="keyword">in</span> buckets:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> bucket: <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> bucketSize == <span class="number">1</span>:</span><br><span class="line">            res.extend(bucket)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 当都装在一个桶里,说明桶容量大了</span></span><br><span class="line">            <span class="keyword">if</span> bucketNum == <span class="number">1</span>:</span><br><span class="line">                bucketSize -= <span class="number">1</span></span><br><span class="line">            res.extend(bucket_sort(bucket, bucketSize))</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="10-基数排序-RadixSort"><a href="#10-基数排序-RadixSort" class="headerlink" title="10 基数排序_RadixSort"></a>10 基数排序_RadixSort</h2><p>基数排序是对数字每一位进行排序，从最低位开始排序</p>
-<p>算法描述：</p>
-<ul>
-<li>找到数组最大值，得最大位数；</li>
-<li>从最低位开始取每个位组成radix数组；</li>
-<li>对radix进行计数排序（计数排序适用于小范围的特点）。</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbuw3cz71lg30s40fywic.gif" alt="img"></p>
-<p>算法分析：稳定排序，外排序，时间复杂度 posCount * (n + n)posCount∗(n+n) ，其中 posCount 为数组中最大元素的最高位数；简化下得：$O( k *n ) $；其中k为常数，n为元素个数。</p>
 <h1 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h1><h2 id="数据结构算法"><a href="#数据结构算法" class="headerlink" title="数据结构算法"></a>数据结构算法</h2><p>常见的数据结构</p>
 <ul>
 <li><strong>栈（Stack）：</strong>栈是一种特殊的线性表，它只能在一个表的一个固定端进行数据结点的插入和删除操作。</li>
@@ -989,6 +958,9 @@
 <li><strong>散列表（Hash table）：</strong>散列表源自于散列函数(Hash function)，其思想是如果在结构中存在关键字和T相等的记录，那么必定在F(T)的存储位置可以找到该记录，这样就可以不用进行比较操作而直接取得所查记录。</li>
 </ul>
 <h2 id="Hashmap处理哈希冲突的分析方法"><a href="#Hashmap处理哈希冲突的分析方法" class="headerlink" title="Hashmap处理哈希冲突的分析方法"></a>Hashmap处理哈希冲突的分析方法</h2><p><strong>哈希算法</strong>：根据设定的哈希函数H（key）和处理冲突方法将一组关键字映象到一个有限的地址区间上的算法。</p>
+<ul>
+<li>求模</li>
+</ul>
 <p><strong>哈希表</strong>：数据经过哈希算法之后得到的集合。这样关键字和数据在集合中的位置存在一定的关系，可以根据这种关系快速查询。</p>
 <p><strong>哈希冲突</strong>：对于散列表而言，无论设置的存储区域（n）有多大，当需要存储的数据大于 n 时，那么必然会存在哈希值相同的情况。这就是所谓的<strong>散列冲突</strong>。</p>
 <h3 id="开放定址法"><a href="#开放定址法" class="headerlink" title="开放定址法"></a>开放定址法</h3><p>从发生冲突的那个单元起，按照一定的次序，从哈希表中找到一个空闲的单元。然后把发生冲突的元素存入到该单元的一种方法。开放定址法需要的表长度要大于等于所需要存放的元素。 在开放定址法中解决冲突的方法有：线行探查法、平方探查法、双散列函数探查法。 开放定址法的缺点在于删除元素的时候不能真的删除，否则会引起查找错误，只能做一个特殊标记。只到有下个元素插入才能真正删除该元素。</p>
@@ -1000,9 +972,15 @@
 
 <h3 id="再哈希法"><a href="#再哈希法" class="headerlink" title="再哈希法"></a>再哈希法</h3><p>就是同时构造多个不同的哈希函数： Hi = RHi(key)   i= 1,2,3 … k; 当H1 = RH1(key)  发生冲突时，再用H2 = RH2(key) 进行计算，直到冲突不再产生，这种方法不易产生聚集，但是增加了计算时间。</p>
 <h3 id="建立公共溢出区"><a href="#建立公共溢出区" class="headerlink" title="建立公共溢出区"></a>建立公共溢出区</h3><p>将哈希表分为公共表和溢出表，当溢出发生时，将所有溢出数据统一放到溢出区。</p>
-<h2 id="堆排序，大堆，小堆，堆排序的原理"><a href="#堆排序，大堆，小堆，堆排序的原理" class="headerlink" title="堆排序，大堆，小堆，堆排序的原理"></a>堆<a href="">排序</a>，大堆，小堆，堆<a href="">排序</a>的原理</h2><h2 id="统计一篇论文，前面出现前十的单词。Counter-List"><a href="#统计一篇论文，前面出现前十的单词。Counter-List" class="headerlink" title="统计一篇论文，前面出现前十的单词。Counter(), List"></a>统计一篇论文，前面出现前十的单词。Counter(), List</h2><p>Linux：<code>cat &lt;em&gt;filename&lt;/em&gt; | sort | unique -c | sort -k1,1nr | head 10</code></p>
+<h2 id="堆排序，大堆，小堆，堆排序的原理"><a href="#堆排序，大堆，小堆，堆排序的原理" class="headerlink" title="堆排序，大堆，小堆，堆排序的原理"></a>堆<a href="">排序</a>，大堆，小堆，堆<a href="">排序</a>的原理</h2><p>我们知道堆是一个完全二叉树了，那么堆又分两种堆：<strong>大顶堆</strong> 和 <strong>小顶堆</strong>它们符合一个重要的性质：</p>
+<ul>
+<li>小顶堆满足： Key[i] &lt;= key[2i+1] &amp;&amp; Key[i] &lt;= key[2i+2] </li>
+<li>大顶堆满足： Key[i] &gt;= Key[2i+1] &amp;&amp; key &gt;= key[2i+2] </li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw15b8vxajj30nh085jro.jpg" alt="img"></p>
+<h2 id="统计一篇论文，前面出现前十的单词。Counter-List"><a href="#统计一篇论文，前面出现前十的单词。Counter-List" class="headerlink" title="统计一篇论文，前面出现前十的单词。Counter(), List"></a>统计一篇论文，前面出现前十的单词。Counter(), List</h2><p>Linux：<code>cat &lt;em&gt;filename&lt;/em&gt; | sort | unique -c | sort -k1,1nr | head 10</code></p>
 <p>list –&gt; dict count(key)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计为字典</span></span><br><span class="line">counts=&#123;&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> all_set:</span><br><span class="line">     counts[key] = all_C.count(key)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计为字典</span></span><br><span class="line">counts=&#123;&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> all_set:</span><br><span class="line">     counts[key] = all_C.count(key)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter   </span><br><span class="line">wordList = []</span><br><span class="line"><span class="comment">#统计每个词出现的次数</span></span><br><span class="line">wordList = Counter( words )</span><br><span class="line"><span class="comment">#统计出现的次数最多的N个词及出现的次数</span></span><br><span class="line">wordListNTop = wordList.most_common( N )</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1013,7 +991,7 @@
 </li>
 </ul>
 <h2 id="装饰器的作用"><a href="#装饰器的作用" class="headerlink" title="装饰器的作用"></a>装饰器的作用</h2><p>装饰器（Decorators） 是 Python 的一个重要部分。简单地说：他们是修改其他函数的功能的函数。是一种函数的函数，因为装饰器传入的参数就是一个函数，然后通过实现各种功能来对这个函数的功能进行增强。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decorator</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hello</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;同学你好&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hello()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decorator</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hello</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;同学你好&#x27;</span>)</span><br><span class="line"></span><br><span class="line">say_hello()</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li> wraps 装饰器</li>
@@ -1105,9 +1083,9 @@
 <p><strong>b = copy.deepcopy(a):</strong> 深度拷贝, a 和 b 完全拷贝了父对象及其子对象，两者是完全独立的。<img src="https://www.runoob.com/wp-content/uploads/2017/03/1489720930-5882-BO4qO.png" alt="img"></p>
 <h2 id="10亿个数取最大的10个怎么取，说三种方案"><a href="#10亿个数取最大的10个怎么取，说三种方案" class="headerlink" title="10亿个数取最大的10个怎么取，说三种方案"></a>10亿个数取最大的10个怎么取，说三种方案</h2><p>直接排序<br>最容易想到的方法是将数据全部排序，然后在排序后的集合中进行查找，最快的排序算法的时间复杂度一般为O（nlogn），如快速排序。但是在32位的机器上，每个float类型占4个字节，1亿个浮点数就要占用400MB的存储空间，对于一些可用内存小于400M的计算机而言，很显然是不能一次将全部数据读入内存进行排序的。其实即使内存能够满足要求（我机器内存都是8GB），该方法也并不高效，因为题目的目的是寻找出最大的1000个数即可，而排序却是将所有的元素都排序了，做了很多的无用功。</p>
 <p><strong>局部淘汰法</strong><br>第二种方法为局部淘汰法，该方法与排序方法类似，用一个容器保存<strong>前1000个数</strong>，然后将剩余的所有数字——<strong>与容器内的最小数字相比</strong>，如果所有后续的元素都比容器内的1000个数还小，那么容器内这个1000个数就是最大1000个数。如果某一后续元素比容器内最小数字大，则删掉容器内最小元素，并将该元素插入容器，最后遍历完这1亿个数，得到的结果容器中保存的数即为最终结果了。此时的时间复杂度为O（n+m^2），其中m为容器的大小，即1000。</p>
-<p><strong>分治法</strong><br>第三种方法是分治法，将1亿个数据分成100份，每份100万个数据，找到每份数据中最大的1000个，最后在剩下的100*1000个数据里面找出最大的1000个。如果100万数据选择足够理想，那么可以过滤掉1亿数据里面99%的数据。100万个数据里面查找最大的1000个数据的方法如下：用快速排序的方法。。。</p>
-<p>Hash法<br>第四种方法是Hash法。如果这1亿个数里面有很多重复的数，先通过Hash法，把这1亿个数字去重复，这样如果重复率很高的话，会减少很大的内存用量，从而缩小运算空间，然后通过分治法或最小堆法查找最大的1000个数。</p>
-<p>最小堆<br>第五种方法采用最小堆。首先读入前1000个数来创建大小为1000的最小堆，建堆的时间复杂度为O（mlogm）（m为数组的大小即为1000），然后遍历后续的数字，并于堆顶（最小）数字进行比较。如果比最小的数小，则继续读取后续数字；如果比堆顶数字大，则替换堆顶元素并重新调整堆为最小堆。整个过程直至1亿个数全部遍历完为止。然后输出当前堆中的所有1000个数字。该算法的时间复杂度为O（nmlogm），空间复杂度是1000（常数）。</p>
+<p><strong>分治法</strong><br>第三种方法是分治法，将1亿个数据分成100份，每份100万个数据，找到每份数据中最大的1000个，最后在剩下的100*1000个数据里面找出最大的1000个。如果100万数据选择足够理想，那么可以过滤掉1亿数据里面99%的数据。100万个数据里面查找最大的1000个数据的方法如下：用快速排序的方法。</p>
+<p><strong>Hash法</strong><br>第四种方法是Hash法。如果这1亿个数里面有很多重复的数，先通过Hash法，把这1亿个数字去重复，这样如果重复率很高的话，会减少很大的内存用量，从而缩小运算空间，然后通过分治法或最小堆法查找最大的1000个数。</p>
+<p><strong>最小堆</strong><br>第五种方法采用最小堆。首先读入前1000个数来创建大小为1000的最小堆，建堆的时间复杂度为O（mlogm）（m为数组的大小即为1000），然后遍历后续的数字，并于堆顶（最小）数字进行比较。如果比最小的数小，则继续读取后续数字；如果比堆顶数字大，则替换堆顶元素并重新调整堆为最小堆。整个过程直至1亿个数全部遍历完为止。然后输出当前堆中的所有1000个数字。该算法的时间复杂度为O（nmlogm），空间复杂度是1000（常数）。</p>
 <h2 id="linux命令说几个"><a href="#linux命令说几个" class="headerlink" title="linux命令说几个"></a>linux命令说几个</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvmyj6ow8qj60ns1cgwgy02.jpg"></p>
 <h2 id="分库分表目的"><a href="#分库分表目的" class="headerlink" title="分库分表目的"></a>分库分表目的</h2><h2 id="Python锁"><a href="#Python锁" class="headerlink" title="Python锁"></a>Python锁</h2><p>一、全局解释器锁（GIL）</p>
 <p>1、什么是全局解释器锁</p>
@@ -1328,7 +1306,12 @@
 <p><strong>数组和链表时间复杂度分别是O(1)与O(n)，方式一种是“随机访问”，一种是“顺序访问”。</strong></p>
 <p>数组：使用下标访问‘</p>
 <p>链表：使用指针顺序查找（单向链表）</p>
-<h2 id="排序算法了解那些？时间复杂度？"><a href="#排序算法了解那些？时间复杂度？" class="headerlink" title="排序算法了解那些？时间复杂度？"></a><a href="">排序</a><a href="">算法</a>了解那些？时间复杂度？</h2><h2 id="口排一下快速排序吧"><a href="#口排一下快速排序吧" class="headerlink" title="口排一下快速排序吧"></a>口排一下快速<a href="">排序</a>吧</h2><h2 id="孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程"><a href="#孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程" class="headerlink" title="孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程"></a>孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程</h2><h3 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h3><ul>
+<h2 id="排序算法了解那些？时间复杂度？"><a href="#排序算法了解那些？时间复杂度？" class="headerlink" title="排序算法了解那些？时间复杂度？"></a><a href="">排序</a><a href="">算法</a>了解那些？时间复杂度？</h2><h2 id="口排一下快速排序吧"><a href="#口排一下快速排序吧" class="headerlink" title="口排一下快速排序吧"></a>口排一下快速<a href="">排序</a>吧</h2><h2 id="孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程"><a href="#孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程" class="headerlink" title="孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程"></a>孤儿进程，僵尸进程，能否用kill杀掉僵尸进程，怎么查看僵尸进程</h2><ul>
+<li><code>ps -ef | grep defunct</code></li>
+<li><code>top</code></li>
+</ul>
+<p>Tasks: 95 total, 1 running, 94 sleeping, 0 stopped, <strong>0 zombie</strong></p>
+<h3 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h3><ul>
 <li><p>一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。</p>
 </li>
 <li><p>孤儿进程将被 <code>init 进程（进程号为 1）</code>所收养，并由 <code>init 进程</code>对它们完成状态收集工作。</p>
@@ -1426,7 +1409,20 @@
 <p>优化</p>
 <p>处理大数据 spark flink  hadoop</p>
 <p>监控平台</p>
-<h2 id="字符串拼接方法哪个更快"><a href="#字符串拼接方法哪个更快" class="headerlink" title="字符串拼接方法哪个更快"></a>字符串拼接方法哪个更快</h2><h2 id="指针和引用区别"><a href="#指针和引用区别" class="headerlink" title="指针和引用区别"></a>指针和引用区别</h2><h2 id="红黑树及应用"><a href="#红黑树及应用" class="headerlink" title="红黑树及应用"></a><a target="_blank" rel="noopener" href="https://www.nowcoder.com/jump/super-jump/word?word=%E7%BA%A2%E9%BB%91%E6%A0%91">红黑树</a>及应用</h2><h2 id="项目用到哪些数据结构"><a href="#项目用到哪些数据结构" class="headerlink" title="项目用到哪些数据结构"></a><a href="">项目</a>用到哪些数据结构</h2><h2 id="python数据结构有哪些，各有啥特点"><a href="#python数据结构有哪些，各有啥特点" class="headerlink" title="python数据结构有哪些，各有啥特点"></a>python数据结构有哪些，各有啥特点</h2><h2 id="哈希表原理，哈希冲突怎么解决"><a href="#哈希表原理，哈希冲突怎么解决" class="headerlink" title="哈希表原理，哈希冲突怎么解决"></a><a href="">哈希表</a>原理，哈希冲突怎么解决</h2><h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a><a href="">二叉树</a>的定义</h2><h2 id="二叉树查找方式有哪些"><a href="#二叉树查找方式有哪些" class="headerlink" title="二叉树查找方式有哪些"></a><a href="">二叉树</a>查找方式有哪些</h2><h2 id="二叉树和其他数据结构相比有什么特点"><a href="#二叉树和其他数据结构相比有什么特点" class="headerlink" title="二叉树和其他数据结构相比有什么特点"></a><a href="">二叉树</a>和其他数据结构相比有什么特点</h2><h2 id="B-树有什么应用场景"><a href="#B-树有什么应用场景" class="headerlink" title="B+树有什么应用场景"></a>B+树有什么应用场景</h2><h2 id="二叉树和图有什么区别"><a href="#二叉树和图有什么区别" class="headerlink" title="二叉树和图有什么区别"></a><a href="">二叉树</a>和图有什么区别</h2><h2 id="知道最小生成树吗"><a href="#知道最小生成树吗" class="headerlink" title="知道最小生成树吗"></a>知道最小生成树吗</h2><h2 id="什么是元类"><a href="#什么是元类" class="headerlink" title="什么是元类"></a>什么是元类</h2><h2 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h2><p>1.栈（操作系统）：由操作系统自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈；</p>
+<h2 id="字符串拼接方法哪个更快"><a href="#字符串拼接方法哪个更快" class="headerlink" title="字符串拼接方法哪个更快"></a>字符串拼接方法哪个更快</h2><h2 id="指针和引用区别"><a href="#指针和引用区别" class="headerlink" title="指针和引用区别"></a>指针和引用区别</h2><h2 id="红黑树及应用"><a href="#红黑树及应用" class="headerlink" title="红黑树及应用"></a><a target="_blank" rel="noopener" href="https://www.nowcoder.com/jump/super-jump/word?word=%E7%BA%A2%E9%BB%91%E6%A0%91">红黑树</a>及应用</h2><h2 id="项目用到哪些数据结构"><a href="#项目用到哪些数据结构" class="headerlink" title="项目用到哪些数据结构"></a><a href="">项目</a>用到哪些数据结构</h2><h2 id="python数据结构有哪些，各有啥特点"><a href="#python数据结构有哪些，各有啥特点" class="headerlink" title="python数据结构有哪些，各有啥特点"></a>python数据结构有哪些，各有啥特点</h2><h2 id="哈希表原理，哈希冲突怎么解决"><a href="#哈希表原理，哈希冲突怎么解决" class="headerlink" title="哈希表原理，哈希冲突怎么解决"></a><a href="">哈希表</a>原理，哈希冲突怎么解决</h2><h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a><a href="">二叉树</a>的定义</h2><h2 id="二叉树查找方式有哪些"><a href="#二叉树查找方式有哪些" class="headerlink" title="二叉树查找方式有哪些"></a><a href="">二叉树</a>查找方式有哪些</h2><h2 id="二叉树和其他数据结构相比有什么特点"><a href="#二叉树和其他数据结构相比有什么特点" class="headerlink" title="二叉树和其他数据结构相比有什么特点"></a><a href="">二叉树</a>和其他数据结构相比有什么特点</h2><h2 id="B-树有什么应用场景"><a href="#B-树有什么应用场景" class="headerlink" title="B+树有什么应用场景"></a>B+树有什么应用场景</h2><h2 id="二叉树和图有什么区别"><a href="#二叉树和图有什么区别" class="headerlink" title="二叉树和图有什么区别"></a><a href="">二叉树</a>和图有什么区别</h2><h2 id="知道最小生成树吗"><a href="#知道最小生成树吗" class="headerlink" title="知道最小生成树吗"></a>知道最小生成树吗</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw244rqywrj308c06qt8p.jpg" alt="img"></p>
+<p>p 算法</p>
+<p>1）以某一个点开始，寻找当前该点可以访问的所有的边；<br>2）在已经寻找的边中发现最小边，这个边必须有一个点还没有访问过，将还没有访问的点加入我们的集合，记录添加的边；<br>3）寻找当前集合可以访问的所有边，重复2的过程，直到没有新的点可以加入；<br>4）此时由所有边构成的树即为最小生成树。</p>
+<p>k 算法</p>
+<p>现在我们假设一个图有m个节点，n条边。首先，我们需要把m个节点看成m个独立的生成树，并且把n条边按照从小到大的数据进行排列。在n条边中，我们依次取出其中的每一条边，如果发现边的两个节点分别位于两棵树上，那么把两棵树合并成为一颗树；如果树的两个节点位于同一棵树上，那么忽略这条边，继续运行。等到所有的边都遍历结束之后，如果所有的生成树可以合并成一条生成树，那么它就是我们需要寻找的最小生成树，反之则没有最小生成树。</p>
+<h2 id="什么是元类"><a href="#什么是元类" class="headerlink" title="什么是元类"></a>什么是元类</h2><p>所谓元类，就是类的类。也可以这么解释，对象是类实例化生成的，那类又是谁生成的？含无疑问，类是元类生成的。</p>
+<ol>
+<li><strong>道</strong> 即是 type</li>
+<li><strong>一</strong> 即是 metaclass(元类，或者叫类生成器)</li>
+<li><strong>二</strong> 即是 class(类，或者叫实例生成器)</li>
+<li><strong>三</strong> 即是 instance(实例)</li>
+<li><strong>万物</strong> 即是 实例的各种属性与方法，我们平常使用python时，调用的就是它们</li>
+</ol>
+<h2 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h2><p>1.栈（操作系统）：由操作系统自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈；</p>
 <p>2.堆（操作系统）： 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收，分配方式倒是类似于链表。</p>
 <p>二.堆栈缓存方式区别：</p>
 <p>1.栈使用的是一级缓存， 他们通常都是被调用时处于存储空间中，调用完毕立即释放；</p>
@@ -1458,17 +1454,6 @@
 <li>bisect</li>
 </ul>
 <h2 id="人生中最重要的算法是哪个"><a href="#人生中最重要的算法是哪个" class="headerlink" title="人生中最重要的算法是哪个"></a>人生中最重要的<a href="">算法</a>是哪个</h2><h2 id="字典、元组、列表的in方法哪个更快"><a href="#字典、元组、列表的in方法哪个更快" class="headerlink" title="字典、元组、列表的in方法哪个更快"></a>字典、元组、列表的in方法哪个更快</h2><p>很多人会告诉你，这是Hash Table，而Hash Table的访问速度是O(1)的</p>
-<table>
-<thead>
-<tr>
-<th>x in s （查找）</th>
-<th>√ O(n)</th>
-<th>√ O(n)</th>
-<th>√ O(1)</th>
-<th>√ O(1)</th>
-</tr>
-</thead>
-</table>
 <h2 id="open和with-open的区别"><a href="#open和with-open的区别" class="headerlink" title="open和with open的区别"></a>open和with open的区别</h2><p>平常用哪个比较多</p>
 <p>由于文件读写时都有可能产生<code>IOError</code>，一旦出错，后面的<code>f.close()</code>就不会调用。所以，为了保证无论是否出错都能正确地关闭文件，我们可以使用<code>try ... finally</code>来实现：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def read_file():</span><br><span class="line">    try:</span><br><span class="line">        f = open(&#x27;sawako&#x27;, &#x27;r&#x27;)</span><br><span class="line">        try:</span><br><span class="line">            print(&#x27;&#x27;.join(f.readlines()))</span><br><span class="line">        except:</span><br><span class="line">            print(&#x27;error occurs while reading file&#x27;)</span><br><span class="line">        finally:</span><br><span class="line">            f.close()</span><br><span class="line">    except:</span><br><span class="line">        print(&quot;rror occurs while reading file&quot;)</span><br><span class="line">read_file()</span><br></pre></td></tr></table></figure>
@@ -1480,7 +1465,7 @@
 
 <p>执行结果与上例相同。这和前面的<code>try ... finally</code>是一样的，但是代码更佳简洁，并且不必调用<code>f.close()</code>方法。</p>
 <h2 id="字典树"><a href="#字典树" class="headerlink" title="字典树"></a>字典树</h2><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvzmov50uuj305l06lglh.jpg" alt="img"></p>
-<p>，这一类单词集合在本数据结构中公用前缀，因此，当我们搜索单词的时候，这一数据结构可以自动帮助我们过滤掉那些前缀不一致的单词。当单词数据库变的很大很大的时候，这一检索方法会帮我们节省大量的时间。</p>
+<p>这一类单词集合在本数据结构中公用前缀，因此，当我们搜索单词的时候，这一数据结构可以自动帮助我们过滤掉那些前缀不一致的单词。当单词数据库变的很大很大的时候，这一检索方法会帮我们节省大量的时间。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">words = [<span class="string">&#x27;cat&#x27;</span>,<span class="string">&#x27;category&#x27;</span>,<span class="string">&#x27;tree&#x27;</span>,<span class="string">&#x27;trace&#x27;</span>,<span class="string">&#x27;top&#x27;</span>]</span><br><span class="line">trie = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> words:</span><br><span class="line">    t = trie <span class="comment"># 请把这个t理解为指针，这个指针除了用来移动外，也用来建立新的字典。</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> word:</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> t:</span><br><span class="line">            t[c] = &#123;&#125; <span class="comment"># 若没有，为下一个字母建立一个新的字典</span></span><br><span class="line">        t = t[c] <span class="comment"># 进入下一层</span></span><br><span class="line">    t[<span class="string">&#x27;#&#x27;</span>] = <span class="string">&#x27;#&#x27;</span> <span class="comment"># 句尾结束符</span></span><br><span class="line">print(trie)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span>(<span class="params">word</span>):</span></span><br><span class="line">    t = trie</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> word:</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> t: <span class="comment"># 如果我们在本层发现了这个字母，那么，我们进入下一层</span></span><br><span class="line">            t = t[c] <span class="comment"># 关键点依然是把t理解成指针。</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;#&#x27;</span> <span class="keyword">in</span> t: <span class="comment"># 当所有字母都检查完毕的时候，我们需要确定，这个被查询的序列到底是不是一个完整的单词</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
 
@@ -1522,13 +1507,21 @@ Bloom filter日后会在本BLOG内详细阐述。
 <p>分治 </p>
 <p>位图法：40 亿个不重复整数，我们用 40 亿个 bit 来表示，初始位均为 0，那么总共需要内存：4,000,000,000b≈512M。我们读取这 40 亿个整数，将对应的 bit 设置为 1。接着读取要查询的数，查看相应位是否为 1，如果为 1 表示存在，如果为 0 表示不存在。</p>
 <p>可以hash一下，拆分成N多库N多表N多机器，比如一台机器分配100万用户，查询毫无压力吧。再说登录并发不算高，谁没事登着玩啊。</p>
+<h2 id="大数据处理"><a href="#大数据处理" class="headerlink" title="大数据处理"></a>大数据处理</h2><p>针对时间，我们可以采用巧妙的算法搭配合适的数据结构，如Bloom filter/Hash/bit-map/堆/数据库或倒排索引/trie树；</p>
+<p>针对空间，无非就一个办法：大而化小，分而治之（hash映射），你不是说规模太大嘛，那简单啊，就把规模大化为规模小的，各个击破不就完了嘛；</p>
+<p><strong>分而治之/hash映射 + hash统计 + 堆/快速/归并排序</strong></p>
+<ol>
+<li>分而治之/hash映射：针对数据太大，内存受限，只能把大文件化成(取模映射)小文件</li>
+<li>hash_map统计：当大文件转化了小文件，那么我们便可以采用常规的hash_map(key，value)来进行频率统计</li>
+<li>堆/快速排序：统计完了之后，便进行排序(可采取堆排序)，得到次数最多的key</li>
+</ol>
 <h2 id="迭代器-1"><a href="#迭代器-1" class="headerlink" title="迭代器"></a>迭代器</h2><p>是访问集合元素的一种方式，从集合的第一个元素开始访问，直到所有元素被访问结束。其优点是不需要事先准备好整个迭代过程中的所有元素，仅在迭代到某个元素时才开始计算该元素。适合遍历比较巨大的集合。<strong>iter</strong>()：方法返回迭代器本身， <strong>next</strong>()：方法用于返回容器中下一个元素或数据。</p>
 <h2 id="生成器-1"><a href="#生成器-1" class="headerlink" title="生成器"></a>生成器</h2><p>带有yield的函数不再是一个普通函数，而是一个生成器。当函数被调用时，返回一个生成器对象。不像一般函数在生成值后退出，生成器函数在生成值后会自动挂起并暂停他们的执行状态。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;迭代器&#x27;&#x27;&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;for x in iter([1, 2, 3, 4, 5]):&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">iter</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]):</span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;生成器&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myyield</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">        print(<span class="string">&quot;开始生成...:&quot;</span>)</span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line">        print(<span class="string">&quot;完成一次...:&quot;</span>)</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> myyield(<span class="number">4</span>):</span><br><span class="line">    print(<span class="string">&quot;遍历得到的值:&quot;</span>,i)</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包可以实现先将一个参数传递给一个函数，而并不立即执行，以达到延迟求值的目的。</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包可以实现先将一个参数传递给一个函数，而并不立即执行，以达到延迟求值的目的。闭包可以保存当前的运行环境</p>
 <p>满足以下三个条件：必须有一个内嵌函数；内嵌函数必须引用外部函数中变量；外部函数返回值必须是内嵌函数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delay_fun</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">caculator</span>():</span></span><br><span class="line">        <span class="keyword">return</span> x+y</span><br><span class="line">    <span class="keyword">return</span> caculator</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;返回一个求和的函数，并不求和&#x27;</span>)</span><br><span class="line">msum = delay_fun(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">print(<span class="string">&#x27;调用并求和:&#x27;</span>)</span><br><span class="line">print(msum())</span><br></pre></td></tr></table></figure>
 
@@ -1554,7 +1547,35 @@ Bloom filter日后会在本BLOG内详细阐述。
 </ul>
 </li>
 </ul>
-<h2 id="Python进程、线程、协程概念"><a href="#Python进程、线程、协程概念" class="headerlink" title="Python进程、线程、协程概念"></a>Python进程、线程、协程概念</h2><h2 id="常见Web安全"><a href="#常见Web安全" class="headerlink" title="常见Web安全"></a>常见Web安全</h2><h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>当应用程序将用户输入的内容，拼接到 SQL 语句中，一起提交给数据库执行时，就会产生SQL注入威胁。由于用户的输入，也是SQL语句的一部分，所以攻击者可以利用这部分可以控制的内容，注入自己定义的语句，改变 SQL 语句执行逻辑，让数据库执行任意自己需要的指令。通过控制部分 SQL 语句，攻击者可以查洵数据库中任何自己需要的数据，利用数据库的一些特性，可以直接获取数据库服务器的系统权限。</p>
+<h2 id="Python进程、线程、协程概念"><a href="#Python进程、线程、协程概念" class="headerlink" title="Python进程、线程、协程概念"></a>Python进程、线程、协程概念</h2><ul>
+<li><p>进程：每个程序，本身首先是一个进程</p>
+<ul>
+<li>运行中每个进程都拥有自己的地址空间、内存、数据栈及其它资源。</li>
+<li>进程彼此之间互相隔离，要实现进程间通信（IPC），multiprocessing 模块支持两种形式：<strong>队列和管道</strong>，这两种方式都是使用消息传递的。<ul>
+<li>进程 queue: 在生成子进程的时候，会将代码拷贝到子进程中执行一遍，及子进程拥有和主进程内容一样的不同的名称空间。</li>
+<li>管道 Pipe</li>
+<li>共享数据</li>
+<li>进程池</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线程：线程，是在进程中执行的代码。一个进程下可以运行多个线程，这些线程之间共享主进程内申请的操作系统资源。</p>
+<ul>
+<li>线程，必须在一个存在的进程中启动运行</li>
+<li>线程使用进程获得的系统资源，不会像进程那样需要申请CPU等资源</li>
+<li>线程池：线程池在系统启动时即创建大量空闲的线程，程序只要将一个函数提交给线程池，线程池就会启动一个空闲的线程来执行它。当该函数执行结束后，该线程并不会死亡，而是再次返回到线程池中变成空闲状态，等待执行下一个函数。使用线程池可以有效地控制系统中并发线程的数量</li>
+<li>多线程通信<ul>
+<li>共享变量：创建全局变量，多个线程公用一个全局变量，方便简单。但是坏处就是共享变量容易出现数据竞争，不是线程安全的，解决方法就是使用互斥锁。</li>
+<li>队列：线程间使用队列进行通信，因为队列所有方法都是线程安全的，所以不会出现线程竞争资源的情况</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>协程：又称微线程，纤程，英文名Coroutine。协程的作用，是在执行函数A时，可以随时中断，去执行函数B，然后中断继续执行函数A（可以自由切换）。但这一过程并不是函数调用（没有调用语句），这一整个过程看似像多线程，然而协程只有一个线程执行。协程由于由程序主动控制切换，没有线程切换的开销，所以执行效率极高。对于IO密集型任务非常适用，如果是cpu密集型，推荐多进程+协程的方式。协程间是协同调度的，这使得并发量数万以上的时候，协程的性能是远远高于线程。</p>
+</li>
+</ul>
+<h2 id="常见Web安全"><a href="#常见Web安全" class="headerlink" title="常见Web安全"></a>常见Web安全</h2><h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>当应用程序将用户输入的内容，拼接到 SQL 语句中，一起提交给数据库执行时，就会产生SQL注入威胁。由于用户的输入，也是SQL语句的一部分，所以攻击者可以利用这部分可以控制的内容，注入自己定义的语句，改变 SQL 语句执行逻辑，让数据库执行任意自己需要的指令。通过控制部分 SQL 语句，攻击者可以查洵数据库中任何自己需要的数据，利用数据库的一些特性，可以直接获取数据库服务器的系统权限。</p>
 <p>本来 SQL 注入攻击需要攻击者对 SQL 语句非常了解，所以对攻击者的技术有一定要求。但是现在已经出现了大量 SQL 注入利用工具，可以让任何攻击者，只要点几下鼠标，就能达到攻击效果，这使得 SQL 注入的威胁极大增加。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">USER</span> <span class="keyword">WHERE</span> username <span class="operator">=</span> &quot;Mark&quot;; <span class="keyword">AND</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span><span class="comment">-- AND PASSWORD=&quot;1234&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -1595,12 +1616,12 @@ Bloom filter日后会在本BLOG内详细阐述。
 </ul>
 <h3 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h3><p>路径遍历攻击不像上述几种攻击方法那么常见，但仍然是任何 Web 应用的一大威胁。路径遍历攻击针对 Web root 文件夹，访问目标文件夹外部的未授权文件或目录。攻击者试图将移动模式注入服务器目录，以便向上爬升。成功的路径遍历攻击能够获得网站访问权，染指配置文件、数据库和同一实体服务器上的其他网站和文件。</p>
 <p>网站能否抵御路径遍历攻击取决于你的输入净化程度。这意味着保证用户输入安全，并且不能从你的服务器恢复出用户输入内容。最直观的建议就是打造你的代码库，这样用户的任何信息都不会传输到文件系统 API。即使这条路走不通，也有其他技术解决方案可用。</p>
-<h3 id="DDoS"><a href="#DDoS" class="headerlink" title="DDoS"></a>DDoS</h3><p>DDoS攻击本身不能使恶意黑客突破安全措施，但会令网站暂时或永久掉线。卡巴斯基实验室《2017年IT安全风险调查》指出，单次DDoS攻击可令小企业平均损失12.3万美元，大型企业的损失水平在230万美元左右。</p>
+<h3 id="DDoS"><a href="#DDoS" class="headerlink" title="DDoS"></a>DDoS</h3><p>DDoS 攻击本身不能使恶意黑客突破安全措施，但会令网站暂时或永久掉线。卡巴斯基实验室《2017年 IT 安全风险调查》指出，单次DDoS攻击可令小企业平均损失 12.3 万美元，大型企业的损失水平在230万美元左右。</p>
 <p>DDoS 旨在用请求洪水压垮目标 Web 服务器，让其他访客无法访问网站。僵尸网络通常能够利用之前感染的计算机从全球各地协同发送大量请求。而且，DDoS 攻击常与其他攻击方法搭配使用；攻击者利用 DDoS 攻击吸引安全系统火力，从而暗中利用漏洞入侵系统。</p>
-<p>保护网站免遭 DDoS 攻击侵害一般要从几个方面着手。首先，需通过内容分发网络（CDN）、负载均衡器和可扩展资源缓解高峰流量。其次，需部署 Web 应用防火墙（WAF），防止DDoS攻击隐蔽注入攻击或跨站脚本等其他网络攻击方法。</p>
-<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击常见于用户与服务器间传输数据不加密的网站。作为用户，只要看看网站的URL是不是以HTTPS开头就能发现这一潜在风险了，因为HTTPS中的“S”指的就是数据是加密的，缺了“S”就是未加密。</p>
+<p>保护网站免遭 DDoS 攻击侵害一般要从几个方面着手。首先，需通过内容分发网络（CDN）、负载均衡器和可扩展资源缓解高峰流量。其次，需部署 Web 应用防火墙（WAF），防止DDoS 攻击隐蔽注入攻击或跨站脚本等其他网络攻击方法。</p>
+<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击常见于用户与服务器间传输数据不加密的网站。作为用户，只要看看网站的 URL 是不是以 HTTPS 开头就能发现这一潜在风险了，因为HTTPS中的“S”指的就是数据是加密的，缺了“S”就是未加密。</p>
 <p>攻击者利用中间人类型的攻击收集信息，通常是敏感信息。数据在双方之间传输时可能遭到恶意黑客拦截，如果数据未加密，攻击者就能轻易读取个人信息、登录信息或其他敏感信息。</p>
-<p>在网站上安装安全套接字层（SSL）就能缓解中间人攻击风险。SSL证书加密各方间传输的信息，攻击者即使拦截到了也无法轻易破解。现代托管提供商通常已经在托管服务包中配置了SSL证书。</p>
+<p>在网站上安装安全套接字层（SSL）就能缓解中间人攻击风险。SSL证书加密各方间传输的信息，攻击者即使拦截到了也无法轻易破解。现代托管提供商通常已经在托管服务包中配置了 SSL 证书。</p>
 <h3 id="暴力破解攻击"><a href="#暴力破解攻击" class="headerlink" title="暴力破解攻击"></a>暴力破解攻击</h3><p>暴力破解攻击是获取Web应用登录信息相当直接的一种方式。但同时也是非常容易缓解的攻击方式之一，尤其是从用户侧加以缓解最为方便。</p>
 <p>暴力破解攻击中，攻击者试图猜解用户名和密码对，以便登录用户账户。当然，即使采用多台计算机，除非密码相当简单且明显，否则破解过程可能需耗费几年时间。</p>
 <p>保护登录信息的最佳办法，是创建强密码，或者使用双因子身份验证（2FA）。作为网站拥有者，你可以要求用户同时设置强密码和2FA，以便缓解网络罪犯猜出密码的风险。</p>
@@ -1638,10 +1659,6 @@ Bloom filter日后会在本BLOG内详细阐述。
 <li>数据包丢失</li>
 <li>确认应答丢失</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/xiaolincoder/ImageHost2/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP-%E5%8F%AF%E9%9D%A0%E7%89%B9%E6%80%A7/5.jpg" alt="超时重传的两种情况"></p>
-<h2 id="30张图解：-TCP-重传、滑动窗口、流量控制、拥塞控制"><a href="#30张图解：-TCP-重传、滑动窗口、流量控制、拥塞控制" class="headerlink" title="30张图解： TCP 重传、滑动窗口、流量控制、拥塞控制"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaolincoding/p/12732052.html">30张图解： TCP 重传、滑动窗口、流量控制、拥塞控制</a></h2><p>相信大家都知道 TCP 是一个可靠传输的协议，那它是如何保证可靠的呢？</p>
-<p>为了实现可靠性传输，需要考虑很多事情，例如数据的破坏、丢包、重复以及分片顺序混乱等问题。如不能解决这些问题，也就无从谈起可靠传输。</p>
-<p>那么，TCP 是通过序列号、确认应答、重发控制、连接管理以及窗口控制等机制实现可靠性传输的。</p>
 <p>今天，将重点介绍 TCP 的<strong>重传机制、滑动窗口、流量控制、拥塞控制。</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xiaolincoder/ImageHost2/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP-%E5%8F%AF%E9%9D%A0%E7%89%B9%E6%80%A7/3.jpg" alt="img"></p>
 <h3 id="重传机制"><a href="#重传机制" class="headerlink" title="重传机制"></a>重传机制</h3><p>TCP 实现可靠传输的方式之一，是通过序列号与确认应答。</p>
@@ -2047,21 +2064,22 @@ Bloom filter日后会在本BLOG内详细阐述。
 <p>也就是没有像「超时重传」一夜回到解放前，而是还在比较高的值，后续呈线性增长。</p>
 <h4 id="拥塞算法示意图"><a href="#拥塞算法示意图" class="headerlink" title="拥塞算法示意图"></a>拥塞算法示意图</h4><p>好了，以上就是拥塞控制的全部内容了，看完后，你再来看下面这张图片，每个过程我相信你都能明白：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xiaolincoder/ImageHost2/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP-%E5%8F%AF%E9%9D%A0%E7%89%B9%E6%80%A7/31.png" alt="TCP 拥塞控制">TCP 拥塞控制</p>
-<h2 id="tcp保证数据传输的三个流程"><a href="#tcp保证数据传输的三个流程" class="headerlink" title="tcp保证数据传输的三个流程"></a>tcp保证数据传输的三个流程</h2><p>TCP为了提供可靠传输：<br>（1）首先，采用三次握手来建立TCP连接，四次握手来释放TCP连接，从而保证建立的传输信道是可靠的。<br>（2）其次，TCP采用了连续ARQ协议（回退N，Go-back-N；超时自动重传）(自动重传请求（Automatic Repeat-reQuest，ARQ）)来保证数据传输的正确性，使用滑动窗口协议来保证接方能够及时处理所接收到的数据，进行流量控制。<br>（3）最后，TCP使用慢开始、拥塞避免、快重传和快恢复来进行拥塞控制，避免网络拥塞。</p>
-<h2 id="tcp-三次握手"><a href="#tcp-三次握手" class="headerlink" title="tcp 三次握手"></a>tcp 三次握手</h2><p>在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。<br>第一次握手： 建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手： 服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手： 客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。 完成三次握手，客户端与服务器开始传送数据.</p>
+<h2 id="tcp保证数据传输的三个流程"><a href="#tcp保证数据传输的三个流程" class="headerlink" title="tcp保证数据传输的三个流程"></a>tcp保证数据传输的三个流程</h2><p>TCP为了提供可靠传输：<br>（1）首先，采用三次握手来建立TCP连接，四次握手来释放TCP连接，从而保证建立的传输信道是可靠的。<br>（2）其次，TCP 采用了连续ARQ协议（回退N，Go-back-N；超时自动重传）(自动重传请求（Automatic Repeat-reQuest，ARQ）)来保证数据传输的正确性，使用滑动窗口协议来保证接方能够及时处理所接收到的数据，进行流量控制。<br>（3）最后，TCP 使用慢开始、拥塞避免、快重传和快恢复来进行拥塞控制，避免网络拥塞。</p>
+<h2 id="tcp-三次握手"><a href="#tcp-三次握手" class="headerlink" title="tcp 三次握手"></a>tcp 三次握手</h2><p>在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。<br>第一次握手： 建立连接时，客户端发送 syn 包 (syn=j) 到服务器，并进入 SYN_SEND 状态，等待服务器确认；<br>第二次握手： 服务器收到 syn 包，必须确认客户的 SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手： 客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。 完成三次握手，客户端与服务器开始传送数据.</p>
 <p>三次握手（Three-way Handshake）其实就是指建立一个TCP连接时，需要客户端和服务器总共发送 3 个包</p>
 <p>主要作用就是为了<strong>确认双方的接收能力和发送能力是否正常、指定自己的初始化序列号</strong>为后面的可靠性传送做准备</p>
 <p>过程如下：</p>
 <ul>
 <li>第一次握手：客户端给服务端发一个 SYN 报文，并指明客户端的初始化序列号 ISN(c)，此时客户端处于 SYN_SENT 状态</li>
 <li>第二次握手：服务器收到客户端的 SYN 报文之后，会以自己的 SYN 报文作为应答，为了确认客户端的 SYN，将客户端的 ISN+1作为ACK的值，此时服务器处于 SYN_RCVD 的状态</li>
-<li>第三次握手：客户端收到 SYN 报文之后，会发送一个 ACK 报文，值为服务器的ISN+1。此时客户端处于 ESTABLISHED 状态。服务器收到 ACK 报文之后，也处于 ESTABLISHED 状态，此时，双方已建立起了连接</li>
+<li>第三次握手：客户端收到 SYN 报文之后，会发送一个 ACK 报文，值为服务器的 ISN+1。此时客户端处于 ESTABLISHED 状态。服务器收到 ACK 报文之后，也处于 ESTABLISHED 状态，此时，双方已建立起了连接</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/df92e0deefb619759aa435aca99720cf4113a5ba705eb09f1636f91c89d3eb1e/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f66623438396663302d626562392d313165622d383566362d3666616337376330633962332e706e67"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0vu3wk8qj30fd0aemxk.jpg" alt="img"></a></p>
 <p>上述每一次握手的作用如下：</p>
 <ul>
 <li>第一次握手：客户端发送网络包，服务端收到了<br>  这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</li>
-<li>第二次握手：服务端发包，客户端收到了<br>  这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时<strong>服务器并不能确认客户端的接收能力</strong>是否正常</li>
+<li>第二次握手：服务端发包，客户端收到了</li>
+<li>这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时<strong>服务器并不能确认客户端的接收能力</strong>是否正常</li>
 <li>第三次握手：客户端发包，服务端收到了<br>  这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常</li>
 </ul>
 <p>通过三次握手，就能确定双方的接收和发送能力是正常的。之后就可以正常通信了</p>
@@ -2075,54 +2093,70 @@ Bloom filter日后会在本BLOG内详细阐述。
 <li>第三次挥手：如果服务端也想断开连接了，和客户端的第一次挥手一样，发给 FIN 报文，且指定一个序列号。此时服务端处于 <code>LAST_ACK</code> 的状态</li>
 <li>第四次挥手：客户端收到 FIN 之后，一样发送一个 ACK 报文作为应答，且把服务端的序列号值 +1 作为自己 ACK 报文的序列号值，此时客户端处于 TIME_WAIT状态。需要过一阵子以确保服务端收到自己的 ACK 报文之后才会进入 CLOSED 状态，服务端收到 ACK 报文之后，就处于关闭连接了，处于 CLOSED 状态</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/245cf8925daac2792d36f0f07066826a955175fe6e09030ae0a7ae17d1be9954/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30613365626239302d626562612d313165622d383566362d3666616337376330633962332e706e67"><img src="https://camo.githubusercontent.com/245cf8925daac2792d36f0f07066826a955175fe6e09030ae0a7ae17d1be9954/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30613365626239302d626562612d313165622d383566362d3666616337376330633962332e706e67" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/245cf8925daac2792d36f0f07066826a955175fe6e09030ae0a7ae17d1be9954/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f30613365626239302d626562612d313165622d383566362d3666616337376330633962332e706e67"><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw1z0wr7pkj30vw0gzab8.jpg" alt="img"></a></p>
+<table>
+<thead>
+<tr>
+<th>状 态</th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CLOSED</td>
+<td>关闭状态，没有连接活动或正在进行</td>
+</tr>
+<tr>
+<td>LISTEN</td>
+<td>监听状态，服务器正在等待连接进入</td>
+</tr>
+<tr>
+<td>SYN RCVD</td>
+<td>收到一个连接请求，尚未确认</td>
+</tr>
+<tr>
+<td>SYN SENT</td>
+<td>已经发出连接请求，等待确认</td>
+</tr>
+<tr>
+<td>ESTABLISHED</td>
+<td>连接建立，正常数据传输状态</td>
+</tr>
+<tr>
+<td>FIN WAIT 1</td>
+<td>（主动关闭）已经发送关闭请求，等待确认</td>
+</tr>
+<tr>
+<td>FIN WAIT 2</td>
+<td>（主动关闭）收到对方关闭确认，等待对方关闭请求</td>
+</tr>
+<tr>
+<td>TIMED WAIT</td>
+<td>完成双向关闭，等待所有分组死掉</td>
+</tr>
+<tr>
+<td>CLOSING</td>
+<td>双方同时尝试关闭，等待对方确认</td>
+</tr>
+<tr>
+<td>CLOSE WAIT</td>
+<td>（被动关闭）收到对方关闭请求，已经确认</td>
+</tr>
+<tr>
+<td>LAST ACK</td>
+<td>（被动关闭）等待最后一个关闭确认，并等待所有分组死掉</td>
+</tr>
+</tbody></table>
 <h2 id="四次挥手原因"><a href="#四次挥手原因" class="headerlink" title="四次挥手原因"></a>四次挥手原因</h2><p>服务端在收到客户端断开连接<code>Fin</code>报文后，并不会立即关闭连接，而是先发送一个<code>ACK</code>包先告诉客户端收到关闭连接的请求，只有当<strong>服务器的所有报文发送完毕</strong>之后，才发送<code>FIN</code>报文断开连接，因此需要四次挥手</p>
-<p>两个两次连接</p>
+<p>两个两次连接，双向过程（客户端：发送关闭请求，确认关闭请求； 服务端：发送关闭请求，确认关闭请求）</p>
 <ul>
-<li>客户端 &lt;–&gt; 服务端</li>
+<li>客户端 &lt;–&gt; 服务端 </li>
 <li>服务端 &lt;–&gt; 客户端</li>
 </ul>
-<h2 id="CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理"><a href="#CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理" class="headerlink" title="CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理"></a>CLOSE-WAIT状态的含义，如果服务端出现过多C-W状态，该如何处理</h2><h3 id="1-1-出现的原因"><a href="#1-1-出现的原因" class="headerlink" title="1.1 出现的原因"></a>1.1 出现的原因</h3><ul>
+<h2 id="TIME-WAIT"><a href="#TIME-WAIT" class="headerlink" title="TIME-WAIT"></a>TIME-WAIT</h2><ul>
 <li>高并发短连接的服务器上会出现这样的情况，导致创建大量的tcp连接然后close，出现大量的连接出现time_wait的状态。</li>
 </ul>
-<h3 id="1-2-大量time-wait的危害"><a href="#1-2-大量time-wait的危害" class="headerlink" title="1.2.大量time_wait的危害"></a>1.2.大量time_wait的危害</h3><ul>
-<li>在socket的TIME_WAIT状态结束之前，该socket所占用的本地端口号将一直无法释放</li>
-<li>在高并发（每秒几万qps）并且采用短连接方式进行交互的系统中运行一段时间后，系统中就会存在大量的time_wait状态，如果time_wait状态把系统所有可用端口都占完了且尚未被系统回收时，就会出现无法向服务端创建新的socket连接的情况。此时系统几乎停转，任何链接都不能建立。</li>
-<li>大量的time_wait状态也会系统一定的fd，内存和cpu资源，当然这个量一般比较小，并不是主要危害</li>
-</ul>
-<h3 id="1-3-大量time-wait解决方案"><a href="#1-3-大量time-wait解决方案" class="headerlink" title="1.3.大量time_wait解决方案"></a>1.3.大量time_wait解决方案</h3><p><strong>方式一：调整系统内核参数</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = <span class="number">1</span> 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为<span class="number">0</span>，表示关闭；</span><br><span class="line">net.ipv4.tcp_tw_recycle = <span class="number">1</span> 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为<span class="number">0</span>，表示关闭。</span><br><span class="line">net.ipv4.tcp_tw_recycle = <span class="number">1</span>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为<span class="number">0</span>，表示关闭。</span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
-
-<p>允许允许将TIME-WAIT sockets重新用于新的TCP连接，同时TIME-WAIT sockets的加快回收</p>
-<p><strong>方式二：改短连接为长连接</strong></p>
-<ul>
-<li>短连接和长连接工作方式的区别：</li>
-</ul>
-<p>短连接：</p>
-<ul>
-<li>连接-&gt;传输数据-&gt;关闭连接</li>
-<li>HTTP是无状态的，浏览器和服务器每进行一次HTTP操作，就建立一次连接，但任务结束就中断连接。</li>
-<li>也可以这样说：短连接是指SOCKET连接后发送后接收完数据后马上断开连接。</li>
-</ul>
-<p>长连接：</p>
-<ul>
-<li>连接-&gt;传输数据-&gt;保持连接 -&gt; 传输数据-&gt; 。。。-&gt;关闭连接。</li>
-<li>长连接指建立SOCKET连接后不管是否使用都保持连接，但安全性较差。</li>
-</ul>
-<p>从区别上可以看出，长连接比短连接从根本上减少了关闭连接的次数，减少了TIME_WAIT状态的产生数量，在高并发的系统中，这种方式的改动非常有效果，可以明显减少系统TIME_WAIT的数量。</p>
-<h2 id="二-大量close-wait的出现"><a href="#二-大量close-wait的出现" class="headerlink" title="二. 大量close_wait的出现"></a>二. 大量close_wait的出现</h2><h3 id="2-1-出现的原因和解决方案"><a href="#2-1-出现的原因和解决方案" class="headerlink" title="2.1 出现的原因和解决方案"></a>2.1 出现的原因和解决方案</h3><ul>
-<li>close_wait是被动关闭连接是形成的，根据TCP状态机，服务器端收到客户端发送的FIN，TCP协议栈会自动发送ACK，链接进入close_wait状态。但如果服务器端不执行socket的close()操作（即不向客户端发送FIN），状态就不能由close_wait迁移到last_ack，则系统中会存在很多close_wait状态的连接</li>
-</ul>
-<p>我觉得第一时间应该去判断是客户端的问题还是服务端的问题，有可能是客户端一直在向服务端发送FIN，也有可能是服务端一直没有发送自己的FIN。</p>
-<p>可能的原因如下：</p>
-<ul>
-<li>关闭socket不及时：例如I/O线程被意外阻塞，或者I/O线程执行的用户自定义Task比例过高，导致I/O操作处理不及时，链路不能被及时释放。</li>
-</ul>
-<p>通常，CLOSE_WAIT 状态在服务器停留时间很短，如果你发现大量的 CLOSE_WAIT 状态，那么就意味着被动关闭的一方没有及时发出 FIN 包，一般有如下几种可能：</p>
-<ul>
-<li>程序问题：如果代码层面忘记了 close 相应的 socket 连接，那么自然不会发出 FIN 包，从而导致 CLOSE_WAIT 累积；或者代码不严谨，出现死循环之类的问题，导致即便后面写了 close 也永远执行不到。</li>
-<li>响应太慢或者超时设置过小：如果连接双方不和谐，一方不耐烦直接 timeout，另一方却还在忙于耗时逻辑，就会导致 close 被延后。响应太慢是首要问题，不过换个角度看，也可能是 timeout 设置过小。</li>
-</ul>
+<h2 id="CLOSE-WAIT-状态的含义，如果服务端出现过多C-W状态，该如何处理"><a href="#CLOSE-WAIT-状态的含义，如果服务端出现过多C-W状态，该如何处理" class="headerlink" title="CLOSE-WAIT 状态的含义，如果服务端出现过多C-W状态，该如何处理"></a>CLOSE-WAIT 状态的含义，如果服务端出现过多C-W状态，该如何处理</h2><p>TCP 终止连接中第二次挥手：服务端收到 FIN 之后，会发送 ACK 报文，且把客户端的序列号值 +1 作为 ACK 报文的序列号值，表明已经收到客户端的报文了，此时服务端处于 CLOSE_WAIT 状态。</p>
+<p>出现 CW 原因：close_wait 是被动关闭连接是形成的，根据 TCP 状态机，服务器端收到客户端发送的 FIN，TCP 协议栈会自动发送 ACK，链接进入 close_wait 状态。但如果服务器端不执行 socke t的 close() 操作（即不向客户端发送FIN），状态就不能由 close_wait 迁移到 last_ack，则系统中会存在很多 close_wait 状态的连接</p>
 <h2 id="常见的网络模型"><a href="#常见的网络模型" class="headerlink" title="常见的网络模型"></a>常见的网络模型</h2><p><img src="https://pic1.zhimg.com/80/v2-a9976ebe153157fde548aaa7b8d73e28_1440w.jpg" alt="img"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw0vhso1xrj30ak07xwf4.jpg" alt="img"></p>
 <p>A ： 私有号段：10.0.0.0-10.255.255.255</p>
@@ -2131,7 +2165,10 @@ Bloom filter日后会在本BLOG内详细阐述。
 <h2 id="二、三级转发"><a href="#二、三级转发" class="headerlink" title="二、三级转发"></a>二、三级转发</h2><p>二层：交换机</p>
 <p>三层：路由器</p>
 <ul>
-<li>路由器有多个端口，分别连接不同的数据链路。它通过识别目的 IP 地址的<strong>网络号</strong>，再根据<strong>路由表</strong>进行转发，路由表中有<strong>匹配</strong>的路由条目才会转发，无匹配的路由条目则直接丢弃。路由条目既可以手动设置静态路由，也可以通过路由协议自动生成动态路由。</li>
+<li><p>路由器有多个端口，分别连接不同的数据链路。它通过识别目的 IP 地址的<strong>网络号</strong>，再根据<strong>路由表</strong>进行转发，路由表中有<strong>匹配</strong>的路由条目才会转发，无匹配的路由条目则直接丢弃。路由条目既可以手动设置静态路由，也可以通过路由协议自动生成动态路由。</p>
+</li>
+<li><p>在不考虑代理的情况下，数据包每到一个三层，就把源MAC替换成自己的出接口MAC，目标MAC替换成下一跳MAC，不跨三层不替换。</p>
+</li>
 </ul>
 <h2 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h2><ul>
 <li><p>UDP 不可靠不稳定 面向非连接</p>
@@ -2145,14 +2182,16 @@ Bloom filter日后会在本BLOG内详细阐述。
 <p><strong>UDP 应用场景：</strong> </p>
 <p>当对网络通讯质量要求不高的时候，要求网络通讯速度能尽量的快，这时就可以使用 UDP。 </p>
 <p>比如，日常生活中，常见使用 UDP 协议的应用如下：QQ 语音，QQ 视频，TFTP 等。有些应用场景对可靠性要求不高会用到 UPD，比如长视频，要求速率。</p>
-<h2 id="浏览器输入URL全过程"><a href="#浏览器输入URL全过程" class="headerlink" title="浏览器输入URL全过程"></a>浏览器输入URL全过程</h2><ul>
-<li>DNS 解析: 将域名解析成 IP 地址</li>
-<li>TCP 连接：TCP 三次握手</li>
-<li>发送 HTTP 请求</li>
-<li>服务器处理请求并返回 HTTP 报文</li>
-<li>浏览器解析渲染页面</li>
-<li>断开连接：TCP 四次挥手</li>
-</ul>
+<h2 id="浏览器输入URL全过程"><a href="#浏览器输入URL全过程" class="headerlink" title="浏览器输入URL全过程"></a>浏览器输入URL全过程</h2><ol>
+<li>DNS域名解析；将域名解析为 IP 地址</li>
+<li>建立TCP连接；三次握手</li>
+<li>发送HTTP请求；</li>
+<li>服务器处理请求；</li>
+<li>返回响应结果；</li>
+<li>关闭TCP连接；四次挥手</li>
+<li>浏览器解析HTML；</li>
+<li>浏览器布局渲染；</li>
+</ol>
 
       
     </div>
