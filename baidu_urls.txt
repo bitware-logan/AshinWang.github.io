@@ -64,5 +64,3 @@ https://www.ashin.wang/hexo-accelerate/
 https://www.ashin.wang/windows-skill/
 https://www.ashin.wang/macos-skill/
 https://www.ashin.wang/hexo-build/
-https://www.ashin.wang/sxf/
-https://www.ashin.wang/leetcode/
