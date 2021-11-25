@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ashin.wang","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"appID":"S30ZCDT4BR","apiKey":"6988e9b27ba9570d9ed85020ebf48b01","indexName":"blog","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="项目简介Repo: https:&#x2F;&#x2F;github.com&#x2F;aouinizied&#x2F;nfstream Docs: https:&#x2F;&#x2F;www.nfstream.org&#x2F;docs&#x2F;  NFStream 是一个 Python 框架，提供了快速、灵活和富有表现力的数据结构，旨在使处理在线或离线网络数据既简单又直观。它旨在成为用 Python 进行实际的、真实的网络数据分析的基本高级构建块。此外，它还有一个更广泛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NFStream流量分析｜特征提取｜机器学习">
+<meta property="og:url" content="https://www.ashin.wang/notes-nfstream/index.html">
+<meta property="og:site_name" content="Ashin Wang&#39;s Blog">
+<meta property="og:description" content="项目简介Repo: https:&#x2F;&#x2F;github.com&#x2F;aouinizied&#x2F;nfstream Docs: https:&#x2F;&#x2F;www.nfstream.org&#x2F;docs&#x2F;  NFStream 是一个 Python 框架，提供了快速、灵活和富有表现力的数据结构，旨在使处理在线或离线网络数据既简单又直观。它旨在成为用 Python 进行实际的、真实的网络数据分析的基本高级构建块。此外，它还有一个更广泛">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwpm0n126zj30jw0gu0tv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwpl3o6df7j313k0f8dh5.jpg">
+<meta property="article:published_time" content="2021-11-24T06:15:37.000Z">
+<meta property="article:modified_time" content="2021-11-25T12:31:37.963Z">
+<meta property="article:author" content="Ashin Wang">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="NFStream">
+<meta property="article:tag" content="特征提取">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwpm0n126zj30jw0gu0tv.jpg">
+
+<link rel="canonical" href="https://www.ashin.wang/notes-nfstream/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>NFStream流量分析｜特征提取｜机器学习 | Ashin Wang's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1d0c251d59c914b8a773d2fd3302cc56";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ashin Wang's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.ashin.wang/notes-nfstream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+      <meta itemprop="name" content="Ashin Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ashin Wang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NFStream流量分析｜特征提取｜机器学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-24 14:15:37" itemprop="dateCreated datePublished" datetime="2021-11-24T14:15:37+08:00">2021-11-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">流量分析</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h1><p>Repo: <a target="_blank" rel="noopener" href="https://github.com/aouinizied/nfstream">https://github.com/aouinizied/nfstream</a></p>
+<p>Docs: <a target="_blank" rel="noopener" href="https://www.nfstream.org/docs/">https://www.nfstream.org/docs/</a></p>
+<blockquote>
+<p>NFStream 是一个 Python 框架，提供了快速、灵活和富有表现力的数据结构，旨在使处理在线或离线网络数据既简单又直观。它旨在成为用 Python 进行实际的、真实的网络数据分析的基本高级构建块。此外，它还有一个更广泛的目标，即成为研究人员的通用网络数据分析框架，提供跨实验的数据再现性。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h1 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h1><h2 id="网络设备排序"><a href="#网络设备排序" class="headerlink" title="网络设备排序"></a>网络设备排序</h2><p><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9559086"><strong>Ranking Network Devices for Alarm Prioritisation: Intrusion Detection Case Study</strong></a></p>
+<blockquote>
+<p>网络中的某些设备比其他设备更重要，重要网络设备的潜在问题可能比不太重要的设备的问题造成更大的损害。本文提出了一种方法，可以通过使用学习排序算法对各种设备报告进行排序，以帮助最终用户更轻松地检测更高优先级的警报。对学习排序算法用于使用自定义数据集增量训练模型，同时在单独的测试集上测试其准确性。预测测试数据集中前两个、五个、十个项目的排名显示模型准确性呈上升趋势。使用这种方法，我们能够实现超过 95% 的排名准确率，并在入侵检测系统案例研究中讨论了所提出的方法。</p>
+</blockquote>
+<h2 id="结合爬虫和深度学习进行恶意软件检测"><a href="#结合爬虫和深度学习进行恶意软件检测" class="headerlink" title="结合爬虫和深度学习进行恶意软件检测"></a>结合爬虫和深度学习进行恶意软件检测</h2><p><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9500920"><strong>Network Flows-Based Malware Detection Using A Combined Approach of Crawling And Deep Learning</strong></a></p>
+<blockquote>
+<p>随着社会越来越依赖互联网，每天都有更多的私人数据通过网络传输。不幸的是，这种流量容易受到各种威胁和漏洞的影响，包括诱骗用户破坏其系统或泄露敏感个人信息的网络钓鱼攻击。在这项研究中，我们提出了一种深度学习方法，<strong>使用从网络爬虫收集的数据检测恶意软件，该网络爬虫系统地向 Internet 上的良性和恶意网站发送请求。在应用程序对网络流进行分割并提取特征后，我们使用这些提取的高级网络流量特征来训练深度神经网络以识别良性和恶意流。</strong>最后，我们根据各种指标评估了我们的恶意软件检测方法，包括精度、召回率和 f1 分数。达到的 f1 分数为 0.924，验证了检测方案的整体性能。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.researchgate.net/profile/Yuwei-Sun-14/publication/351854466_Network_Flows-Based_Malware_Detection_Using_a_Combined_Approach_of_Crawling_and_Deep_Learning/links/60ad937792851c168e4036d7/Network-Flows-Based-Malware-Detection-Using-a-Combined-Approach-of-Crawling-and-Deep-Learning.pdf">researchgate PDF</a></li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwpm0n126zj30jw0gu0tv.jpg" alt="image-20211124014411916" style="zoom:67%;" />
+
+<h2 id="Generative-Transformer：网络流量生成与分类"><a href="#Generative-Transformer：网络流量生成与分类" class="headerlink" title="Generative Transformer：网络流量生成与分类"></a>Generative Transformer：网络流量生成与分类</h2><p><a target="_blank" rel="noopener" href="https://cyberleninka.ru/article/n/generative-transformer-framework-for-network-traffic-generation-and-classification"><strong>Generative Transformer Framework For Network Traffic Generation And Classification</strong></a></p>
+<blockquote>
+<p>我们介绍了适用于生成和分类任务的基于生成式 Transformer 的网络流量模型。只有<strong>数据包大小和数据包间时间序列用作流特征来统一两个任务的输入</strong>。源特征空间使用 K-Means 进行缩放和聚类，以形成离散序列作为模型输入。该模型可以在两种模式下进行训练：（i）自回归，用于网络流量生成，其中训练序列的第一个标记代表流类，（ii）作为网络流分类器。通过 Kolmogorov-Smirnov 统计对生成的流量进行评估表明，其质量与一阶马尔可夫链相当，该链是在每个流量类别上独立训练的。该指标测量源之间的距离，并生成经验累积分布等参数，如数据包大小、到达间隔时间、吞吐量和每个流在往返流量来源方向上的数据包数量。结果表明，使用来自不同域的外部流量来丰富数据集可以提高目标类上生成的流量的质量。实验结果表明，生成式预训练对交通分类任务的质量有积极的影响。在使用预训练模型作为线性算法的特征提取器的情况下，质量接近在原始序列上训练的随机森林。当所有模型参数都经过训练后，根据 F1 分类器的性能平均比集成高 4%。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cyberleninka.ru/article/n/generative-transformer-framework-for-network-traffic-generation-and-classification/pdf">PDF</a></li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwpl3o6df7j313k0f8dh5.jpg" alt="image-20211124011231015" style="zoom: 67%;" />
+
+<ul>
+<li>方法<ul>
+<li><strong>一次会话双向网络流组成 stream matrix</strong> = [pkt_1, pkt_2, …, pkt_n]</li>
+<li><strong>线性缩放</strong>：以字节为单位的数据包通过除以 1500（作为 IP 数据包的最大可能值）线性缩放，并且以微秒为单位测量的数据包间隔被对数化（除了等于 0 的值）</li>
+<li><strong>流量开始、结束位标记 + Token + 数据包聚类</strong>：<code>L x 2 --&gt; L + 2</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="基于神经网络的多类网络流量生成器和分类器"><a href="#基于神经网络的多类网络流量生成器和分类器" class="headerlink" title="基于神经网络的多类网络流量生成器和分类器"></a>基于神经网络的多类网络流量生成器和分类器</h2><p><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9416067"><strong>Multi-Class Network Traffic Generators and Classifiers Based on Neural Networks</strong></a></p>
+<blockquote>
+<p>我们引入了一个神经网络框架，该框架允许构建适用于流生成和分类任务的多类网络流量模型。<strong>数据包大小和数据包间时间序列是形成输入的唯一流特征</strong>。我们的方法有两个主要组成部分：数据包特征量化器和序列模型，我们分别使用 K-Means 算法和基于 Transformer 的模型在示例配置上对其进行了验证。此外，我们声称有可能将知识从生成转移到分类任务。发电机的流量质量的评估是通过 Kolmogorov-Smirnov 度量进行的，这些参数包括包大小、到达间隔时间、吞吐量和每个流在往返流量源方向上的包数。结果表明，所提出的多类模型与单个基于马尔可夫的单类模型的性能相当。至于分类任务，该模型优于 FS-NET 和传统的随机森林分类器。我们证明了在流量生成器和分类器之间执行知识转移程序（所谓的生成预训练）可以进一步提高流量分类任务的性能。我们还发布了代码、数据集和经过训练的模型。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.mdpi.com/1424-8220/21/14/4834"><strong>Using Embedded Feature Selection and CNN for Classification on CCD-INID-V1 A New IoT Dataset</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://latamt.ieeer9.org/index.php/transactions/article/view/5083/1116"><strong>An Approach Based on Knowledge-Defined Networking for Identifying Video Streaming Flows in 5G Networks</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://link.springer.com/content/pdf/10.1007/s10922-021-09593-w.pdf"><strong>Knowledge Discovery: Can It Shed New Light on Threshold Definition for Heavy‑Hitter Detection?</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.diva-portal.org/smash/get/diva2:1575255/FULLTEXT01.pdf"><strong>Collecting and analyzing Tor exit node traffic</strong></a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐阅读</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/ai-competition-platform/" rel="bookmark">AI竞赛平台</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/use-colab/" rel="bookmark">Colab的使用</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/keras-plot-acc-loss-in-notebook/" rel="bookmark">Keras在NoteBook绘制acc-loss曲线</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/kaggle-api-guide/" rel="bookmark">Kaggle API指南</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/nlp_news_classification/" rel="bookmark">NLP-新闻分类</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ashin Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.ashin.wang/notes-nfstream/" title="NFStream流量分析｜特征提取｜机器学习">https://www.ashin.wang/notes-nfstream/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/NFStream/" rel="tag"># NFStream</a>
+              <a href="/tags/%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/" rel="tag"># 特征提取</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/clip/" rel="prev" title="CLIP图文多模态对比学习">
+      <i class="fa fa-chevron-left"></i> CLIP图文多模态对比学习
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="nav-text">项目简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0"><span class="nav-text">相关文章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E6%8E%92%E5%BA%8F"><span class="nav-text">网络设备排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E7%88%AC%E8%99%AB%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%BF%9B%E8%A1%8C%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%A3%80%E6%B5%8B"><span class="nav-text">结合爬虫和深度学习进行恶意软件检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generative-Transformer%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E7%94%9F%E6%88%90%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="nav-text">Generative Transformer：网络流量生成与分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%9A%E7%B1%BB%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E5%88%86%E7%B1%BB%E5%99%A8"><span class="nav-text">基于神经网络的多类网络流量生成器和分类器</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ashin Wang"
+      src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lvmm1zhj3074074q4r.jpg">
+  <p class="site-author-name" itemprop="name">Ashin Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AshinWang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AshinWang" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ashin Wang</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '4d1a5c237f1ecba513f0',
+      clientSecret: 'f403fbb98b9afbee3a250673d6f741dda22ba1e2',
+      repo        : 'AshinWang.github.io',
+      owner       : 'AshinWang',
+      admin       : ['AshinWang'],
+      id          : '2b80ea6c2625668c3ca10556b381cb9b',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
