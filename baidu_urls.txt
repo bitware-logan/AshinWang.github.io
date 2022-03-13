@@ -1,3 +1,4 @@
+https://www.ashin.wang/jupyterlab-config/
 https://www.ashin.wang/notes-nfstream/
 https://www.ashin.wang/clip/
 https://www.ashin.wang/track-3-of-global-ai-technology-innovation-competition-semantic-matching-of-xiaobu-assistant-dialogue/
@@ -67,3 +68,4 @@ https://www.ashin.wang/windows-skill/
 https://www.ashin.wang/macos-skill/
 https://www.ashin.wang/hexo-build/
 https://www.ashin.wang/leetcode/
+https://www.ashin.wang/algos/
